@@ -1,0 +1,47 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language: \n"
+"Language-Team: \n"
+"Content-Type: \n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#: components/Block/schema
+# defaultMessage: Code Block
+msgid "Code Block"
+msgstr "Bloco de Código"
+
+#: components/SyntaxHighlighter/Styles
+# defaultMessage: Dark
+msgid "Dark"
+msgstr "Escuro"
+
+#: components/Block/schema
+# defaultMessage: Language
+msgid "Language"
+msgstr "Linguagem"
+
+#: components/SyntaxHighlighter/Styles
+# defaultMessage: Light
+msgid "Light"
+msgstr "Claro"
+
+#: components/Block/schema
+# defaultMessage: Show Line Numbers
+msgid "Show Line Numbers"
+msgstr "Exibir número de linha"
+
+#: components/Block/schema
+# defaultMessage: Style
+msgid "Style"
+msgstr "Estilo"
+
+#: components/Block/schema
+# defaultMessage: Wrap Long Lines
+msgid "Wrap Long Lines"
+msgstr "Quebrar linhas longas"
