@@ -1,0 +1,7 @@
+.vscode
+project/
+node_modules
+cypress/videos/
+results
+build
+*~

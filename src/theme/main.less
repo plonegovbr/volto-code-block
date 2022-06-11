@@ -1,0 +1,35 @@
+/*
+  Code Block styles
+*/
+.block.code {
+  > .code-block-wrapper {
+    &.edit {
+      > textarea {
+        overflow: hidden;
+        width: 100%;
+        padding: 10px;
+        border: 0px;
+        background-color: whitesmoke;
+        outline: none;
+        resize: none;
+      }
+    }
+
+    .copy.button {
+      position: absolute;
+      top: 0.5em;
+      right: 0.5em;
+      display: flex;
+      height: 20px !important;
+      color: black;
+
+      &.copied {
+        color: green;
+      }
+    }
+
+    .hljs {
+      padding: 10px;
+    }
+  }
+}

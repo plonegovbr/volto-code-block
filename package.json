@@ -1,0 +1,81 @@
+{
+  "name": "@plonegovbr/volto-code-block",
+  "version": "0.1.0",
+  "description": "Volto add-on providing a code block with syntax highlighting.",
+  "author": "PloneGov-BR",
+  "homepage": "https://github.com/plonegovbr/volto-code-block",
+  "main": "src/index.js",
+  "license": "MIT",
+  "keywords": [
+    "volto-addon",
+    "volto",
+    "plone",
+    "react"
+  ],
+  "scripts": {
+    "i18n": "rm -rf build/messages && NODE_ENV=production i18n --addon",
+    "stylelint": "./node_modules/stylelint/bin/stylelint.js --allow-empty-input 'src/**/*.{css,less}'",
+    "stylelint:overrides": "./node_modules/.bin/stylelint --syntax less --allow-empty-input 'theme/**/*.overrides' 'src/**/*.overrides'",
+    "stylelint:fix": "yarn stylelint --fix && yarn stylelint:overrides --fix",
+    "prettier": "./node_modules/.bin/prettier --single-quote --check 'src/**/*.{js,jsx,json,css,less,md}'",
+    "prettier:fix": "./node_modules/.bin/prettier --single-quote --write 'src/**/*.{js,jsx,json,css,less,md}'"
+  },
+  "peerDependencies": {
+    "@plone/volto": ">=15.12.0"
+  },
+  "dependencies": {
+    "@plone/scripts": "*",
+    "react-syntax-highlighter": "^15.5.0",
+    "use-copy": "^0.0.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "@release-it/conventional-changelog": "^3.2.0",
+    "prettier": "2.0.5",
+    "release-it": "*",
+    "stylelint": "13.3.3",
+    "stylelint-config-idiomatic-order": "8.1.0",
+    "stylelint-config-prettier": "8.0.1",
+    "stylelint-prettier": "1.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:plonegovbr/volto-code-block.git"
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.overrides",
+        "options": {
+          "parser": "less"
+        }
+      }
+    ]
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-idiomatic-order"
+    ],
+    "plugins": [
+      "stylelint-prettier"
+    ],
+    "rules": {
+      "prettier/prettier": true,
+      "rule-empty-line-before": [
+        "always-multi-line",
+        {
+          "except": [
+            "first-nested"
+          ],
+          "ignore": [
+            "after-comment"
+          ]
+        }
+      ]
+    },
+    "ignoreFiles": "theme/themes/default/**/*.overrides"
+  }
+}

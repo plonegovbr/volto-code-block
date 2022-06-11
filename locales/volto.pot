@@ -1,0 +1,49 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Plone\n"
+"POT-Creation-Date: 2022-06-11T02:44:43.479Z\n"
+"Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
+"Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8\n"
+"Domain: volto\n"
+
+#: components/Block/schema
+# defaultMessage: Code Block
+msgid "Code Block"
+msgstr ""
+
+#: components/SyntaxHighlighter/Styles
+# defaultMessage: Dark
+msgid "Dark"
+msgstr ""
+
+#: components/Block/schema
+# defaultMessage: Language
+msgid "Language"
+msgstr ""
+
+#: components/SyntaxHighlighter/Styles
+# defaultMessage: Light
+msgid "Light"
+msgstr ""
+
+#: components/Block/schema
+# defaultMessage: Show Line Numbers
+msgid "Show Line Numbers"
+msgstr ""
+
+#: components/Block/schema
+# defaultMessage: Style
+msgid "Style"
+msgstr ""
+
+#: components/Block/schema
+# defaultMessage: Wrap Long Lines
+msgid "Wrap Long Lines"
+msgstr ""
