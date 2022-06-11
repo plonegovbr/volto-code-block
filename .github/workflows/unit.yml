@@ -8,6 +8,7 @@ jobs:
         node-version: [16.x]
         python-version: [3.9]
     env:
+      NAMESPACE: '@plonegovbr'
       GIT_NAME: volto-code-block
       GIT_USER: 'plonegovbr'
       GIT_BRANCH: ${GITHUB_REF##*/}

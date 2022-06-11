@@ -13,7 +13,7 @@ MAKEFLAGS+=--no-builtin-rules
 # Project settings
 
 DIR=$(shell basename $$(pwd))
-ADDON ?= "volto-code-block"
+ADDON ?= "@plonegovbr/volto-code-block"
 
 # Recipe snippets for reuse
 
