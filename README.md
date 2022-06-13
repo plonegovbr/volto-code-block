@@ -5,7 +5,6 @@ Addon implementing a code block with syntax highlight for [Plone](https://plone.
 [![Code analysis checks](https://github.com/plonegovbr/volto-code-block/actions/workflows/code.yml/badge.svg)](https://github.com/plonegovbr/volto-code-block/actions/workflows/code.yml)
 [![Unit tests](https://github.com/plonegovbr/volto-code-block/actions/workflows/unit.yml/badge.svg)](https://github.com/plonegovbr/volto-code-block/actions/workflows/unit.yml)
 
-
 ## Screenshots
 
 ### Code Block with Dark style
@@ -27,6 +26,7 @@ Addon implementing a code block with syntax highlight for [Plone](https://plone.
 ### New Volto Project
 
 Create a Volto project
+
 ```shell
 npm install -g yo @plone/generator-volto
 yo @plone/volto my-volto-project --addon @plonegovbr/volto-code-block
@@ -41,6 +41,7 @@ yarn start
 ```
 
 ### Existing Volto Project
+
 If you already have a Volto project, just update `package.json`:
 
 ```JSON
@@ -56,7 +57,6 @@ If you already have a Volto project, just update `package.json`:
 ### Test it
 
 Go to http://localhost:3000/
-
 
 ## Credits
 
