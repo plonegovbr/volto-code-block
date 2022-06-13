@@ -12,6 +12,9 @@
     "plone",
     "react"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "ci:test-acceptance-server": "make test-acceptance-server",
     "cy:test:fixture:setup": "node cypress/support/reset-fixture.js",
