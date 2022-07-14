@@ -13,6 +13,9 @@ MAKEFLAGS+=--no-builtin-rules
 # Project settings
 
 DIR=$(shell basename $$(pwd))
+GIT_USER='plonegovbr'
+GIT_NAME='volto-code-block'
+GIT_BRANCH='main'
 ADDON ?= "@plonegovbr/volto-code-block"
 
 # Recipe snippets for reuse
@@ -32,13 +35,11 @@ project:
 	npm install -g yo
 	npm install -g @plone/generator-volto
 	npm install -g mrs-developer
-	yo @plone/volto project --addon ${ADDON} --workspace "src/addons/${DIR}" --no-interactive
-	ln -sf $$(pwd) project/src/addons/
-	cp .project.eslintrc.js .eslintrc.js
-	cd project && yarn
+	rm -Rf addon-testing-project
+	npx -p @plone/scripts addon clone https://github.com/${GIT_USER}/${GIT_NAME}.git --branch ${GIT_BRANCH}
 	@echo "-------------------"
 	@echo "$(GREEN)Volto project is ready!$(RESET)"
-	@echo "$(RED)Now run: cd project && yarn start$(RESET)"
+	@echo "$(RED)Now run: cd addon-testing-project && yarn start$(RESET)"
 
 .PHONY: all
 all: project
