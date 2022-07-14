@@ -1,7 +1,8 @@
 # Code Block for Volto (@plonegovbr/volto-code-block)
 
-Addon implementing a code block with syntax highlight for [Plone](https://plone.org) projects with Volto.
+Addon implementing a code block with syntax highlight for [Plone](https://plone.org) projects with [Volto](https://github.com/plone/volto).
 
+![npm](https://img.shields.io/npm/v/@plonegovbr/volto-code-block)
 [![Code analysis checks](https://github.com/plonegovbr/volto-code-block/actions/workflows/code.yml/badge.svg)](https://github.com/plonegovbr/volto-code-block/actions/workflows/code.yml)
 [![Unit tests](https://github.com/plonegovbr/volto-code-block/actions/workflows/unit.yml/badge.svg)](https://github.com/plonegovbr/volto-code-block/actions/workflows/unit.yml)
 
