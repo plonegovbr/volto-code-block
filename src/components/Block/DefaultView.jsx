@@ -7,7 +7,9 @@ import clipboardSVG from '@plone/volto/icons/copy.svg';
 
 const CodeView = (props) => {
   const { data } = props;
-  const className = `code-block-wrapper ${data.style}`;
+  const { style, showLineNumbers, wrapLongLines } = data;
+  const styleWrap = wrapLongLines ? 'wrapLongLines' : '';
+  const className = `code-block-wrapper ${style} ${styleWrap}`;
   const [copied, copy, setCopied] = useCopy(data.code);
 
   const copyText = () => {
@@ -35,8 +37,8 @@ const CodeView = (props) => {
             <SyntaxHighlighter
               language={data.language}
               useInlineStyles={false}
-              showLineNumbers={data.showLineNumbers}
-              wrapLongLines={data.wrapLongLines}
+              showLineNumbers={showLineNumbers}
+              wrapLongLines={wrapLongLines}
             >
               {data.code}
             </SyntaxHighlighter>
