@@ -1,8 +1,0 @@
-.vscode
-addon-testing-project/
-project/
-node_modules
-cypress/videos/
-results
-build
-*~
