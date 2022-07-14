@@ -2,7 +2,8 @@
 
 Addon implementing a code block with syntax highlight for [Plone](https://plone.org) projects with [Volto](https://github.com/plone/volto).
 
-![npm](https://img.shields.io/npm/v/@plonegovbr/volto-code-block)
+[![npm](https://img.shields.io/npm/v/@plonegovbr/volto-code-block)](https://www.npmjs.com/package/@plonegovbr/volto-code-block)
+[![](https://img.shields.io/badge/-Storybook-ff4785?logo=Storybook&logoColor=white&style=flat-square)](https://plonegovbr.github.io/volto-code-block/)
 [![Code analysis checks](https://github.com/plonegovbr/volto-code-block/actions/workflows/code.yml/badge.svg)](https://github.com/plonegovbr/volto-code-block/actions/workflows/code.yml)
 [![Unit tests](https://github.com/plonegovbr/volto-code-block/actions/workflows/unit.yml/badge.svg)](https://github.com/plonegovbr/volto-code-block/actions/workflows/unit.yml)
 
@@ -21,7 +22,6 @@ Addon implementing a code block with syntax highlight for [Plone](https://plone.
 @plonegovbr/volto-code-block can be seen in action at the following sites:
 
 - [Plone Brasil](https://plone.org.br)
-
 
 You can also check its [Storybook](https://plonegovbr.github.io/volto-code-block/).
 
