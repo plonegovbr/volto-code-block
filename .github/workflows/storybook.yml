@@ -20,7 +20,7 @@ jobs:
           make storybook
 
       - name: Deploy to GitHub pages
-        uses: JamesIves/github-pages-deploy-action@4.3.4
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: addon-testing-project/storybook-static
