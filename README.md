@@ -22,6 +22,9 @@ Addon implementing a code block with syntax highlight for [Plone](https://plone.
 
 - [Plone Brasil](https://plone.org.br)
 
+
+You can also check its [Storybook](https://plonegovbr.github.io/volto-code-block/).
+
 ## Install
 
 ### New Volto Project

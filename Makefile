@@ -29,9 +29,7 @@ YELLOW=`tput setaf 3`
 
 
 # Top-level targets
-
-.PHONY: project
-project:
+addon-testing-project/package.json:
 	npm install -g yo
 	npm install -g @plone/generator-volto
 	npm install -g mrs-developer
@@ -39,7 +37,15 @@ project:
 	npx -p @plone/scripts addon clone https://github.com/${GIT_USER}/${GIT_NAME}.git --branch ${GIT_BRANCH}
 	@echo "-------------------"
 	@echo "$(GREEN)Volto project is ready!$(RESET)"
+
+.PHONY: project
+project: addon-testing-project/package.json
 	@echo "$(RED)Now run: cd addon-testing-project && yarn start$(RESET)"
+
+.PHONY: storybook
+storybook: addon-testing-project/package.json
+	@echo "$(GREEN)Create Storybook$(RESET)"
+	(cd addon-testing-project && yarn build-storybook)
 
 .PHONY: all
 all: project
