@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0](https://github.com/plonegovbr/volto-code-block/compare/1.0.0-alpha.0...1.0.0) (2022-07-14)
+
+
+### Features
+
+* Fix issue with wrap long lines and styles applied together. ([cb0cf3c](https://github.com/plonegovbr/volto-code-block/commit/cb0cf3c044347eca4a1b9d3fa748604fc5e9e599))
+
 ## 1.0.0-alpha.0 (2022-06-13)
 
 
