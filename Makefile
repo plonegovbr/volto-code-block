@@ -50,6 +50,24 @@ storybook: addon-testing-project/package.json
 .PHONY: all
 all: project
 
+.PHONY: format-prettier
+format-prettier: ## Format Code with Prettier
+	yarn run prettier:fix
+
+.PHONY: format-stylelint
+format-stylelint: ## Format Code with Stylelint
+	yarn run stylelint:fix
+
+.PHONY: format
+format: format-prettier format-stylelint ## Format the codebase according to our standards
+
+.PHONY: i18n
+i18n: ## Sync i18n
+	yarn i18n
+
+.PHONY: i18n-ci
+i18n-ci: ## Check if i18n is not synced
+	yarn i18n && git diff -G'^[^\"POT]' --exit-code
 .PHONY: start-test-backend
 start-test-backend: ## Start Test Plone Backend
 	@echo "$(GREEN)==> Start Test Plone Backend$(RESET)"
