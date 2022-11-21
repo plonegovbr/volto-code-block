@@ -24,6 +24,10 @@ const messages = defineMessages({
     id: 'Wrap Long Lines',
     defaultMessage: 'Wrap Long Lines',
   },
+  lineNbr: {
+    id: 'Starting Line Number',
+    defaultMessage: 'Starting Line Number',
+  },
 });
 
 export const codeSchema = (props) => {
@@ -45,7 +49,13 @@ export const codeSchema = (props) => {
       {
         id: 'default',
         title: 'Default',
-        fields: ['language', 'style', 'showLineNumbers', 'wrapLongLines'],
+        fields: [
+          'language',
+          'style',
+          'showLineNumbers',
+          'wrapLongLines',
+          'lineNbr',
+        ],
       },
     ],
 
@@ -71,6 +81,11 @@ export const codeSchema = (props) => {
         title: props.intl.formatMessage(messages.wrapLongLines),
         default: true,
         type: 'boolean',
+      },
+      lineNbr: {
+        title: props.intl.formatMessage(messages.lineNbr),
+        type: 'integer',
+        default: 1,
       },
     },
     required: ['language'],
