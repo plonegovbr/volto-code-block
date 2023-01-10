@@ -1,5 +1,4 @@
 import { defineMessages } from 'react-intl';
-import { LANGUAGES } from '../SyntaxHighlighter/SyntaxHighlighter';
 import STYLES from '../SyntaxHighlighter/Styles';
 import config from '@plone/volto/registry';
 
@@ -36,7 +35,8 @@ export const codeSchema = (props) => {
   const defaultStyle = config.blocks?.blocksConfig?.codeBlock?.defaultStyle;
 
   const availableLanguages = () => {
-    return LANGUAGES.map((item) => [item[0], item[1]]);
+    const languages = config.settings.codeBlock.languages || [];
+    return languages.map((item) => [item[0], item[1]]);
   };
 
   const availableStyles = () => {
