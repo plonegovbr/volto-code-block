@@ -37,6 +37,7 @@ const CodeView = (props) => {
             <SyntaxHighlighter
               language={data.language}
               useInlineStyles={false}
+              startingLineNumber={data.lineNbr ? Number(data.lineNbr) : 1}
               showLineNumbers={showLineNumbers}
               wrapLongLines={wrapLongLines}
             >
