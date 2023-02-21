@@ -11,10 +11,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.1
 
-      - name: Create a new Volto project
-        run: |
-          make project
-
       - name: Generate Storybook
         run: |
           make storybook
@@ -23,4 +19,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: addon-testing-project/storybook-static
+          folder: .storybook

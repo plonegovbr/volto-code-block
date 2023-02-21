@@ -10,13 +10,7 @@ SHELL:=bash
 MAKEFLAGS+=--warn-undefined-variables
 MAKEFLAGS+=--no-builtin-rules
 
-# Project settings
-
-DIR=$(shell basename $$(pwd))
-GIT_USER='plonegovbr'
-GIT_NAME='volto-code-block'
-GIT_BRANCH='main'
-ADDON ?= "@plonegovbr/volto-code-block"
+CURRENT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 # Recipe snippets for reuse
 
@@ -27,57 +21,117 @@ GREEN=`tput setaf 2`
 RESET=`tput sgr0`
 YELLOW=`tput setaf 3`
 
+PLONE_VERSION=6
+VOLTO_VERSION=16.10.0
 
-# Top-level targets
-addon-testing-project/package.json:
-	npm install -g yo
-	npm install -g @plone/generator-volto
-	npm install -g mrs-developer
-	rm -Rf addon-testing-project
-	npx -p @plone/scripts addon clone https://github.com/${GIT_USER}/${GIT_NAME}.git --branch ${GIT_BRANCH}
-	@echo "-------------------"
-	@echo "$(GREEN)Volto project is ready!$(RESET)"
+ADDON_NAME='@plonegovbr/volto-code-block'
+ADDON_PATH='volto-code-block'
+DEV_COMPOSE=dockerfiles/docker-compose.yml
+ACCEPTANCE_COMPOSE=acceptance/docker-compose.yml
+CMD=CURRENT_DIR=${CURRENT_DIR} ADDON_NAME=${ADDON_NAME} ADDON_PATH=${ADDON_PATH} VOLTO_VERSION=${VOLTO_VERSION} PLONE_VERSION=${PLONE_VERSION} docker compose
+DOCKER_COMPOSE=${CMD} -p ${ADDON_PATH} -f ${DEV_COMPOSE}
+ACCEPTANCE=${CMD} -p ${ADDON_PATH}-acceptance -f ${ACCEPTANCE_COMPOSE}
 
-.PHONY: project
-project: addon-testing-project/package.json
-	@echo "$(RED)Now run: cd addon-testing-project && yarn start$(RESET)"
+.PHONY: build-backend
+build-backend: ## Build
+	@echo "$(GREEN)==> Build Backend Container $(RESET)"
+	${DOCKER_COMPOSE} build backend
 
-.PHONY: storybook
-storybook: addon-testing-project/package.json
-	@echo "$(GREEN)Create Storybook$(RESET)"
-	(cd addon-testing-project && yarn build-storybook)
+.PHONY: start-backend
+start-backend: ## Starts Docker backend
+	@echo "$(GREEN)==> Start Docker-based Plone Backend $(RESET)"
+	${DOCKER_COMPOSE} up backend -d
 
-.PHONY: all
-all: project
+.PHONY: stop-backend
+stop-backend: ## Stop Docker backend
+	@echo "$(GREEN)==> Stop Docker-based Plone Backend $(RESET)"
+	${DOCKER_COMPOSE} stop backend
 
-.PHONY: format-prettier
-format-prettier: ## Format Code with Prettier
-	yarn run prettier:fix
+.PHONY: build-addon
+build-addon: ## Build Addon dev
+	@echo "$(GREEN)==> Build Addon development container $(RESET)"
+	${DOCKER_COMPOSE} build addon-dev
+	${DOCKER_COMPOSE} build addon-storybook
 
-.PHONY: format-stylelint
-format-stylelint: ## Format Code with Stylelint
-	yarn run stylelint:fix
+.PHONY: start-dev
+start-dev: ## Starts Dev container
+	@echo "$(GREEN)==> Start Addon Development container $(RESET)"
+	${DOCKER_COMPOSE} up addon-dev
 
-.PHONY: format
-format: format-prettier format-stylelint ## Format the codebase according to our standards
+.PHONY: start-storybook
+start-storybook: ## Starts Storybook
+	@echo "$(GREEN)==> Start Storybook $(RESET)"
+	${DOCKER_COMPOSE} up addon-storybook
 
-.PHONY: i18n
-i18n: ## Sync i18n
-	yarn i18n
-
-.PHONY: i18n-ci
-i18n-ci: ## Check if i18n is not synced
-	yarn i18n && git diff -G'^[^\"POT]' --exit-code
-.PHONY: start-test-backend
-start-test-backend: ## Start Test Plone Backend
-	@echo "$(GREEN)==> Start Test Plone Backend$(RESET)"
-	docker run -i --rm -e ZSERVER_HOST=0.0.0.0 -e ZSERVER_PORT=55001 -p 55001:55001 -e SITE=plone -e APPLY_PROFILES=plone.app.contenttypes:plone-content,plone.restapi:default,plone.volto:default-homepage -e CONFIGURE_PACKAGES=plone.app.contenttypes,plone.restapi,plone.volto,plone.volto.cors -e ADDONS='plone.app.robotframework plone.app.contenttypes plone.restapi plone.volto' plone ./bin/robot-server plone.app.robotframework.testing.PLONE_ROBOT_TESTING
-
-.PHONY: start-backend-docker
-start-backend-docker:		## Starts a Docker-based backend
-	@echo "$(GREEN)==> Start Docker-based Plone Backend$(RESET)"
-	docker run -it --rm --name=plone -p 8080:8080 -e SITE=Plone plone/plone-backend:6.0.0a4
+.PHONY: dev
+dev: ## Develop the addon
+	@echo "$(GREEN)==> Start Development Environment $(RESET)"
+	make build-backend
+	make start-backend
+	make build-addon
+	make start-dev
 
 .PHONY: help
 help:		## Show this help.
 	@echo -e "$$(grep -hE '^\S+:.*##' $(MAKEFILE_LIST) | sed -e 's/:.*##\s*/:/' -e 's/^\(.\+\):\(.*\)/\\x1b[36m\1\\x1b[m:\2/' | column -c2 -t -s :)"
+
+# Dev Helpers
+.PHONY: i18n
+i18n: ## Sync i18n
+	${DOCKER_COMPOSE} run addon-dev i18n
+
+.PHONY: build-storybook
+build-storybook: ## Build storybook
+	rm -rf .storybook
+	mkdir .storybook
+	${DOCKER_COMPOSE} run addon-storybook build-storybook
+
+.PHONY: format
+format: ## Format codebase
+	${DOCKER_COMPOSE} run addon-dev lint:fix
+	${DOCKER_COMPOSE} run addon-dev prettier:fix
+	${DOCKER_COMPOSE} run addon-dev stylelint:fix
+
+.PHONY: lint
+lint: ## Lint Codebase
+	${DOCKER_COMPOSE} run addon-dev lint
+	${DOCKER_COMPOSE} run addon-dev prettier
+	${DOCKER_COMPOSE} run addon-dev stylelint
+
+.PHONY: test
+test: ## Run unit tests
+	${DOCKER_COMPOSE} run addon-dev test --watchAll
+
+.PHONY: test-ci
+test-ci: ## Run unit tests in CI
+	${DOCKER_COMPOSE} run -e CI=1 addon-dev test
+
+## Acceptance
+.PHONY: install-acceptance
+install-acceptance: ## Install Cypress, build containers
+	(cd acceptance && yarn)
+	${ACCEPTANCE} --profile dev --profile prod build
+
+.PHONY: start-test-acceptance-server
+start-test-acceptance-server: ## Start acceptance server
+	${ACCEPTANCE} --profile dev up -d
+
+.PHONY: start-test-acceptance-server-prod
+start-test-acceptance-server-prod: ## Start acceptance server
+	${ACCEPTANCE} --profile prod up -d
+
+.PHONY: test-acceptance
+test-acceptance: ## Start Cypress
+	(cd acceptance && ./node_modules/.bin/cypress open)
+
+.PHONY: test-acceptance-headless
+test-acceptance-headless: ## Run cypress tests in CI
+	(cd acceptance && ./node_modules/.bin/cypress run)
+
+.PHONY: stop-test-acceptance-server
+stop-test-acceptance-server: ## Stop acceptance server
+	${ACCEPTANCE} down
+
+.PHONY: status-test-acceptance-server
+status-test-acceptance-server: ## Status of Acceptance Server
+	${ACCEPTANCE} ps
