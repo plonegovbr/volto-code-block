@@ -1,5 +1,5 @@
 import { defineMessages } from 'react-intl';
-import STYLES from '../SyntaxHighlighter/Styles';
+import STYLES from '../../SyntaxHighlighter/Styles';
 import config from '@plone/volto/registry';
 
 const messages = defineMessages({
