@@ -3,7 +3,7 @@ import { withBlockExtensions } from '@plone/volto/helpers';
 import { SidebarPortal } from '@plone/volto/components';
 import config from '@plone/volto/registry';
 import CodeBlockData from './Data';
-import Editor from '../Editor/Editor.tsx';
+import Editor from '../../Editor/Editor.tsx';
 import { highlight } from 'prismjs/components/prism-core';
 
 const CodeBlockEdit = (props) => {

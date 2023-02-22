@@ -63,6 +63,11 @@ start-storybook: ## Starts Storybook
 	@echo "$(GREEN)==> Start Storybook $(RESET)"
 	${DOCKER_COMPOSE} up addon-storybook
 
+.PHONY: debug
+debug: ## Starts Dev container
+	@echo "$(GREEN)==> Start Addon Development container $(RESET)"
+	${DOCKER_COMPOSE} exec -it addon-dev bash
+
 .PHONY: dev
 dev: ## Develop the addon
 	@echo "$(GREEN)==> Start Development Environment $(RESET)"

@@ -1,5 +1,5 @@
 import React from 'react';
-import SyntaxHighlighter from '../SyntaxHighlighter/SyntaxHighlighter';
+import SyntaxHighlighter from '../../SyntaxHighlighter/SyntaxHighlighter';
 
 const CodeView = (props) => {
   const { data } = props;

@@ -1,6 +1,13 @@
 import codeSVG from '@plone/volto/icons/code.svg';
-import CodeBlockViewBlock from './components/Block/View';
-import CodeBlockEditBlock from './components/Block/Edit';
+import showcaseSVG from '@plone/volto/icons/showcase.svg';
+
+import MermaidConfig from './helpers/Mermaid/MermaidConfig';
+
+import CodeBlockViewBlock from './components/Blocks/Code/View';
+import CodeBlockEditBlock from './components/Blocks/Code/Edit';
+
+import MermaidBlockEdit from './components/Blocks/Mermaid/Edit';
+import MermaidBlockView from './components/Blocks/Mermaid/View';
 
 import './theme/main.less';
 import './theme/theme-dark.less';
@@ -15,6 +22,7 @@ import 'prismjs/components/prism-json';
 import 'prismjs/components/prism-less';
 // import 'prismjs/components/prism-markdown';
 import 'prismjs/components/prism-markup';
+import 'prismjs/components/prism-mermaid';
 import 'prismjs/components/prism-nginx';
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-scss';
@@ -23,6 +31,14 @@ import 'prismjs/components/prism-yaml';
 import { languages } from 'prismjs/components/prism-core';
 
 const applyConfig = (config) => {
+  config.settings.appExtras = [
+    ...config.settings.appExtras,
+    {
+      match: '',
+      component: MermaidConfig,
+    },
+  ];
+
   config.blocks.blocksConfig.codeBlock = {
     id: 'codeBlock',
     title: 'Code Block',
@@ -37,6 +53,20 @@ const applyConfig = (config) => {
     defaultLanguage: 'python',
     defaultStyle: 'dark',
   };
+
+  config.blocks.blocksConfig.mermaidBlock = {
+    id: 'mermaidBlock',
+    title: 'Mermaid Diagram',
+    icon: showcaseSVG,
+    group: 'text',
+    view: MermaidBlockView,
+    edit: MermaidBlockEdit,
+    restricted: false,
+    mostUsed: false,
+    sidebarTab: 0,
+    blockHasOwnFocusManagement: false,
+  };
+
   config.settings['codeBlock'] = {
     languages: {
       bash: { label: 'Bash', language: languages.bash },
@@ -46,6 +76,7 @@ const applyConfig = (config) => {
       json: { label: 'JSON', language: languages.json },
       less: { label: 'LESS', language: languages.less },
       markdown: { label: 'Markdown', language: languages.markdown },
+      mermaid: { label: 'Mermaid', language: languages.mermaid },
       nginx: { label: 'nginx', language: languages.nginx },
       python: { label: 'Python', language: languages.python },
       scss: { label: 'SCSS', language: languages.scss },
