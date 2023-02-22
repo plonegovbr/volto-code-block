@@ -3,5 +3,7 @@ acceptance/node_modules
 acceptance/cypress/videos/
 results
 build
+node_modules
 .storybook
+yarn.lock
 *~

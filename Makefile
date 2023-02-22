@@ -91,6 +91,16 @@ build-storybook: ## Build storybook
 	mkdir .storybook
 	${DOCKER_COMPOSE} run addon-storybook build-storybook
 
+.PHONY: release
+release: ## Release package
+	yarn
+	npx release-it
+
+.PHONY: dry-run-release
+dry-run-release: ## Dry Run Release package
+	yarn
+	npx release-it --dry-run
+
 .PHONY: format
 format: ## Format codebase
 	${DOCKER_COMPOSE} run addon-dev lint:fix
