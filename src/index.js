@@ -22,7 +22,6 @@ import 'prismjs/components/prism-yaml';
 
 import { languages } from 'prismjs/components/prism-core';
 
-
 const applyConfig = (config) => {
   config.blocks.blocksConfig.codeBlock = {
     id: 'codeBlock',

@@ -33,14 +33,15 @@ context('Blocks Acceptance Tests', () => {
       cy.get('.button .block-add-button').click({ force: true });
       cy.get('.blocks-chooser .text .button.codeBlock').click({ force: true });
 
-      cy.get('.inline.field.field-wrapper-showLineNumbers .ui.checkbox').click();
+      cy.get(
+        '.inline.field.field-wrapper-showLineNumbers .ui.checkbox',
+      ).click();
 
-      cy.get('.code-block-wrapper.edit textarea').click().type(
-        'from plone import api\n\nuser=api.user.get(username="admin")'
-      );
+      cy.get('.code-block-wrapper.edit textarea')
+        .click()
+        .type('from plone import api\n\nuser=api.user.get(username="admin")');
 
       cy.get('#toolbar-save').click();
     });
-
   });
 });

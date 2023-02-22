@@ -36,9 +36,12 @@ export const codeSchema = (props) => {
 
   const availableLanguages = () => {
     const allLanguages = config.settings.codeBlock.languages || {};
-    const languages = Array.from(Object.entries(allLanguages), ([key, value]) => {
-      return [key, value.label];
-    });
+    const languages = Array.from(
+      Object.entries(allLanguages),
+      ([key, value]) => {
+        return [key, value.label];
+      },
+    );
     return languages;
   };
 
