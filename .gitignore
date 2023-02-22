@@ -1,8 +1,6 @@
 .vscode
-addon-testing-project/
-project/
-node_modules
-cypress/videos/
+acceptance/node_modules
+acceptance/cypress/videos/
 results
 build
 .storybook

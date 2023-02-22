@@ -1,22 +1,27 @@
 import codeSVG from '@plone/volto/icons/code.svg';
 import CodeBlockViewBlock from './components/Block/View';
 import CodeBlockEditBlock from './components/Block/Edit';
+
 import './theme/main.less';
 import './theme/theme-dark.less';
 import './theme/theme-light.less';
 
-import bash from 'react-syntax-highlighter/dist/cjs/languages/hljs/bash';
-import css from 'react-syntax-highlighter/dist/cjs/languages/hljs/css';
-import dockerfile from 'react-syntax-highlighter/dist/cjs/languages/hljs/dockerfile';
-import javascript from 'react-syntax-highlighter/dist/cjs/languages/hljs/javascript';
-import json from 'react-syntax-highlighter/dist/cjs/languages/hljs/json';
-import less from 'react-syntax-highlighter/dist/cjs/languages/hljs/less';
-import markdown from 'react-syntax-highlighter/dist/cjs/languages/hljs/markdown';
-import nginx from 'react-syntax-highlighter/dist/cjs/languages/hljs/nginx';
-import python from 'react-syntax-highlighter/dist/cjs/languages/hljs/python';
-import scss from 'react-syntax-highlighter/dist/cjs/languages/hljs/scss';
-import yaml from 'react-syntax-highlighter/dist/cjs/languages/hljs/yaml';
-import xml from 'react-syntax-highlighter/dist/cjs/languages/hljs/xml';
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-docker';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-json';
+import 'prismjs/components/prism-less';
+// import 'prismjs/components/prism-markdown';
+import 'prismjs/components/prism-markup';
+import 'prismjs/components/prism-nginx';
+import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-scss';
+import 'prismjs/components/prism-yaml';
+
+import { languages } from 'prismjs/components/prism-core';
+
 
 const applyConfig = (config) => {
   config.blocks.blocksConfig.codeBlock = {
@@ -33,22 +38,21 @@ const applyConfig = (config) => {
     defaultLanguage: 'python',
     defaultStyle: 'dark',
   };
-
   config.settings['codeBlock'] = {
-    languages: [
-      ['bash', 'Bash', bash],
-      ['css', 'CSS', css],
-      ['dockerfile', 'Dockerfile', dockerfile],
-      ['javascript', 'Javascript', javascript],
-      ['json', 'JSON', json],
-      ['less', 'LESS', less],
-      ['markdown', 'Markdown', markdown],
-      ['nginx', 'nginx', nginx],
-      ['python', 'Python', python],
-      ['scss', 'SCSS', scss],
-      ['yaml', 'Yaml', yaml],
-      ['xml', 'XML', xml],
-    ],
+    languages: {
+      bash: { label: 'Bash', language: languages.bash },
+      css: { label: 'CSS', language: languages.css },
+      dockerfile: { label: 'Dockerfile', language: languages.dockerfile },
+      javascript: { label: 'Javascript', language: languages.js },
+      json: { label: 'JSON', language: languages.json },
+      less: { label: 'LESS', language: languages.less },
+      markdown: { label: 'Markdown', language: languages.markdown },
+      nginx: { label: 'nginx', language: languages.nginx },
+      python: { label: 'Python', language: languages.python },
+      scss: { label: 'SCSS', language: languages.scss },
+      yaml: { label: 'Yaml', language: languages.yaml },
+      xml: { label: 'XML', language: languages.xml },
+    },
   };
 
   return config;

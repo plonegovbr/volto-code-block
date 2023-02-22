@@ -38,13 +38,13 @@
   },
   "dependencies": {
     "@plone/scripts": "*",
-    "react-syntax-highlighter": "^15.5.0",
-    "use-copy": "^0.0.2"
+    "prismjs": "*"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
     "@release-it/conventional-changelog": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "*",
     "prettier": "2.0.5",
     "release-it": "*",
     "stylelint": "13.3.3",

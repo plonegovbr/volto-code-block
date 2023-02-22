@@ -2,67 +2,45 @@ import React from 'react';
 import { withBlockExtensions } from '@plone/volto/helpers';
 import { SidebarPortal } from '@plone/volto/components';
 import config from '@plone/volto/registry';
-import CodeBlockSidebar from './Sidebar';
+import CodeBlockData from './Data';
+import Editor from '../Editor/Editor.tsx';
+import { highlight } from 'prismjs/components/prism-core';
 
-class CodeBlockEdit extends React.Component {
-  constructor(props) {
-    super();
-    this.state = {
-      code: props.data.code || '',
-    };
+const CodeBlockEdit = (props) => {
+  const { data, selected, block, onChangeBlock } = props;
+  const [code, setCode] = React.useState(data.code || '');
+  const className = `code-block-wrapper edit ${data.style}`;
+  const codeBlockConfig = config.blocks?.blocksConfig?.codeBlock;
+  const defaultLanguage = codeBlockConfig?.defaultLanguage;
+  const defaultStyle = codeBlockConfig?.defaultStyle;
+  if (data.language === undefined) {
+    data.language = defaultLanguage;
+    data.style = defaultStyle;
   }
+  const allLanguages = config.settings.codeBlock.languages;
+  const language = allLanguages[data.language].language;
 
-  editable = React.createRef();
-  textarearef = React.createRef();
-  componentDidUpdate(prevProps) {
-    if (this.props.selected && this.editable.current) {
-      this.editable.current.focus();
-    }
-    const element = this.textarearef.current;
-    if (element.scrollHeight > element.clientHeight) {
-      element.style.height = element.scrollHeight + 'px';
-    }
-  }
-
-  handleChange = (event) => {
-    const { block, data } = this.props;
-    const element = event.target;
-    const cleanedText = element.value;
-    this.setState({ code: cleanedText });
-    this.props.onChangeBlock(block, { ...data, code: cleanedText });
-    element.style.height = element.scrollHeight + 'px';
+  const handleChange = (code) => {
+    setCode(code);
+    onChangeBlock(block, { ...data, code: code });
   };
 
-  render = () => {
-    const { block, data, onChangeBlock, selected } = this.props;
-    const className = `code-block-wrapper edit ${data.style}`;
-    const defaultLanguage =
-      config.blocks?.blocksConfig?.codeBlock?.defaultLanguage;
-    const defaultStyle = config.blocks?.blocksConfig?.codeBlock?.defaultStyle;
-    if (data.language === undefined) {
-      data.language = defaultLanguage;
-      data.style = defaultStyle;
-    }
-    return (
-      <div className="block code">
-        <div className={className}>
-          <textarea
-            ref={this.textarearef}
-            value={this.state.code}
-            onChange={this.handleChange}
-          />
-          <SidebarPortal selected={selected}>
-            <CodeBlockSidebar
-              {...this.props}
-              data={data}
-              block={block}
-              onChangeBlock={onChangeBlock}
-            />
-          </SidebarPortal>
-        </div>
+  return (
+    <div className="block code">
+      <div className={className}>
+        <Editor
+          value={code}
+          onValueChange={(code) => handleChange(code)}
+          highlight={(code) => highlight(code, language)}
+          padding={10}
+          preClassName={`code-block-wrapper ${data.style} language-${data.language}`}
+        />
+        <SidebarPortal selected={selected}>
+          <CodeBlockData {...props} />
+        </SidebarPortal>
       </div>
-    );
-  };
-}
+    </div>
+  );
+};
 
 export default withBlockExtensions(CodeBlockEdit);
