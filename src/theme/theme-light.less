@@ -1,74 +1,227 @@
-/*
-https://github.com/highlightjs/highlight.js/blob/main/src/styles/vs.css
-*/
+.code-block-wrapper.light {
+  /* PrismJS 1.29.0
+https://prismjs.com/download.html#themes=prism-solarizedlight&languages=markup+css+clike+javascript+bash+docker+json+less+markdown+nginx+python+jsx+tsx+regex+rest+sass+sql+typescript+yaml&plugins=line-numbers+toolbar+copy-to-clipboard */
+  code[class*='language-'],
+  pre[class*='language-'] {
+    color: #657b83;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-size: 1em;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+    line-height: 1.5;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    text-align: left;
+    white-space: pre;
+    word-break: normal;
+    word-spacing: normal;
+    word-wrap: normal;
+  }
 
-.block.code {
-  > .code-block-wrapper.light {
-    &.edit {
-      > textarea {
-        background: beige;
-        color: black;
-      }
-    }
+  code[class*='language-'] ::-moz-selection,
+  code[class*='language-']::-moz-selection,
+  pre[class*='language-'] ::-moz-selection,
+  pre[class*='language-']::-moz-selection {
+    background: #073642;
+  }
 
-    .hljs {
-      background: beige;
-      color: black;
-    }
+  code[class*='language-'] ::selection,
+  code[class*='language-']::selection,
+  pre[class*='language-'] ::selection,
+  pre[class*='language-']::selection {
+    background: #073642;
+  }
 
-    .hljs-comment,
-    .hljs-quote,
-    .hljs-variable {
-      color: #008000;
-    }
+  pre[class*='language-'] {
+    overflow: auto;
+    padding: 1em;
+    margin: 0.5em 0;
+    border-radius: 0.3em;
+  }
 
-    .hljs-keyword,
-    .hljs-selector-tag,
-    .hljs-built_in,
-    .hljs-name,
-    .hljs-tag {
-      color: #00f;
-    }
+  :not(pre) > code[class*='language-'],
+  pre[class*='language-'] {
+    background-color: #fdf6e3;
+  }
 
-    .hljs-string,
-    .hljs-title,
-    .hljs-section,
-    .hljs-attribute,
-    .hljs-literal,
-    .hljs-template-tag,
-    .hljs-template-variable,
-    .hljs-type,
-    .hljs-addition {
-      color: #a31515;
-    }
+  :not(pre) > code[class*='language-'] {
+    padding: 0.1em;
+    border-radius: 0.3em;
+  }
 
-    .hljs-deletion,
-    .hljs-selector-attr,
-    .hljs-selector-pseudo,
-    .hljs-meta {
-      color: #2b91af;
-    }
+  .token.cdata,
+  .token.comment,
+  .token.doctype,
+  .token.prolog {
+    color: #93a1a1;
+  }
 
-    .hljs-doctag {
-      color: #808080;
-    }
+  .token.punctuation {
+    color: #586e75;
+  }
 
-    .hljs-attr {
-      color: #f00;
-    }
+  .token.namespace {
+    opacity: 0.7;
+  }
 
-    .hljs-symbol,
-    .hljs-bullet,
-    .hljs-link {
-      color: #00b0e8;
-    }
+  .token.boolean,
+  .token.constant,
+  .token.deleted,
+  .token.number,
+  .token.property,
+  .token.symbol,
+  .token.tag {
+    color: #268bd2;
+  }
 
-    .hljs-emphasis {
-      font-style: italic;
-    }
+  .token.attr-name,
+  .token.builtin,
+  .token.char,
+  .token.inserted,
+  .token.selector,
+  .token.string,
+  .token.url {
+    color: #2aa198;
+  }
 
-    .hljs-strong {
-      font-weight: bold;
-    }
+  .token.entity {
+    background: #eee8d5;
+    color: #657b83;
+  }
+
+  .token.atrule,
+  .token.attr-value,
+  .token.keyword {
+    color: #859900;
+  }
+
+  .token.class-name,
+  .token.function {
+    color: #b58900;
+  }
+
+  .token.important,
+  .token.regex,
+  .token.variable {
+    color: #cb4b16;
+  }
+
+  .token.bold,
+  .token.important {
+    font-weight: 700;
+  }
+
+  .token.italic {
+    font-style: italic;
+  }
+
+  .token.entity {
+    cursor: help;
+  }
+
+  pre[class*='language-'].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+  }
+
+  pre[class*='language-'].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+  }
+
+  .line-numbers .line-numbers-rows {
+    position: absolute;
+    top: 0;
+    left: -3.8em;
+    width: 3em;
+    border-right: 1px solid #999;
+    font-size: 100%;
+    letter-spacing: -1px;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .line-numbers-rows > span {
+    display: block;
+    counter-increment: linenumber;
+  }
+
+  .line-numbers-rows > span:before {
+    display: block;
+    padding-right: 0.8em;
+    color: #999;
+    content: counter(linenumber);
+    text-align: right;
+  }
+
+  div.code-toolbar {
+    position: relative;
+  }
+
+  div.code-toolbar > .toolbar {
+    position: absolute;
+    z-index: 10;
+    top: 0.3em;
+    right: 0.2em;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  div.code-toolbar:hover > .toolbar {
+    opacity: 1;
+  }
+
+  div.code-toolbar:focus-within > .toolbar {
+    opacity: 1;
+  }
+
+  div.code-toolbar > .toolbar > .toolbar-item {
+    display: inline-block;
+  }
+
+  div.code-toolbar > .toolbar > .toolbar-item > a {
+    cursor: pointer;
+  }
+
+  div.code-toolbar > .toolbar > .toolbar-item > button {
+    overflow: visible;
+    padding: 0;
+    border: 0;
+    background: 0 0;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  div.code-toolbar > .toolbar > .toolbar-item > a,
+  div.code-toolbar > .toolbar > .toolbar-item > button,
+  div.code-toolbar > .toolbar > .toolbar-item > span {
+    padding: 0 0.5em;
+    background: #f5f2f0;
+    background: rgba(224, 224, 224, 0.2);
+    border-radius: 0.5em;
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2);
+    color: #bbb;
+    font-size: 0.8em;
+  }
+
+  div.code-toolbar > .toolbar > .toolbar-item > a:focus,
+  div.code-toolbar > .toolbar > .toolbar-item > a:hover,
+  div.code-toolbar > .toolbar > .toolbar-item > button:focus,
+  div.code-toolbar > .toolbar > .toolbar-item > button:hover,
+  div.code-toolbar > .toolbar > .toolbar-item > span:focus,
+  div.code-toolbar > .toolbar > .toolbar-item > span:hover {
+    color: inherit;
+    text-decoration: none;
   }
 }

@@ -15,29 +15,23 @@
       }
     }
 
-    .copy.button {
-      position: absolute;
-      top: 0.5em;
-      right: 0.5em;
-      display: flex;
-      height: 20px !important;
-      color: black;
-
-      &.copied {
-        color: green;
-      }
-    }
-
     &.wrapLongLines {
-      code {
-        > span {
-          display: block !important;
-        }
+      code[class*='language-'],
+      pre[class*='language-'] {
+        white-space: pre-wrap;
       }
     }
 
-    .hljs {
-      padding: 10px;
+    > .code-toolbar {
+      .toolbar {
+        left: initial;
+        display: initial;
+        padding: initial;
+        background-color: initial;
+        border-radius: initial;
+        box-shadow: initial;
+        transform: initial;
+      }
     }
   }
 }

@@ -35,8 +35,14 @@ export const codeSchema = (props) => {
   const defaultStyle = config.blocks?.blocksConfig?.codeBlock?.defaultStyle;
 
   const availableLanguages = () => {
-    const languages = config.settings.codeBlock.languages || [];
-    return languages.map((item) => [item[0], item[1]]);
+    const allLanguages = config.settings.codeBlock.languages || {};
+    const languages = Array.from(
+      Object.entries(allLanguages),
+      ([key, value]) => {
+        return [key, value.label];
+      },
+    );
+    return languages;
   };
 
   const availableStyles = () => {
