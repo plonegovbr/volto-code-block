@@ -87,8 +87,8 @@ i18n: ## Sync i18n
 
 .PHONY: build-storybook
 build-storybook: ## Build storybook
-	rm -rf .storybook
-	mkdir .storybook
+	@echo "$(GREEN)==> Build storybook $(RESET)"
+	if [ ! -d .storybook ]; then mkdir .storybook; fi
 	${DOCKER_COMPOSE} run addon-storybook build-storybook
 
 .PHONY: release

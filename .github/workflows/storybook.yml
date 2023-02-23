@@ -13,6 +13,8 @@ jobs:
 
       - name: Generate Storybook
         run: |
+          mkdir -p .storybook
+          chmod -R 777 .storybook
           make build-storybook
 
       - name: Deploy to GitHub pages
