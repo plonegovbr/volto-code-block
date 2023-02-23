@@ -29,7 +29,7 @@ You can also check its [Storybook](https://plonegovbr.github.io/volto-code-block
 
 ### New Volto Project
 
-Create a Volto project, and nstall the new add-on and restart Volto:
+Create a Volto project, install the new add-on and restart Volto:
 
 ```shell
 yarn install
