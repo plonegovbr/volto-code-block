@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.0.0](https://github.com/plonegovbr/volto-code-block/compare/1.0.0...2.0.0) (2023-02-23)
+
+
+### Features
+
+* Add easy language list configuration ([7458028](https://github.com/plonegovbr/volto-code-block/commit/74580286dfec0b99169ad6fbae24a0167eac7787))
+* Add Mermaid Diagram block ([f393f99](https://github.com/plonegovbr/volto-code-block/commit/f393f99324a4f767509ad34514a111838d4c0c64))
+* Add possiblity to change start line number ([8e079a0](https://github.com/plonegovbr/volto-code-block/commit/8e079a02176b6ab69e63580f46625a761c25f0f2))
+* Use prismjs as default highlighter mechanism. ([#6](https://github.com/plonegovbr/volto-code-block/issues/6)) ([8e7717a](https://github.com/plonegovbr/volto-code-block/commit/8e7717a03029c75ee5d2e4314bd20f5490dc4bba))
+
 ## [1.0.0](https://github.com/plonegovbr/volto-code-block/compare/1.0.0-alpha.0...1.0.0) (2022-07-14)
 
 ### Features
