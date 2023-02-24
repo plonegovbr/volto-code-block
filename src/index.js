@@ -64,7 +64,7 @@ const applyConfig = (config) => {
     restricted: false,
     mostUsed: false,
     sidebarTab: 0,
-    blockHasOwnFocusManagement: false,
+    blockHasOwnFocusManagement: true,
   };
 
   config.settings['codeBlock'] = {
