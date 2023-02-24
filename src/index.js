@@ -85,6 +85,16 @@ const applyConfig = (config) => {
     },
   };
 
+  // Check for @kitconcept/volto-blocks-grid
+  const gridBlock = config.blocks.blocksConfig.__grid;
+  if (gridBlock !== undefined) {
+    config.blocks.blocksConfig.__grid.gridAllowedBlocks = [
+      ...gridBlock.gridAllowedBlocks,
+      'codeBlock',
+      'mermaidBlock',
+    ];
+  }
+
   return config;
 };
 
