@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.1.0](https://github.com/plonegovbr/volto-code-block/compare/2.0.0...2.1.0) (2023-05-22)
+
+
+### Features
+
+* Integrate with @kitconcept/volto-blocks-grid, allowing our blocks to be added to grids. ([7823232](https://github.com/plonegovbr/volto-code-block/commit/782323277e324d8287fa5cd98e870ef11072ca50))
+
+
+### Bug Fixes
+
+* Line numbers now align to code ([#9](https://github.com/plonegovbr/volto-code-block/issues/9)) ([90c5eb8](https://github.com/plonegovbr/volto-code-block/commit/90c5eb8d08fb6ac29fac4313fdf8f78d792d31d0))
+* Set blockHasOwnFocusManagement to true for Mermaid block editing. ([e8605bf](https://github.com/plonegovbr/volto-code-block/commit/e8605bfdc50bad66cb824d5ac6a5dd72ef2f623d))
+
 ## [2.0.0](https://github.com/plonegovbr/volto-code-block/compare/1.0.0...2.0.0) (2023-02-23)
 
 
