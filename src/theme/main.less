@@ -4,6 +4,18 @@
 .block.code {
   > .code-block-wrapper {
     &.edit {
+      &.dark {
+        > textarea {
+          caret-color: #fff;
+        }
+      }
+
+      &.light {
+        > textarea {
+          caret-color: #657b83;
+        }
+      }
+
       > textarea {
         overflow: hidden;
         width: 100%;
