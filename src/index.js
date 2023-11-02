@@ -98,4 +98,5 @@ const applyConfig = (config) => {
   return config;
 };
 
+export { languages };
 export default applyConfig;

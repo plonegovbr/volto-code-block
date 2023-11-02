@@ -77,8 +77,7 @@ import 'prismjs/components/prism-scss';
 import 'prismjs/components/prism-yaml';
 
 
-import { languages } from 'prismjs/components/prism-core';
-
+import { languages } from '@plonegovbr/volto-code-block';
 
 const applyConfig = (config) => {
     config.settings['codeBlock'] = {
