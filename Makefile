@@ -22,7 +22,7 @@ RESET=`tput sgr0`
 YELLOW=`tput setaf 3`
 
 PLONE_VERSION=6
-VOLTO_VERSION=16.12.0
+VOLTO_VERSION=16.26.0
 
 ADDON_NAME='@plonegovbr/volto-code-block'
 ADDON_PATH='volto-code-block'
@@ -67,6 +67,10 @@ start-storybook: ## Starts Storybook
 debug: ## Starts Dev container
 	@echo "$(GREEN)==> Start Addon Development container $(RESET)"
 	${DOCKER_COMPOSE} exec -it addon-dev bash
+
+.PHONY: debug-frontend
+debug-frontend:  ## Run bash in the Frontend container (for debug infrastructure purposes)
+	${DOCKER_COMPOSE} run --entrypoint bash addon-dev
 
 .PHONY: dev
 dev: ## Develop the addon
