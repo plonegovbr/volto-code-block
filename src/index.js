@@ -69,6 +69,7 @@ const applyConfig = (config) => {
 
   config.settings['codeBlock'] = {
     languages: {
+      plain: { label: 'Plaintext', language: languages.plain },
       bash: { label: 'Bash', language: languages.bash },
       css: { label: 'CSS', language: languages.css },
       dockerfile: { label: 'Dockerfile', language: languages.dockerfile },
