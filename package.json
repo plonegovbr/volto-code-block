@@ -8,8 +8,10 @@
   "license": "MIT",
   "keywords": [
     "volto-addon",
+    "volto-block",
     "volto",
     "plone",
+    "highlighting",
     "react"
   ],
   "publishConfig": {

@@ -64,6 +64,7 @@ build-live: ## Build Addon live
 build-addon: ## Build Addon dev
 	@echo "$(GREEN)==> Build Addon development container $(RESET)"
 	${DEV_COMPOSE} build addon-dev
+	${DEV_COMPOSE} build addon-storybook
 
 .PHONY: start-dev
 start-dev: ## Starts Dev container
@@ -148,6 +149,19 @@ status-test-acceptance-server: ## Status of Acceptance Server (for use it while 
 debug-frontend:  ## Run bash in the Frontend container (for debug infrastructure purposes)
 	${DEV_COMPOSE} run --entrypoint bash addon-dev
 
+# Storybook
+.PHONY: start-storybook
+start-storybook: ## Starts Storybook
+	@echo "$(GREEN)==> Start Storybook $(RESET)"
+	${DOCKER_COMPOSE} up addon-storybook
+
+.PHONY: build-storybook
+build-storybook: ## Build storybook
+	@echo "$(GREEN)==> Build storybook $(RESET)"
+	if [ ! -d .storybook ]; then mkdir .storybook; fi
+	${DOCKER_COMPOSE} run addon-storybook build-storybook
+
+# Release
 .PHONY: release
 release:  ## Release a version of the add-on
 	yarn release
