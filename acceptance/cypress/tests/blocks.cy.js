@@ -16,11 +16,6 @@ context('Blocks Acceptance Tests', () => {
         path: '/document',
       });
       cy.visit('/document');
-      cy.waitForResourceToLoad('@navigation');
-      cy.waitForResourceToLoad('@breadcrumbs');
-      cy.waitForResourceToLoad('@actions');
-      cy.waitForResourceToLoad('@types');
-      cy.waitForResourceToLoad('document');
       cy.navigate('/document/edit');
     });
 

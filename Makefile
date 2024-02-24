@@ -148,10 +148,6 @@ status-test-acceptance-server: ## Status of Acceptance Server (for use it while 
 debug-frontend:  ## Run bash in the Frontend container (for debug infrastructure purposes)
 	${DEV_COMPOSE} run --entrypoint bash addon-dev
 
-.PHONY: pull-backend-image
-pull-backend-image:  ## Pulls and updates the backend image (for use it while developing)
-	docker pull ghcr.io/voltointranet-trece:latest
-
 .PHONY: release
 release:  ## Release a version of the add-on
 	yarn release
