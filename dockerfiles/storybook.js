@@ -51,13 +51,7 @@ const defaultRazzleOptions = {
   staticCssInDev: false,
   emitOnErrors: false,
   disableWebpackbar: false,
-  browserslist: [
-    '>1%',
-    'last 4 versions',
-    'Firefox ESR',
-    'not ie 11',
-    'not dead',
-  ],
+  browserslist: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie 11', 'not dead'],
 };
 
 module.exports = {
@@ -116,9 +110,7 @@ module.exports = {
     // Put the SVG loader on top and prevent the asset/resource rule
     // from processing the app's SVGs
     config.module.rules.unshift(SVGLOADER);
-    const fileLoaderRule = config.module.rules.find((rule) =>
-      rule.test.test('.svg'),
-    );
+    const fileLoaderRule = config.module.rules.find((rule) => rule.test.test('.svg'));
     fileLoaderRule.exclude = /icons\/.*\.svg$/;
 
     config.plugins.unshift(
@@ -139,9 +131,7 @@ module.exports = {
     };
 
     // Addons have to be loaded with babel
-    const addonPaths = registry.addonNames.map((addon) =>
-      fs.realpathSync(registry.packages[addon].modulePath),
-    );
+    const addonPaths = registry.addonNames.map((addon) => fs.realpathSync(registry.packages[addon].modulePath));
     resultConfig.module.rules[1].exclude = (input) =>
       // exclude every input from node_modules except from @plone/volto
       /node_modules\/(?!(@plone\/volto)\/)/.test(input) &&
@@ -150,11 +140,7 @@ module.exports = {
 
     const addonExtenders = registry.getAddonExtenders().map((m) => require(m));
 
-    const extendedConfig = addonExtenders.reduce(
-      (acc, extender) =>
-        extender.modify(acc, { target: 'web', dev: 'dev' }, config),
-      resultConfig,
-    );
+    const extendedConfig = addonExtenders.reduce((acc, extender) => extender.modify(acc, { target: 'web', dev: 'dev' }, config), resultConfig);
 
     // Note: we don't actually support razzle plugins, which are also a feature
     // of the razzle.extend.js addons file. Those features are probably

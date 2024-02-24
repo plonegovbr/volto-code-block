@@ -1,19 +1,36 @@
 import React, { useEffect, useState } from 'react';
 
 const MermaidView = (props) => {
-  const { code } = props;
-  const [loaded, setLoaded] = useState(false);
+  const { code, block } = props;
+  const elementId = `mermaid-${block}`;
+  const [mermaid, setMermaid] = useState(null);
+  const [svg, setSVG] = useState('');
+
   useEffect(() => {
-    if (window.mermaid) {
-      setLoaded(true);
-    }
-  }, [loaded]);
+    const loadMermaid = async () => {
+      const config = { startOnLoad: true, flowchart: { useMaxWidth: false, htmlLabels: true } };
+      const { default: mermaid } = await import('mermaid/dist/mermaid.esm.mjs');
+      setMermaid(mermaid);
+      mermaid.initialize(config);
+    };
+
+    loadMermaid();
+    return () => {};
+  }, []);
+
   useEffect(() => {
-    if (loaded && window.mermaid) {
-      window.mermaid.contentLoaded();
+    if (__CLIENT__ && mermaid && elementId && code) {
+      const renderSVG = async () => {
+        const { svg } = await mermaid.render(elementId, code);
+        setSVG(svg);
+      };
+
+      renderSVG();
+      return () => {};
     }
-  }, [loaded, code]);
-  return <>{code && <pre className="mermaid">{code}</pre>}</>;
+  }, [mermaid, elementId, code]);
+
+  return <div className={'mermaidWrapper'}>{svg && <div dangerouslySetInnerHTML={{ __html: svg }} />}</div>;
 };
 
 export default MermaidView;
