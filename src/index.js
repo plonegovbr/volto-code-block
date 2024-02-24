@@ -1,8 +1,6 @@
 import codeSVG from '@plone/volto/icons/code.svg';
 import showcaseSVG from '@plone/volto/icons/showcase.svg';
 
-import MermaidConfig from './helpers/Mermaid/MermaidConfig';
-
 import CodeBlockViewBlock from './components/Blocks/Code/View';
 import CodeBlockEditBlock from './components/Blocks/Code/Edit';
 
@@ -31,14 +29,6 @@ import 'prismjs/components/prism-yaml';
 import { languages } from 'prismjs/components/prism-core';
 
 const applyConfig = (config) => {
-  config.settings.appExtras = [
-    ...config.settings.appExtras,
-    {
-      match: '',
-      component: MermaidConfig,
-    },
-  ];
-
   config.blocks.blocksConfig.codeBlock = {
     id: 'codeBlock',
     title: 'Code Block',

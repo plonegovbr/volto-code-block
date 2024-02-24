@@ -3,9 +3,9 @@ import MermaidView from './DefaultView';
 import { withBlockExtensions } from '@plone/volto/helpers';
 
 const MermaidBlockView = (props) => {
-  const { data } = props;
+  const { block, data } = props;
   const code = data.code || '';
-  return <>{code && <MermaidView code={code} />}</>;
+  return <>{code && <MermaidView code={code} block={block} />}</>;
 };
 
 export default withBlockExtensions(MermaidBlockView);
