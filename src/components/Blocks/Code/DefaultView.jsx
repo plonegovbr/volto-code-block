@@ -3,14 +3,7 @@ import SyntaxHighlighter from '../../SyntaxHighlighter/SyntaxHighlighter';
 
 const CodeView = (props) => {
   const { data } = props;
-  const {
-    code,
-    style,
-    language,
-    lineNbr,
-    showLineNumbers,
-    wrapLongLines,
-  } = data;
+  const { code, style, language, lineNbr, showLineNumbers, wrapLongLines } = data;
   const styleWrap = wrapLongLines ? 'wrapLongLines' : '';
   const className = `code-block-wrapper ${style} ${styleWrap}`;
 
@@ -19,12 +12,7 @@ const CodeView = (props) => {
       {data && (
         <div className={'block code'}>
           <div className={className}>
-            <SyntaxHighlighter
-              code={code}
-              language={language}
-              showLineNumbers={showLineNumbers}
-              lineNbr={lineNbr}
-            />
+            <SyntaxHighlighter code={code} language={language} showLineNumbers={showLineNumbers} lineNbr={lineNbr} />
           </div>
         </div>
       )}
