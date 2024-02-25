@@ -36,7 +36,8 @@
   },
   "dependencies": {
     "prismjs": "1.29.0",
-    "mermaid": "10.8.0"
+    "mermaid": "10.8.0",
+    "react-gist": "1.2.4"
   },
   "devDependencies": {
     "@plone/scripts": "^3.0.0",

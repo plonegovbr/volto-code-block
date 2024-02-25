@@ -3,6 +3,7 @@ import { withBlockExtensions } from '@plone/volto/helpers';
 import { SidebarPortal } from '@plone/volto/components';
 import config from '@plone/volto/registry';
 import CodeBlockData from './Data';
+import Caption from '../../Caption/Caption.jsx';
 import Editor from '../../Editor/Editor.tsx';
 import { highlight } from 'prismjs/components/prism-core';
 
@@ -19,7 +20,7 @@ const CodeBlockEdit = (props) => {
   }
   const allLanguages = config.settings.codeBlock.languages;
   const language = allLanguages[data.language].language;
-
+  const { caption_title, caption_description } = data;
   const handleChange = (code) => {
     setCode(code);
     onChangeBlock(block, { ...data, code: code });
@@ -29,6 +30,7 @@ const CodeBlockEdit = (props) => {
     <div className="block code">
       <div className={className}>
         <Editor value={code} onValueChange={(code) => handleChange(code)} highlight={(code) => highlight(code, language)} padding={10} preClassName={`code-block-wrapper ${data.style} language-${data.language}`} />
+        {caption_title && <Caption title={caption_title} description={caption_description} />}
         <SidebarPortal selected={selected}>
           <CodeBlockData {...props} />
         </SidebarPortal>

@@ -27,6 +27,14 @@ const messages = defineMessages({
     id: 'Starting Line Number',
     defaultMessage: 'Starting Line Number',
   },
+  caption_title: {
+    id: 'Title',
+    defaultMessage: 'Title',
+  },
+  caption_description: {
+    id: 'Description',
+    defaultMessage: 'Description',
+  },
 });
 
 export const codeSchema = (props) => {
@@ -52,6 +60,11 @@ export const codeSchema = (props) => {
         id: 'default',
         title: 'Default',
         fields: ['language', 'style', 'showLineNumbers', 'wrapLongLines', 'lineNbr'],
+      },
+      {
+        id: 'caption',
+        title: 'Caption',
+        fields: ['caption_title', 'caption_description'],
       },
     ],
 
@@ -82,6 +95,13 @@ export const codeSchema = (props) => {
         title: props.intl.formatMessage(messages.lineNbr),
         type: 'integer',
         default: 1,
+      },
+      caption_title: {
+        title: props.intl.formatMessage(messages.caption_title),
+      },
+      caption_description: {
+        title: props.intl.formatMessage(messages.caption_description),
+        widget: 'textarea',
       },
     },
     required: ['language'],

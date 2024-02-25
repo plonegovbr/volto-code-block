@@ -1,11 +1,17 @@
 import codeSVG from '@plone/volto/icons/code.svg';
 import showcaseSVG from '@plone/volto/icons/showcase.svg';
 
-import CodeBlockViewBlock from './components/Blocks/Code/View';
-import CodeBlockEditBlock from './components/Blocks/Code/Edit';
+// Blocks - CodeBlock
+import CodeBlockView from './components/Blocks/Code/View';
+import CodeBlockEdit from './components/Blocks/Code/Edit';
 
+// Blocks - MermaidBlock
 import MermaidBlockEdit from './components/Blocks/Mermaid/Edit';
 import MermaidBlockView from './components/Blocks/Mermaid/View';
+
+// Blocks - GistBlock
+import GistBlockEdit from './components/Blocks/Gist/Edit';
+import GistBlockView from './components/Blocks/Gist/View';
 
 import './theme/main.less';
 import './theme/theme-dark.less';
@@ -34,8 +40,8 @@ const applyConfig = (config) => {
     title: 'Code Block',
     icon: codeSVG,
     group: 'text',
-    view: CodeBlockViewBlock,
-    edit: CodeBlockEditBlock,
+    view: CodeBlockView,
+    edit: CodeBlockEdit,
     restricted: false,
     mostUsed: false,
     sidebarTab: 1,
@@ -57,6 +63,19 @@ const applyConfig = (config) => {
     blockHasOwnFocusManagement: true,
   };
 
+  config.blocks.blocksConfig.gistBlock = {
+    id: 'gistBlock',
+    title: 'Gist Block',
+    icon: codeSVG,
+    group: 'text',
+    view: GistBlockView,
+    edit: GistBlockEdit,
+    restricted: false,
+    mostUsed: false,
+    sidebarTab: 1,
+    blockHasOwnFocusManagement: false,
+  };
+
   config.settings['codeBlock'] = {
     languages: {
       plain: { label: 'Plaintext', language: languages.plain },
@@ -76,11 +95,19 @@ const applyConfig = (config) => {
     },
   };
 
-  // Check for @kitconcept/volto-blocks-grid
-  const gridBlock = config.blocks.blocksConfig.__grid;
-  if (gridBlock !== undefined) {
-    config.blocks.blocksConfig.__grid.gridAllowedBlocks = [...gridBlock.gridAllowedBlocks, 'codeBlock', 'mermaidBlock'];
-  }
+  // Add Blocks to gridBlock and accordionBlock
+  ['gridBlock', 'accordion'].forEach((blockId) => {
+    const block = config.blocks.blocksConfig[blockId];
+    if (block !== undefined) {
+      config.blocks.blocksConfig.gridBlock = {
+        ...config.blocks.blocksConfig.gridBlock,
+        blocksConfig: {
+          ...config.blocks.blocksConfig,
+        },
+        allowedBlocks: [...config.blocks.blocksConfig.gridBlock.allowedBlocks, 'codeBlock', 'mermaidBlock', 'gistBlock'],
+      };
+    }
+  });
 
   return config;
 };
