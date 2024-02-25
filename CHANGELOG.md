@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.2.0](https://github.com/plonegovbr/volto-code-block/compare/2.1.0...2.2.0) (2024-02-25)
+
+
+### Features
+
+* Add Gist Block and Caption component ([#18](https://github.com/plonegovbr/volto-code-block/issues/18)) ([2bd58b8](https://github.com/plonegovbr/volto-code-block/commit/2bd58b8d1d11561efc65873ba4f6de8f071d5499))
+* Add plain to default languages to be able to use it like a pre-block ([#12](https://github.com/plonegovbr/volto-code-block/issues/12)) ([9899762](https://github.com/plonegovbr/volto-code-block/commit/98997628d07c332cf2ce8075b79bf7faa8b8286b))
+
+
+### Bug Fixes
+
+* Fix extensibility while adding new languages syntaxes [@sneridagh](https://github.com/sneridagh) ([#10](https://github.com/plonegovbr/volto-code-block/issues/10)) ([e683b15](https://github.com/plonegovbr/volto-code-block/commit/e683b15edfe72d6bf575e45ed4283f2df2d43952))
+* Fix Storybook generation ([f6aed35](https://github.com/plonegovbr/volto-code-block/commit/f6aed35653ea8a23a1a5233004be9837cb82369e))
+* Load Mermaid only when the Mermaid Block is visible ([#13](https://github.com/plonegovbr/volto-code-block/issues/13)) ([#16](https://github.com/plonegovbr/volto-code-block/issues/16)) ([68d4505](https://github.com/plonegovbr/volto-code-block/commit/68d450589ea7e651f9688e21792600cd12e95fa2))
+
 ## [2.1.0](https://github.com/plonegovbr/volto-code-block/compare/2.0.0...2.1.0) (2023-05-22)
 
 
