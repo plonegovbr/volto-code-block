@@ -1,6 +1,6 @@
 {
   "name": "@plonegovbr/volto-code-block",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Volto add-on providing a code block with syntax highlighting.",
   "author": "PloneGov-BR",
   "homepage": "https://github.com/plonegovbr/volto-code-block",

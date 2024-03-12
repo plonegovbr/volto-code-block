@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/plonegovbr/volto-code-block/compare/2.2.0...2.2.1) (2024-03-12)
+
+
+### Bug Fixes
+
+* Use clone to avoid pass by reference ([#19](https://github.com/plonegovbr/volto-code-block/issues/19)) ([b4fc613](https://github.com/plonegovbr/volto-code-block/commit/b4fc613da30bf26fcadef727a4f550d10e9f5e25))
+
 ## [2.2.0](https://github.com/plonegovbr/volto-code-block/compare/2.1.0...2.2.0) (2024-02-25)
 
 
