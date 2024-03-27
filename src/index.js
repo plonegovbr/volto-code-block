@@ -108,11 +108,26 @@ const applyConfig = (config) => {
   // the internal `blocksConfig` object, so we clone the object to avoid this.
   ['gridBlock', 'accordion'].forEach((blockId) => {
     const block = config.blocks.blocksConfig[blockId];
-    if (block !== undefined && block.allowedBlocks !== undefined && block.blocksConfig !== undefined) {
-      block.allowedBlocks = [...block.allowedBlocks, 'codeBlock', 'mermaidBlock', 'gistBlock'];
-      block.blocksConfig.codeBlock = cloneDeep(config.blocks.blocksConfig.codeBlock);
-      block.blocksConfig.mermaidBlock = cloneDeep(config.blocks.blocksConfig.mermaidBlock);
-      block.blocksConfig.gistBlock = cloneDeep(config.blocks.blocksConfig.gistBlock);
+    if (
+      block !== undefined &&
+      block.allowedBlocks !== undefined &&
+      block.blocksConfig !== undefined
+    ) {
+      block.allowedBlocks = [
+        ...block.allowedBlocks,
+        'codeBlock',
+        'mermaidBlock',
+        'gistBlock',
+      ];
+      block.blocksConfig.codeBlock = cloneDeep(
+        config.blocks.blocksConfig.codeBlock,
+      );
+      block.blocksConfig.mermaidBlock = cloneDeep(
+        config.blocks.blocksConfig.mermaidBlock,
+      );
+      block.blocksConfig.gistBlock = cloneDeep(
+        config.blocks.blocksConfig.gistBlock,
+      );
     }
   });
 

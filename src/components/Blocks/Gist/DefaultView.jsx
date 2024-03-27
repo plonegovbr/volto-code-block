@@ -7,7 +7,9 @@ const GistView = (props) => {
   return (
     <>
       {gistId && <Gist id={gistId} file={file} />}
-      {caption_title && <Caption title={caption_title} description={caption_description} />}
+      {caption_title && (
+        <Caption title={caption_title} description={caption_description} />
+      )}
     </>
   );
 };

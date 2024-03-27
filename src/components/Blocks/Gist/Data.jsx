@@ -4,7 +4,8 @@ import { gistSchema } from './schema';
 import { useIntl } from 'react-intl';
 
 const GistBlockData = (props) => {
-  const { data, block, onChangeBlock } = props;
+  const { block, blocksConfig, data, onChangeBlock, navRoot, contentType } =
+    props;
   const intl = useIntl();
   const schema = gistSchema({ ...props, intl });
 
@@ -18,8 +19,12 @@ const GistBlockData = (props) => {
           [id]: value,
         });
       }}
+      onChangeBlock={onChangeBlock}
       formData={data}
       block={block}
+      blocksConfig={blocksConfig}
+      navRoot={navRoot}
+      contentType={contentType}
     />
   );
 };

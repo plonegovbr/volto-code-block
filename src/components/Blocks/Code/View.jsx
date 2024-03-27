@@ -5,7 +5,7 @@ import CodeView from './DefaultView';
 const CodeBlockView = (props) => {
   const { data } = props;
 
-  return <>{data && <CodeView data={data} />}</>;
+  return <>{data && <CodeView {...props} />}</>;
 };
 
 export default withBlockExtensions(CodeBlockView);

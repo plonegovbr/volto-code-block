@@ -38,14 +38,18 @@ const messages = defineMessages({
 });
 
 export const codeSchema = (props) => {
-  const defaultLanguage = config.blocks?.blocksConfig?.codeBlock?.defaultLanguage;
+  const defaultLanguage =
+    config.blocks?.blocksConfig?.codeBlock?.defaultLanguage;
   const defaultStyle = config.blocks?.blocksConfig?.codeBlock?.defaultStyle;
 
   const availableLanguages = () => {
     const allLanguages = config.settings.codeBlock.languages || {};
-    const languages = Array.from(Object.entries(allLanguages), ([key, value]) => {
-      return [key, value.label];
-    });
+    const languages = Array.from(
+      Object.entries(allLanguages),
+      ([key, value]) => {
+        return [key, value.label];
+      },
+    );
     return languages;
   };
 
@@ -59,7 +63,13 @@ export const codeSchema = (props) => {
       {
         id: 'default',
         title: 'Default',
-        fields: ['language', 'style', 'showLineNumbers', 'wrapLongLines', 'lineNbr'],
+        fields: [
+          'language',
+          'style',
+          'showLineNumbers',
+          'wrapLongLines',
+          'lineNbr',
+        ],
       },
       {
         id: 'caption',

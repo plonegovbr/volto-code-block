@@ -8,7 +8,10 @@ const MermaidView = (props) => {
 
   useEffect(() => {
     const loadMermaid = async () => {
-      const config = { startOnLoad: true, flowchart: { useMaxWidth: false, htmlLabels: true } };
+      const config = {
+        startOnLoad: true,
+        flowchart: { useMaxWidth: false, htmlLabels: true },
+      };
       const { default: mermaid } = await import('mermaid/dist/mermaid.esm.mjs');
       setMermaid(mermaid);
       mermaid.initialize(config);
@@ -30,7 +33,11 @@ const MermaidView = (props) => {
     }
   }, [mermaid, elementId, code]);
 
-  return <div className={'mermaidWrapper'}>{svg && <div dangerouslySetInnerHTML={{ __html: svg }} />}</div>;
+  return (
+    <div className={'mermaidWrapper'}>
+      {svg && <div dangerouslySetInnerHTML={{ __html: svg }} />}
+    </div>
+  );
 };
 
 export default MermaidView;
