@@ -4,7 +4,8 @@ import { codeSchema } from './schema';
 import { useIntl } from 'react-intl';
 
 const CodeBlockData = (props) => {
-  const { data, block, onChangeBlock } = props;
+  const { block, blocksConfig, data, onChangeBlock, navRoot, contentType } =
+    props;
   const intl = useIntl();
   const schema = codeSchema({ ...props, intl });
 
@@ -18,8 +19,12 @@ const CodeBlockData = (props) => {
           [id]: value,
         });
       }}
+      onChangeBlock={onChangeBlock}
       formData={data}
       block={block}
+      blocksConfig={blocksConfig}
+      navRoot={navRoot}
+      contentType={contentType}
     />
   );
 };

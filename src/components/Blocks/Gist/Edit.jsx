@@ -13,7 +13,12 @@ const GistBlockEdit = (props) => {
       {data && (
         <>
           <div className={'gist editLayer'}></div>
-          <View gistId={gistId} file={file} caption_title={caption_title} caption_description={caption_description} />
+          <View
+            gistId={gistId}
+            file={file}
+            caption_title={caption_title}
+            caption_description={caption_description}
+          />
         </>
       )}
       <SidebarPortal selected={selected}>

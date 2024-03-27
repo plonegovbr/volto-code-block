@@ -62,8 +62,14 @@ const KEYCODE_BACK_QUOTE = 192;
 const HISTORY_LIMIT = 100;
 const HISTORY_TIME_GAP = 3000;
 
-const isWindows = typeof window !== 'undefined' && 'navigator' in window && /Win/i.test(navigator.platform);
-const isMacLike = typeof window !== 'undefined' && 'navigator' in window && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
+const isWindows =
+  typeof window !== 'undefined' &&
+  'navigator' in window &&
+  /Win/i.test(navigator.platform);
+const isMacLike =
+  typeof window !== 'undefined' &&
+  'navigator' in window &&
+  /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
 
 const className = 'npm__react-simple-code-editor__textarea';
 
@@ -124,7 +130,8 @@ export default class Editor extends React.Component<Props, State> {
     });
   };
 
-  private _getLines = (text: string, position: number) => text.substring(0, position).split('\n');
+  private _getLines = (text: string, position: number) =>
+    text.substring(0, position).split('\n');
 
   private _recordChange = (record: Record, overwrite: boolean = false) => {
     const { stack, offset } = this._history;
@@ -156,10 +163,14 @@ export default class Editor extends React.Component<Props, State> {
         const re = /[^a-z0-9]([a-z0-9]+)$/i;
 
         // Get the previous line
-        const previous = this._getLines(last.value, last.selectionStart).pop()?.match(re);
+        const previous = this._getLines(last.value, last.selectionStart)
+          .pop()
+          ?.match(re);
 
         // Get the current line
-        const current = this._getLines(record.value, record.selectionStart).pop()?.match(re);
+        const current = this._getLines(record.value, record.selectionStart)
+          .pop()
+          ?.match(re);
 
         if (previous?.[1] && current?.[1]?.startsWith(previous[1])) {
           // The last word of the previous line and current line match
@@ -264,7 +275,11 @@ export default class Editor extends React.Component<Props, State> {
         const nextValue = value
           .split('\n')
           .map((line, i) => {
-            if (i >= startLine && i <= endLine && line.startsWith(tabCharacter)) {
+            if (
+              i >= startLine &&
+              i <= endLine &&
+              line.startsWith(tabCharacter)
+            ) {
               return line.substring(tabCharacter.length);
             }
 
@@ -279,7 +294,9 @@ export default class Editor extends React.Component<Props, State> {
             value: nextValue,
             // Move the start cursor if first line in selection was modified
             // It was modified only if it started with a tab
-            selectionStart: startLineText?.startsWith(tabCharacter) ? selectionStart - tabCharacter.length : selectionStart,
+            selectionStart: startLineText?.startsWith(tabCharacter)
+              ? selectionStart - tabCharacter.length
+              : selectionStart,
             // Move the end cursor by total number of characters removed
             selectionEnd: selectionEnd - (value.length - nextValue.length),
           });
@@ -304,16 +321,23 @@ export default class Editor extends React.Component<Props, State> {
             .join('\n'),
           // Move the start cursor by number of characters added in first line of selection
           // Don't move it if it there was no text before cursor
-          selectionStart: startLineText && /\S/.test(startLineText) ? selectionStart + tabCharacter.length : selectionStart,
+          selectionStart:
+            startLineText && /\S/.test(startLineText)
+              ? selectionStart + tabCharacter.length
+              : selectionStart,
           // Move the end cursor by total number of characters added
-          selectionEnd: selectionEnd + tabCharacter.length * (endLine - startLine + 1),
+          selectionEnd:
+            selectionEnd + tabCharacter.length * (endLine - startLine + 1),
         });
       } else {
         const updatedSelection = selectionStart + tabCharacter.length;
 
         this._applyEdits({
           // Insert tab character at caret
-          value: value.substring(0, selectionStart) + tabCharacter + value.substring(selectionEnd),
+          value:
+            value.substring(0, selectionStart) +
+            tabCharacter +
+            value.substring(selectionEnd),
           // Update caret position
           selectionStart: updatedSelection,
           selectionEnd: updatedSelection,
@@ -331,7 +355,9 @@ export default class Editor extends React.Component<Props, State> {
 
         this._applyEdits({
           // Remove tab character at caret
-          value: value.substring(0, selectionStart - tabCharacter.length) + value.substring(selectionEnd),
+          value:
+            value.substring(0, selectionStart - tabCharacter.length) +
+            value.substring(selectionEnd),
           // Update caret position
           selectionStart: updatedSelection,
           selectionEnd: updatedSelection,
@@ -353,14 +379,22 @@ export default class Editor extends React.Component<Props, State> {
 
           this._applyEdits({
             // Insert indentation character at caret
-            value: value.substring(0, selectionStart) + indent + value.substring(selectionEnd),
+            value:
+              value.substring(0, selectionStart) +
+              indent +
+              value.substring(selectionEnd),
             // Update caret position
             selectionStart: updatedSelection,
             selectionEnd: updatedSelection,
           });
         }
       }
-    } else if (e.keyCode === KEYCODE_PARENS || e.keyCode === KEYCODE_BRACKETS || e.keyCode === KEYCODE_QUOTE || e.keyCode === KEYCODE_BACK_QUOTE) {
+    } else if (
+      e.keyCode === KEYCODE_PARENS ||
+      e.keyCode === KEYCODE_BRACKETS ||
+      e.keyCode === KEYCODE_QUOTE ||
+      e.keyCode === KEYCODE_BACK_QUOTE
+    ) {
       let chars;
 
       if (e.keyCode === KEYCODE_PARENS && e.shiftKey) {
@@ -386,7 +420,12 @@ export default class Editor extends React.Component<Props, State> {
         e.preventDefault();
 
         this._applyEdits({
-          value: value.substring(0, selectionStart) + chars[0] + value.substring(selectionStart, selectionEnd) + chars[1] + value.substring(selectionEnd),
+          value:
+            value.substring(0, selectionStart) +
+            chars[0] +
+            value.substring(selectionStart, selectionEnd) +
+            chars[1] +
+            value.substring(selectionEnd),
           // Update caret position
           selectionStart,
           selectionEnd: selectionEnd + 2,
@@ -409,16 +448,20 @@ export default class Editor extends React.Component<Props, State> {
         ? // Trigger redo with ⌘+Shift+Z on Mac
           e.metaKey && e.keyCode === KEYCODE_Z && e.shiftKey
         : isWindows
-        ? // Trigger redo with Ctrl+Y on Windows
-          e.ctrlKey && e.keyCode === KEYCODE_Y
-        : // Trigger redo with Ctrl+Shift+Z on other platforms
-          e.ctrlKey && e.keyCode === KEYCODE_Z && e.shiftKey) &&
+          ? // Trigger redo with Ctrl+Y on Windows
+            e.ctrlKey && e.keyCode === KEYCODE_Y
+          : // Trigger redo with Ctrl+Shift+Z on other platforms
+            e.ctrlKey && e.keyCode === KEYCODE_Z && e.shiftKey) &&
       !e.altKey
     ) {
       e.preventDefault();
 
       this._redoEdit();
-    } else if (e.keyCode === KEYCODE_M && e.ctrlKey && (isMacLike ? e.shiftKey : true)) {
+    } else if (
+      e.keyCode === KEYCODE_M &&
+      e.ctrlKey &&
+      (isMacLike ? e.shiftKey : true)
+    ) {
       e.preventDefault();
 
       // Toggle capturing tab key so users can focus away
@@ -503,7 +546,14 @@ export default class Editor extends React.Component<Props, State> {
 
     return (
       <div {...rest} style={{ ...styles.container, ...style }}>
-        <pre className={preClassName} aria-hidden="true" style={{ ...styles.editor, ...styles.highlight, ...contentStyle }} {...(typeof highlighted === 'string' ? { dangerouslySetInnerHTML: { __html: highlighted + '<br />' } } : { children: highlighted })} />
+        <pre
+          className={preClassName}
+          aria-hidden="true"
+          style={{ ...styles.editor, ...styles.highlight, ...contentStyle }}
+          {...(typeof highlighted === 'string'
+            ? { dangerouslySetInnerHTML: { __html: highlighted + '<br />' } }
+            : { children: highlighted })}
+        />
         <textarea
           ref={(c) => (this._input = c)}
           style={{
@@ -512,7 +562,9 @@ export default class Editor extends React.Component<Props, State> {
             ...contentStyle,
             background: 'none',
           }}
-          className={className + (textareaClassName ? ` ${textareaClassName}` : '')}
+          className={
+            className + (textareaClassName ? ` ${textareaClassName}` : '')
+          }
           id={textareaId}
           value={value}
           onChange={this._handleChange}

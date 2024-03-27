@@ -19,7 +19,13 @@ const MermaidBlockEdit = (props) => {
   return (
     <div className="block code">
       <div className={className}>
-        <Editor value={code} onValueChange={(code) => handleChange(code)} highlight={(code) => highlight(code, language)} padding={10} preClassName={`code-block-wrapper ${data.style} language-mermaid`} />
+        <Editor
+          value={code}
+          onValueChange={(code) => handleChange(code)}
+          highlight={(code) => highlight(code, language)}
+          padding={10}
+          preClassName={`code-block-wrapper ${data.style} language-mermaid`}
+        />
       </div>
     </div>
   );

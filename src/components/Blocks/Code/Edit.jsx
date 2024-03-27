@@ -29,8 +29,16 @@ const CodeBlockEdit = (props) => {
   return (
     <div className="block code">
       <div className={className}>
-        <Editor value={code} onValueChange={(code) => handleChange(code)} highlight={(code) => highlight(code, language)} padding={10} preClassName={`code-block-wrapper ${data.style} language-${data.language}`} />
-        {caption_title && <Caption title={caption_title} description={caption_description} />}
+        <Editor
+          value={code}
+          onValueChange={(code) => handleChange(code)}
+          highlight={(code) => highlight(code, language)}
+          padding={10}
+          preClassName={`code-block-wrapper ${data.style} language-${data.language}`}
+        />
+        {caption_title && (
+          <Caption title={caption_title} description={caption_description} />
+        )}
         <SidebarPortal selected={selected}>
           <CodeBlockData {...props} />
         </SidebarPortal>

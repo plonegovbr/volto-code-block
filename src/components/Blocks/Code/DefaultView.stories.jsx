@@ -3,9 +3,11 @@ import React from 'react';
 import CodeView from './DefaultView';
 import Wrapper from '@plone/volto/storybook';
 
-const codePython = 'from Testing.makerequest import makerequest\nfrom zope.component.hooks import setSite\nimport transaction\n\n\napp = makerequest(app)\nsite = app.Plone\nsetSite(site)\n\n# Change admin password\nuser = "admin"\npassword = "verynotsecure"\napp.acl_users.users.updateUserPassword(user, password)\n\n\n# Persist changes\ntransaction.commit()\napp._p_jar.sync()';
+const codePython =
+  'from Testing.makerequest import makerequest\nfrom zope.component.hooks import setSite\nimport transaction\n\n\napp = makerequest(app)\nsite = app.Plone\nsetSite(site)\n\n# Change admin password\nuser = "admin"\npassword = "verynotsecure"\napp.acl_users.users.updateUserPassword(user, password)\n\n\n# Persist changes\ntransaction.commit()\napp._p_jar.sync()';
 
-const codeLongLines = '# Code to show how wrap long lines would work\n\ntext = "This is a really, really, really, really long line including a lot of words and letters and a text that should not make any sense, but should be long, very long"\n\nprint(text)';
+const codeLongLines =
+  '# Code to show how wrap long lines would work\n\ntext = "This is a really, really, really, really long line including a lot of words and letters and a text that should not make any sense, but should be long, very long"\n\nprint(text)';
 
 const StoryComponent = injectIntl(({ children, ...args }) => {
   const { language, style, code, showLineNumbers, wrapLongLines } = args;
