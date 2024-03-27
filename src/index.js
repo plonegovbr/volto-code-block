@@ -23,6 +23,7 @@ import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-css';
 import 'prismjs/components/prism-docker';
 import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-json';
 import 'prismjs/components/prism-less';
 // import 'prismjs/components/prism-markdown';
@@ -32,6 +33,9 @@ import 'prismjs/components/prism-nginx';
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-scss';
 import 'prismjs/components/prism-yaml';
+// They have to be the last ones (at least after markup)
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-tsx';
 
 import { languages } from 'prismjs/components/prism-core';
 
@@ -83,7 +87,10 @@ const applyConfig = (config) => {
       bash: { label: 'Bash', language: languages.bash },
       css: { label: 'CSS', language: languages.css },
       dockerfile: { label: 'Dockerfile', language: languages.dockerfile },
-      javascript: { label: 'Javascript', language: languages.js },
+      javascript: { label: 'JavaScript', language: languages.js },
+      typescript: { label: 'TypeScript', language: languages.ts },
+      jsx: { label: 'JSX', language: languages.jsx },
+      tsx: { label: 'TSX', language: languages.tsx },
       json: { label: 'JSON', language: languages.json },
       less: { label: 'LESS', language: languages.less },
       markdown: { label: 'Markdown', language: languages.markdown },
@@ -101,7 +108,7 @@ const applyConfig = (config) => {
   // the internal `blocksConfig` object, so we clone the object to avoid this.
   ['gridBlock', 'accordion'].forEach((blockId) => {
     const block = config.blocks.blocksConfig[blockId];
-    if (block !== undefined) {
+    if (block !== undefined && block.allowedBlocks !== undefined && block.blocksConfig !== undefined) {
       block.allowedBlocks = [...block.allowedBlocks, 'codeBlock', 'mermaidBlock', 'gistBlock'];
       block.blocksConfig.codeBlock = cloneDeep(config.blocks.blocksConfig.codeBlock);
       block.blocksConfig.mermaidBlock = cloneDeep(config.blocks.blocksConfig.mermaidBlock);
