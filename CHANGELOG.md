@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.2](https://github.com/plonegovbr/volto-code-block/compare/2.2.1...2.2.2) (2024-03-28)
+
+
+### Bug Fixes
+
+* Accordion is present, add JSX and TSX imports ([#20](https://github.com/plonegovbr/volto-code-block/issues/20)) ([2055da5](https://github.com/plonegovbr/volto-code-block/commit/2055da53bac906d12ff1415e023059eb0a337800))
+
 ## [2.2.1](https://github.com/plonegovbr/volto-code-block/compare/2.2.0...2.2.1) (2024-03-12)
 
 
