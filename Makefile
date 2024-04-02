@@ -1,10 +1,8 @@
-# Yeoman Volto App development
-
 ### Defensive settings for make:
 #     https://tech.davis-hansson.com/p/make/
 SHELL:=bash
 .ONESHELL:
-.SHELLFLAGS:=-xeu -o pipefail -O inherit_errexit -c
+.SHELLFLAGS:=-eu -o pipefail -c
 .SILENT:
 .DELETE_ON_ERROR:
 MAKEFLAGS+=--warn-undefined-variables
@@ -22,146 +20,84 @@ RESET=`tput sgr0`
 YELLOW=`tput setaf 3`
 
 PLONE_VERSION=6
-VOLTO_VERSION=17.15.2
+DOCKER_IMAGE=plone/server-dev:${PLONE_VERSION}
+DOCKER_IMAGE_ACCEPTANCE=plone/server-acceptance:${PLONE_VERSION}
 
 ADDON_NAME='@plonegovbr/volto-code-block'
-ADDON_PATH='volto-code-block'
-DEV_COMPOSE=dockerfiles/docker-compose.yml
-ACCEPTANCE_COMPOSE=acceptance/docker-compose.yml
-CMD=CURRENT_DIR=${CURRENT_DIR} ADDON_NAME=${ADDON_NAME} ADDON_PATH=${ADDON_PATH} VOLTO_VERSION=${VOLTO_VERSION} PLONE_VERSION=${PLONE_VERSION} docker compose
-DOCKER_COMPOSE=${CMD} -p ${ADDON_PATH} -f ${DEV_COMPOSE}
-ACCEPTANCE=${CMD} -p ${ADDON_PATH}-acceptance -f ${ACCEPTANCE_COMPOSE}
-
-COMPOSE_FILE=dockerfiles/docker-compose.yml
-ACCEPTANCE_COMPOSE=acceptance/docker-compose.yml
-CMD=CURRENT_DIR=${CURRENT_DIR} ADDON_NAME=${ADDON_NAME} ADDON_PATH=${ADDON_PATH} VOLTO_VERSION=${VOLTO_VERSION} PLONE_VERSION=${PLONE_VERSION} docker compose
-DOCKER_COMPOSE=${CMD} -p ${ADDON_PATH} -f ${COMPOSE_FILE}
-DEV_COMPOSE=COMPOSE_PROFILES=dev ${DOCKER_COMPOSE}
-LIVE_COMPOSE=COMPOSE_PROFILES=dev ${DOCKER_COMPOSE}
-ACCEPTANCE=${CMD} -p ${ADDON_PATH}-acceptance -f ${ACCEPTANCE_COMPOSE}
-
-.PHONY: build-backend
-build-backend: ## Build
-	@echo "$(GREEN)==> Build Backend Container $(RESET)"
-	${DEV_COMPOSE} build backend
-
-.PHONY: start-backend
-start-backend: ## Starts Docker backend
-	@echo "$(GREEN)==> Start Docker-based Plone Backend $(RESET)"
-	${DEV_COMPOSE} up backend -d
-
-.PHONY: stop-backend
-stop-backend: ## Stop Docker backend
-	@echo "$(GREEN)==> Stop Docker-based Plone Backend $(RESET)"
-	${DEV_COMPOSE} stop backend
-
-.PHONY: build-live
-build-live: ## Build Addon live
-	@echo "$(GREEN)==> Build Addon development container $(RESET)"
-	${LIVE_COMPOSE} build addon-live
-
-.PHONY: build-addon
-build-addon: ## Build Addon dev
-	@echo "$(GREEN)==> Build Addon development container $(RESET)"
-	${DEV_COMPOSE} build addon-dev
-	${DEV_COMPOSE} build addon-storybook
-
-.PHONY: start-dev
-start-dev: ## Starts Dev container
-	@echo "$(GREEN)==> Start Addon Development container $(RESET)"
-	${DEV_COMPOSE} up addon-dev backend
-
-.PHONY: dev
-dev: ## Develop the addon
-	@echo "$(GREEN)==> Start Development Environment $(RESET)"
-	make build-backend
-	make start-backend
-	make build-addon
-	make start-dev
 
 .PHONY: help
-help:		## Show this help.
+help:		## Show this help
 	@echo -e "$$(grep -hE '^\S+:.*##' $(MAKEFILE_LIST) | sed -e 's/:.*##\s*/:/' -e 's/^\(.\+\):\(.*\)/\\x1b[36m\1\\x1b[m:\2/' | column -c2 -t -s :)"
 
-## Setup the local environment
-.PHONY: install
-install: ## Install the local environment, Cypress, build acceptance containers
-	yarn
-	make install-acceptance
-
 # Dev Helpers
+
+.PHONY: install
+install: ## Install task, checks if missdev (mrs-developer) is present and runs it
+	pnpm dlx mrs-developer missdev --no-config --fetch-https
+	pnpm i
+
 .PHONY: i18n
 i18n: ## Sync i18n
-	@echo "$(YELLOW)==> Do not forget to setup the local environment (make install) $(RESET)"
-	yarn i18n
+	pnpm --filter $(ADDON_NAME) i18n
 
 .PHONY: format
 format: ## Format codebase
-	${DEV_COMPOSE} run --rm addon-dev lint:fix
-	${DEV_COMPOSE} run --rm addon-dev prettier:fix
-	${DEV_COMPOSE} run --rm addon-dev stylelint:fix
+	pnpm lint:fix
+	pnpm prettier:fix
+	pnpm stylelint:fix
 
 .PHONY: lint
 lint: ## Lint Codebase
-	${DEV_COMPOSE} run --rm addon-dev lint
-	${DEV_COMPOSE} run --rm addon-dev prettier
-	${DEV_COMPOSE} run --rm addon-dev stylelint --allow-empty-input
+	pnpm lint
+	pnpm prettier
+	pnpm stylelint
 
 .PHONY: test
 test: ## Run unit tests
-	${DEV_COMPOSE} run --rm addon-dev test --watchAll
+	pnpm test
 
 .PHONY: test-ci
 test-ci: ## Run unit tests in CI
-	${DEV_COMPOSE} run -e CI=1 addon-dev test
+	CI=1 RAZZLE_JEST_CONFIG=$(CURRENT_DIR)/jest-addon.config.js pnpm --filter @plone/volto test -- --passWithNoTests
+
+.PHONY: start-backend-docker
+start-backend-docker:		## Starts a Docker-based backend for developing
+	@echo "$(GREEN)==> Start Docker-based Plone Backend$(RESET)"
+	docker run -it --rm --name=backend -p 8080:8080 -e SITE=Plone $(DOCKER_IMAGE)
+
+## Storybook
+.PHONY: storybook-start
+storybook-start:		## Storybook: Start server on port 6006
+	@echo "$(GREEN)==> Start Storybook$(RESET)"
+	pnpm run storybook
+
+.PHONY: storybook-build
+storybook-build:		## Storybook: Build
+	@echo "$(GREEN)==> Build Storybook$(RESET)"
+	mkdir -p $(CURRENT_DIR)/.storybook-build
+	pnpm run build-storybook -o $(CURRENT_DIR)/.storybook-build
 
 ## Acceptance
-.PHONY: install-acceptance
-install-acceptance: ## Install Cypress, build acceptance containers
-	(cd acceptance && yarn)
-	${ACCEPTANCE} --profile dev --profile prod build
+.PHONY: start-test-acceptance-frontend-dev
+start-test-acceptance-frontend-dev: ## Start acceptance frontend in dev mode
+	RAZZLE_API_PATH=http://127.0.0.1:55001/plone pnpm start
+
+.PHONY: start-test-acceptance-frontend
+start-test-acceptance-frontend: ## Start acceptance frontend in prod mode
+	RAZZLE_API_PATH=http://127.0.0.1:55001/plone pnpm build && pnpm start:prod
 
 .PHONY: start-test-acceptance-server
-start-test-acceptance-server: ## Start acceptance server (for use it in while developing)
-	${ACCEPTANCE} --profile dev up
+start-test-acceptance-server: ## Start acceptance server
+	docker run -it --rm -p 55001:55001 $(DOCKER_IMAGE_ACCEPTANCE)
 
-.PHONY: start-test-acceptance-server-prod
-start-test-acceptance-server-prod: ## Start acceptance server in prod (used by CI)
-	${ACCEPTANCE} --profile prod up -d
+.PHONY: start-test-acceptance-server-ci
+start-test-acceptance-server-ci: ## Start acceptance server in CI mode (no terminal attached)
+	docker run -i --rm -p 55001:55001 $(DOCKER_IMAGE_ACCEPTANCE)
 
 .PHONY: test-acceptance
-test-acceptance: ## Start Cypress (for use it while developing)
-	(cd acceptance && ./node_modules/.bin/cypress open)
+test-acceptance: ## Start Cypress in interactive mode
+	pnpm --filter @plone/volto exec cypress open --config-file $(CURRENT_DIR)/cypress.config.js --config specPattern=$(CURRENT_DIR)'/cypress/tests/**/*.{js,jsx,ts,tsx}'
 
 .PHONY: test-acceptance-headless
-test-acceptance-headless: ## Run cypress tests in CI
-	(cd acceptance && ./node_modules/.bin/cypress run)
-
-.PHONY: stop-test-acceptance-server
-stop-test-acceptance-server: ## Stop acceptance server (for use it while finished developing)
-	${ACCEPTANCE} --profile dev down
-
-.PHONY: status-test-acceptance-server
-status-test-acceptance-server: ## Status of Acceptance Server (for use it while developing)
-	${ACCEPTANCE} ps
-
-.PHONY: debug-frontend
-debug-frontend:  ## Run bash in the Frontend container (for debug infrastructure purposes)
-	${DEV_COMPOSE} run --entrypoint bash addon-dev
-
-# Storybook
-.PHONY: start-storybook
-start-storybook: ## Starts Storybook
-	@echo "$(GREEN)==> Start Storybook $(RESET)"
-	${DOCKER_COMPOSE} up addon-storybook
-
-.PHONY: build-storybook
-build-storybook: ## Build storybook
-	@echo "$(GREEN)==> Build storybook $(RESET)"
-	if [ ! -d .storybook ]; then mkdir .storybook; fi
-	${DOCKER_COMPOSE} run addon-storybook build-storybook
-
-# Release
-.PHONY: release
-release:  ## Release a version of the add-on
-	yarn release
+test-acceptance-headless: ## Run cypress tests in headless mode for CI
+	pnpm --filter @plone/volto exec cypress run --config-file $(CURRENT_DIR)/cypress.config.js --config specPattern=$(CURRENT_DIR)'/cypress/tests/**/*.{js,jsx,ts,tsx}'

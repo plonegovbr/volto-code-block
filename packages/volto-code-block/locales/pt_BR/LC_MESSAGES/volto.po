@@ -1,0 +1,79 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language: \n"
+"Language-Team: \n"
+"Content-Type: \n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. Default: "Code Block"
+#: components/Blocks/Code/schema
+msgid "Code Block"
+msgstr "Bloco de Código"
+
+#. Default: "Dark"
+#: components/SyntaxHighlighter/Styles
+msgid "Dark"
+msgstr "Escuro"
+
+#. Default: "Description"
+#: components/Blocks/Code/schema
+#: components/Blocks/Gist/schema
+msgid "Description"
+msgstr ""
+
+#. Default: "File"
+#: components/Blocks/Gist/schema
+msgid "File"
+msgstr ""
+
+#. Default: "Gist Block"
+#: components/Blocks/Gist/schema
+msgid "Gist Block"
+msgstr ""
+
+#. Default: "Gist Id"
+#: components/Blocks/Gist/schema
+msgid "Gist Id"
+msgstr ""
+
+#. Default: "Language"
+#: components/Blocks/Code/schema
+msgid "Language"
+msgstr "Linguagem"
+
+#. Default: "Light"
+#: components/SyntaxHighlighter/Styles
+msgid "Light"
+msgstr "Claro"
+
+#. Default: "Show Line Numbers"
+#: components/Blocks/Code/schema
+msgid "Show Line Numbers"
+msgstr "Exibir número de linha"
+
+#. Default: "Starting Line Number"
+#: components/Blocks/Code/schema
+msgid "Starting Line Number"
+msgstr ""
+
+#. Default: "Style"
+#: components/Blocks/Code/schema
+msgid "Style"
+msgstr "Estilo"
+
+#. Default: "Title"
+#: components/Blocks/Code/schema
+#: components/Blocks/Gist/schema
+msgid "Title"
+msgstr ""
+
+#. Default: "Wrap Long Lines"
+#: components/Blocks/Code/schema
+msgid "Wrap Long Lines"
+msgstr "Quebrar linhas longas"
