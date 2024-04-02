@@ -1,0 +1,81 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Plone\n"
+"POT-Creation-Date: 2024-04-02T13:25:29.270Z\n"
+"Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
+"Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8\n"
+"Domain: volto\n"
+
+#. Default: "Code Block"
+#: components/Blocks/Code/schema
+msgid "Code Block"
+msgstr ""
+
+#. Default: "Dark"
+#: components/SyntaxHighlighter/Styles
+msgid "Dark"
+msgstr ""
+
+#. Default: "Description"
+#: components/Blocks/Code/schema
+#: components/Blocks/Gist/schema
+msgid "Description"
+msgstr ""
+
+#. Default: "File"
+#: components/Blocks/Gist/schema
+msgid "File"
+msgstr ""
+
+#. Default: "Gist Block"
+#: components/Blocks/Gist/schema
+msgid "Gist Block"
+msgstr ""
+
+#. Default: "Gist Id"
+#: components/Blocks/Gist/schema
+msgid "Gist Id"
+msgstr ""
+
+#. Default: "Language"
+#: components/Blocks/Code/schema
+msgid "Language"
+msgstr ""
+
+#. Default: "Light"
+#: components/SyntaxHighlighter/Styles
+msgid "Light"
+msgstr ""
+
+#. Default: "Show Line Numbers"
+#: components/Blocks/Code/schema
+msgid "Show Line Numbers"
+msgstr ""
+
+#. Default: "Starting Line Number"
+#: components/Blocks/Code/schema
+msgid "Starting Line Number"
+msgstr ""
+
+#. Default: "Style"
+#: components/Blocks/Code/schema
+msgid "Style"
+msgstr ""
+
+#. Default: "Title"
+#: components/Blocks/Code/schema
+#: components/Blocks/Gist/schema
+msgid "Title"
+msgstr ""
+
+#. Default: "Wrap Long Lines"
+#: components/Blocks/Code/schema
+msgid "Wrap Long Lines"
+msgstr ""
