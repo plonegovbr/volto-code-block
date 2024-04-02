@@ -1,6 +1,6 @@
 {
   "name": "@plonegovbr/volto-code-block",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "description": "Volto add-on providing a code block with syntax highlighting.",
   "main": "src/index.js",
   "license": "MIT",

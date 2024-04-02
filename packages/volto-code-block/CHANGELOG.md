@@ -7,3 +7,9 @@
 -->
 
 <!-- towncrier release notes start -->
+
+## 2.3.0 (2024-04-02)
+
+### Internal
+
+- Reorganize repository to use new Volto add-on format based on `cookiecutter-volto` [@ericof] [#21](https://github.com/plonegovbr/volto-code-block/issue/21)
