@@ -35,6 +35,10 @@ const messages = defineMessages({
     id: 'Description',
     defaultMessage: 'Description',
   },
+  caption: {
+    id: 'Caption',
+    defaultMessage: 'Caption',
+  },
 });
 
 export const codeSchema = (props) => {
@@ -73,7 +77,7 @@ export const codeSchema = (props) => {
       },
       {
         id: 'caption',
-        title: 'Caption',
+        title: props.intl.formatMessage(messages.caption),
         fields: ['caption_title', 'caption_description'],
       },
     ],

@@ -1,22 +1,20 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2025-01-15T13:59:29.248Z\n"
-"Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
-"Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"MIME-Version: 1.0\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
-"Preferred-Encodings: utf-8\n"
-"Domain: volto\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language: \n"
+"Language-Team: \n"
+"Content-Type: \n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
 
 #. Default: "Caption"
 #: components/Blocks/Code/schema
 msgid "Caption"
-msgstr ""
+msgstr "Beschriftung"
 
 #. Default: "Code Block"
 #: components/Blocks/Code/schema
@@ -26,18 +24,18 @@ msgstr ""
 #. Default: "Dark"
 #: components/SyntaxHighlighter/Styles
 msgid "Dark"
-msgstr ""
+msgstr "Dunkel"
 
 #. Default: "Description"
 #: components/Blocks/Code/schema
 #: components/Blocks/Gist/schema
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #. Default: "File"
 #: components/Blocks/Gist/schema
 msgid "File"
-msgstr ""
+msgstr "Datei"
 
 #. Default: "Gist Block"
 #: components/Blocks/Gist/schema
@@ -52,35 +50,35 @@ msgstr ""
 #. Default: "Language"
 #: components/Blocks/Code/schema
 msgid "Language"
-msgstr ""
+msgstr "Sprache"
 
 #. Default: "Light"
 #: components/SyntaxHighlighter/Styles
 msgid "Light"
-msgstr ""
+msgstr "Hell"
 
 #. Default: "Show Line Numbers"
 #: components/Blocks/Code/schema
 msgid "Show Line Numbers"
-msgstr ""
+msgstr "Zeilennummern anzeigen"
 
 #. Default: "Starting Line Number"
 #: components/Blocks/Code/schema
 msgid "Starting Line Number"
-msgstr ""
+msgstr "Nummer der Startlinie"
 
 #. Default: "Style"
 #: components/Blocks/Code/schema
 msgid "Style"
-msgstr ""
+msgstr "Aussehen"
 
 #. Default: "Title"
 #: components/Blocks/Code/schema
 #: components/Blocks/Gist/schema
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #. Default: "Wrap Long Lines"
 #: components/Blocks/Code/schema
 msgid "Wrap Long Lines"
-msgstr ""
+msgstr "Lange Zeilen umbrechen"
