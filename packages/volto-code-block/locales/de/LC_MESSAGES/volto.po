@@ -65,7 +65,7 @@ msgstr "Zeilennummern anzeigen"
 #. Default: "Starting Line Number"
 #: components/Blocks/Code/schema
 msgid "Starting Line Number"
-msgstr "Nummer der Startlinie"
+msgstr "Nummer der Startzeile"
 
 #. Default: "Style"
 #: components/Blocks/Code/schema
