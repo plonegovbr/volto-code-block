@@ -26,7 +26,6 @@ import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-json';
 import 'prismjs/components/prism-less';
-// import 'prismjs/components/prism-markdown';
 import 'prismjs/components/prism-markup';
 import 'prismjs/components/prism-mermaid';
 import 'prismjs/components/prism-nginx';
@@ -34,6 +33,7 @@ import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-scss';
 import 'prismjs/components/prism-yaml';
 // They have to be the last ones (at least after markup)
+import 'prismjs/components/prism-markdown';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-tsx';
 
