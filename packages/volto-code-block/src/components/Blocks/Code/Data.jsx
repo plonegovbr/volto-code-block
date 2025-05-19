@@ -6,8 +6,8 @@ import { useIntl } from 'react-intl';
 const CodeBlockData = (props) => {
   const { block, blocksConfig, data, onChangeBlock, navRoot, contentType } =
     props;
-  const intl = useIntl();
-  const schema = codeSchema({ ...props, intl });
+
+  const schema = codeSchema({ ...props });
 
   return (
     <BlockDataForm
