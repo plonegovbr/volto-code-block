@@ -4,26 +4,76 @@
 .block.code {
   > .code-block-wrapper {
     &.edit {
+      .code-editor-container {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: #fff;
+        display: flex;
+        
+        &.with-line-numbers {
+          .line-numbers {
+            display: flex;
+            flex-direction: column;
+            padding: 15px 10px 15px 15px;
+            border-right: 1px solid #e1e4e8;
+            background: #f6f8fa;
+            user-select: none;
+            min-width: 40px;
+            align-self: stretch;
+            
+            .line-number {
+              font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+              font-size: 14px;
+              line-height: 1.4;
+              color: #656d76;
+              text-align: right;
+              white-space: nowrap;
+              height: 19.6px; /* Match exact line height: 14px * 1.4 = 19.6px */
+              display: flex;
+              align-items: center;
+              justify-content: flex-end;
+            }
+          }
+        }
+        
+        .code-editor-with-highlighting {
+          border: none;
+          border-radius: 0;
+          background: transparent;
+          margin: 0;
+          flex: 1;
+          
+          code {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+          }
+        }
+      }
+
       &.dark {
-        > textarea {
-          caret-color: #fff;
+        .code-editor-container {
+          border-color: #444;
+          background: #1e1e1e;
+          
+          &.with-line-numbers {
+            .line-numbers {
+              background: #252526;
+              border-right-color: #3c3c3c;
+              
+              .line-number {
+                color: #858585;
+              }
+            }
+          }
         }
       }
 
       &.light {
-        > textarea {
-          caret-color: #657b83;
+        .code-editor-container {
+          border-color: #e2e8f0;
+          background: #fff;
         }
-      }
-
-      > textarea {
-        overflow: hidden;
-        width: 100%;
-        padding: 10px;
-        border: 0px;
-        background-color: whitesmoke;
-        outline: none;
-        resize: none;
       }
     }
 
@@ -90,6 +140,81 @@ div.codeBlockCaption {
       font-size: 14px;
       font-weight: 300;
       line-height: 16px;
+    }
+  }
+}
+
+// Apply the same styles to view mode
+.block.code > .code-block-wrapper {
+  .code-editor-container {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    display: flex;
+    
+    &.with-line-numbers {
+      .line-numbers {
+        display: flex;
+        flex-direction: column;
+        padding: 15px 10px 15px 15px;
+        border-right: 1px solid #e1e4e8;
+        background: #f6f8fa;
+        user-select: none;
+        min-width: 40px;
+        align-self: stretch;
+        
+        .line-number {
+          font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+          font-size: 14px;
+          line-height: 1.4;
+          color: #656d76;
+          text-align: right;
+          white-space: nowrap;
+          height: 19.6px;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+        }
+      }
+    }
+    
+    .code-editor-with-highlighting {
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      margin: 0;
+      flex: 1;
+      
+      code {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+
+  &.dark {
+    .code-editor-container {
+      border-color: #444;
+      background: #1e1e1e;
+      
+      &.with-line-numbers {
+        .line-numbers {
+          background: #252526;
+          border-right-color: #3c3c3c;
+          
+          .line-number {
+            color: #858585;
+          }
+        }
+      }
+    }
+  }
+
+  &.light {
+    .code-editor-container {
+      border-color: #e2e8f0;
+      background: #fff;
     }
   }
 }
