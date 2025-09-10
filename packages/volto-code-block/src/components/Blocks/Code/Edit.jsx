@@ -77,6 +77,8 @@ hljs.registerLanguage('r', r);
 hljs.registerLanguage('jsx', javascript);
 hljs.registerLanguage('tsx', typescript);
 hljs.registerLanguage('text', () => ({})); // Plain text
+hljs.registerLanguage('plain', () => ({})); // Plain text for backwards compatibility
+hljs.registerLanguage('mermaid', () => ({})); // Mermaid as plain text for backwards compatibility
 hljs.registerLanguage('docker', dockerfile);
 hljs.registerLanguage('batch', powershell);
 hljs.registerLanguage('fish', bash);

@@ -60,115 +60,119 @@ const applyConfig = (config) => {
     blockHasOwnFocusManagement: false,
   };
 
-  config.settings['codeBlock'] = {
-    languages: {
-      // Core languages
-      'text': { label: 'Plain Text' },
-      'bash': { label: 'Bash / Shell' },
-      'c': { label: 'C' },
-      'cpp': { label: 'C++' },
-      'csharp': { label: 'C#' },
-      'css': { label: 'CSS' },
-      'diff': { label: 'Diff' },
-      'go': { label: 'Go' },
-      'html': { label: 'HTML' },
-      'java': { label: 'Java' },
-      'javascript': { label: 'JavaScript' },
-      'json': { label: 'JSON' },
-      'kotlin': { label: 'Kotlin' },
-      'less': { label: 'LESS' },
-      'lua': { label: 'Lua' },
-      'makefile': { label: 'Makefile' },
-      'markdown': { label: 'Markdown' },
-      'objectivec': { label: 'Objective-C' },
-      'perl': { label: 'Perl' },
-      'php': { label: 'PHP' },
-      'python': { label: 'Python' },
-      'ruby': { label: 'Ruby' },
-      'rust': { label: 'Rust' },
-      'scss': { label: 'SCSS/Sass' },
-      'sql': { label: 'SQL' },
-      'swift': { label: 'Swift' },
-      'typescript': { label: 'TypeScript' },
-      'xml': { label: 'XML' },
-      'yaml': { label: 'YAML' },
-      
-      // Modern frameworks and libraries
-      'jsx': { label: 'JSX (React)' },
-      'tsx': { label: 'TSX (React TypeScript)' },
-      'vue': { label: 'Vue.js' },
-      'svelte': { label: 'Svelte' },
-      'graphql': { label: 'GraphQL' },
-      
-      // DevOps and Configuration
-      'dockerfile': { label: 'Dockerfile' },
-      'docker': { label: 'Docker Compose' },
-      'nginx': { label: 'Nginx' },
-      'apache': { label: 'Apache Config' },
-      'terraform': { label: 'Terraform' },
-      'ansible': { label: 'Ansible' },
-      'kubernetes': { label: 'Kubernetes' },
-      
-      // Data formats
-      'toml': { label: 'TOML' },
-      'ini': { label: 'INI' },
-      'properties': { label: 'Properties' },
-      'csv': { label: 'CSV' },
-      
-      // Shell scripts
-      'powershell': { label: 'PowerShell' },
-      'batch': { label: 'Batch' },
-      'fish': { label: 'Fish Shell' },
-      'zsh': { label: 'Zsh' },
-      
-      // Functional languages
-      'haskell': { label: 'Haskell' },
-      'clojure': { label: 'Clojure' },
-      'erlang': { label: 'Erlang' },
-      'elixir': { label: 'Elixir' },
-      'fsharp': { label: 'F#' },
-      'ocaml': { label: 'OCaml' },
-      'elm': { label: 'Elm' },
-      'scala': { label: 'Scala' },
-      
-      // Systems programming
-      'assembly': { label: 'Assembly' },
-      'nasm': { label: 'NASM Assembly' },
-      'llvm': { label: 'LLVM IR' },
-      
-      // Web technologies
-      'handlebars': { label: 'Handlebars' },
-      'pug': { label: 'Pug' },
-      'ejs': { label: 'EJS' },
-      'twig': { label: 'Twig' },
-      'django': { label: 'Django Template' },
-      'jinja2': { label: 'Jinja2' },
-      
-      // Mobile development
-      'dart': { label: 'Dart' },
-      'flutter': { label: 'Flutter' },
-      'solidity': { label: 'Solidity' },
-      
-      // Scientific computing
-      'r': { label: 'R' },
-      'matlab': { label: 'MATLAB' },
-      'julia': { label: 'Julia' },
-      'latex': { label: 'LaTeX' },
-      
-      // Esoteric and legacy
-      'cobol': { label: 'COBOL' },
-      'fortran': { label: 'Fortran' },
-      'pascal': { label: 'Pascal' },
-      'ada': { label: 'Ada' },
-      'scheme': { label: 'Scheme' },
-      'prolog': { label: 'Prolog' },
-      
-      // Markup and documentation
-      'asciidoc': { label: 'AsciiDoc' },
-      'restructuredtext': { label: 'reStructuredText' },
-      'wiki': { label: 'Wiki markup' },
-    },
-  };
+  // Default configuration - backwards compatible
+  if (!config.settings['codeBlock']) {
+    config.settings['codeBlock'] = {
+      languages: {
+        // Core languages - backwards compatible format
+        text: { label: 'Plain Text' },
+        bash: { label: 'Bash / Shell' },
+        c: { label: 'C' },
+        cpp: { label: 'C++' },
+        csharp: { label: 'C#' },
+        css: { label: 'CSS' },
+        diff: { label: 'Diff' },
+        dockerfile: { label: 'Dockerfile' },
+        go: { label: 'Go' },
+        html: { label: 'HTML' },
+        java: { label: 'Java' },
+        javascript: { label: 'JavaScript' },
+        jsx: { label: 'JSX' },
+        json: { label: 'JSON' },
+        kotlin: { label: 'Kotlin' },
+        less: { label: 'LESS' },
+        lua: { label: 'Lua' },
+        makefile: { label: 'Makefile' },
+        markdown: { label: 'Markdown' },
+        mermaid: { label: 'Mermaid' },
+        objectivec: { label: 'Objective-C' },
+        perl: { label: 'Perl' },
+        php: { label: 'PHP' },
+        python: { label: 'Python' },
+        ruby: { label: 'Ruby' },
+        rust: { label: 'Rust' },
+        scss: { label: 'SCSS/Sass' },
+        sql: { label: 'SQL' },
+        swift: { label: 'Swift' },
+        typescript: { label: 'TypeScript' },
+        xml: { label: 'XML' },
+        yaml: { label: 'YAML' },
+
+        // Modern frameworks and libraries
+        tsx: { label: 'TSX (React TypeScript)' },
+        vue: { label: 'Vue.js' },
+        svelte: { label: 'Svelte' },
+        graphql: { label: 'GraphQL' },
+
+        // DevOps and Configuration
+        docker: { label: 'Docker Compose' },
+        nginx: { label: 'Nginx' },
+        apache: { label: 'Apache Config' },
+        terraform: { label: 'Terraform' },
+        ansible: { label: 'Ansible' },
+        kubernetes: { label: 'Kubernetes' },
+
+        // Data formats
+        toml: { label: 'TOML' },
+        ini: { label: 'INI' },
+        properties: { label: 'Properties' },
+        csv: { label: 'CSV' },
+
+        // Shell scripts
+        powershell: { label: 'PowerShell' },
+        batch: { label: 'Batch' },
+        fish: { label: 'Fish Shell' },
+        zsh: { label: 'Zsh' },
+
+        // Functional languages
+        haskell: { label: 'Haskell' },
+        clojure: { label: 'Clojure' },
+        erlang: { label: 'Erlang' },
+        elixir: { label: 'Elixir' },
+        fsharp: { label: 'F#' },
+        ocaml: { label: 'OCaml' },
+        elm: { label: 'Elm' },
+        scala: { label: 'Scala' },
+
+        // Systems programming
+        assembly: { label: 'Assembly' },
+        nasm: { label: 'NASM Assembly' },
+        llvm: { label: 'LLVM IR' },
+
+        // Web technologies
+        handlebars: { label: 'Handlebars' },
+        pug: { label: 'Pug' },
+        ejs: { label: 'EJS' },
+        twig: { label: 'Twig' },
+        django: { label: 'Django Template' },
+        jinja2: { label: 'Jinja2' },
+
+        // Mobile development
+        dart: { label: 'Dart' },
+        flutter: { label: 'Flutter' },
+        solidity: { label: 'Solidity' },
+
+        // Scientific computing
+        r: { label: 'R' },
+        matlab: { label: 'MATLAB' },
+        julia: { label: 'Julia' },
+        latex: { label: 'LaTeX' },
+
+        // Esoteric and legacy
+        cobol: { label: 'COBOL' },
+        fortran: { label: 'Fortran' },
+        pascal: { label: 'Pascal' },
+        ada: { label: 'Ada' },
+        scheme: { label: 'Scheme' },
+        prolog: { label: 'Prolog' },
+
+        // Markup and documentation
+        asciidoc: { label: 'AsciiDoc' },
+        restructuredtext: { label: 'reStructuredText' },
+        wiki: { label: 'Wiki markup' },
+      },
+    };
+  }
 
   // Add Blocks to gridBlock and accordionBlock
   // It's important to maintain the chain, and do not introduce pass by reference in

@@ -32,6 +32,7 @@ import dockerfile from 'highlight.js/lib/languages/dockerfile';
 import nginx from 'highlight.js/lib/languages/nginx';
 import powershell from 'highlight.js/lib/languages/powershell';
 import r from 'highlight.js/lib/languages/r';
+// For mermaid, we'll use a simple text highlighting since hljs doesn't have native mermaid support
 
 import config from '@plone/volto/registry';
 
@@ -74,6 +75,8 @@ hljs.registerLanguage('r', r);
 hljs.registerLanguage('jsx', javascript);
 hljs.registerLanguage('tsx', typescript);
 hljs.registerLanguage('text', () => ({})); // Plain text
+hljs.registerLanguage('plain', () => ({})); // Plain text for backwards compatibility
+hljs.registerLanguage('mermaid', () => ({})); // Mermaid as plain text for backwards compatibility
 hljs.registerLanguage('docker', dockerfile);
 hljs.registerLanguage('batch', powershell);
 hljs.registerLanguage('fish', bash);
