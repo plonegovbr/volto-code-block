@@ -1,15 +1,16 @@
 import React from 'react';
 import { withBlockExtensions } from '@plone/volto/helpers';
-import config from '@plone/volto/registry';
 import Editor from '../../Editor/Editor.tsx';
-import { highlight } from 'prismjs/components/prism-core';
+import Prism from 'prismjs/components/prism-core';
+
+// Register mermaid as a simple text language for Prism.js
+Prism.languages.mermaid = Prism.languages.text;
 
 const MermaidBlockEdit = (props) => {
   const { data, block, onChangeBlock } = props;
   const [code, setCode] = React.useState(data.code || '');
   const className = `code-block-wrapper edit light`;
-  const allLanguages = config.settings.codeBlock.languages;
-  const language = allLanguages['mermaid'].language;
+  const language = 'mermaid';
 
   const handleChange = (code) => {
     setCode(code);
@@ -22,7 +23,7 @@ const MermaidBlockEdit = (props) => {
         <Editor
           value={code}
           onValueChange={(code) => handleChange(code)}
-          highlight={(code) => highlight(code, language)}
+          highlight={(code) => Prism.highlight(code, Prism.languages.mermaid, language)}
           padding={10}
           preClassName={`code-block-wrapper ${data.style} language-mermaid`}
         />
