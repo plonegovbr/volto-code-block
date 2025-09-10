@@ -11,27 +11,46 @@
         display: flex;
         
         &.with-line-numbers {
-          .line-numbers {
-            display: flex;
-            flex-direction: column;
-            padding: 15px 10px 15px 15px;
-            border-right: 1px solid #e1e4e8;
-            background: #f6f8fa;
-            user-select: none;
-            min-width: 40px;
-            align-self: stretch;
+          .code-editor-with-highlighting {
+            position: relative;
             
-            .line-number {
-              font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
-              font-size: 14px;
-              line-height: 1.4;
-              color: #656d76;
-              text-align: right;
-              white-space: nowrap;
-              height: 19.6px; /* Match exact line height: 14px * 1.4 = 19.6px */
-              display: flex;
-              align-items: center;
-              justify-content: flex-end;
+            code {
+              counter-reset: line-counter;
+              
+              .code-line {
+                position: relative;
+                counter-increment: line-counter;
+                
+                &:before {
+                  content: attr(data-line);
+                  position: absolute;
+                  left: -50px;
+                  width: 40px;
+                  text-align: right;
+                  color: #656d76;
+                  font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+                  font-size: 14px;
+                  line-height: 1.4;
+                  user-select: none;
+                  padding-right: 10px;
+                  background: transparent;
+                  top: 0;
+                  display: flex;
+                  align-items: flex-start;
+                  justify-content: flex-end;
+                  line-height: 1.4;
+                }
+                
+                &:after {
+                  content: '';
+                  position: absolute;
+                  left: -10px;
+                  width: 1px;
+                  background: #e1e4e8;
+                  top: 0;
+                  bottom: 0;
+                }
+              }
             }
           }
         }
@@ -42,11 +61,13 @@
           background: transparent;
           margin: 0;
           flex: 1;
+          overflow-x: auto;
           
           code {
             background: transparent !important;
             border: none !important;
             box-shadow: none !important;
+            white-space: pre;
           }
         }
       }
@@ -57,13 +78,13 @@
           background: #1e1e1e;
           
           &.with-line-numbers {
-            .line-numbers {
-              background: #252526;
-              border-right-color: #3c3c3c;
-              
-              .line-number {
-                color: #858585;
-              }
+            .code-editor-with-highlighting code .code-line:before {
+              background: transparent;
+              color: #858585;
+            }
+            
+            .code-editor-with-highlighting code .code-line:after {
+              background: #3c3c3c;
             }
           }
         }
@@ -79,8 +100,16 @@
 
     &.wrapLongLines {
       code[class*='language-'],
-      pre[class*='language-'] {
+      pre[class*='language-'],
+      .code-editor-with-highlighting code,
+      .code-editor-with-highlighting {
         white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+      
+      .code-editor-with-highlighting {
+        overflow-x: visible;
       }
     }
 
@@ -153,27 +182,46 @@ div.codeBlockCaption {
     display: flex;
     
     &.with-line-numbers {
-      .line-numbers {
-        display: flex;
-        flex-direction: column;
-        padding: 15px 10px 15px 15px;
-        border-right: 1px solid #e1e4e8;
-        background: #f6f8fa;
-        user-select: none;
-        min-width: 40px;
-        align-self: stretch;
+      .code-editor-with-highlighting {
+        position: relative;
         
-        .line-number {
-          font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
-          font-size: 14px;
-          line-height: 1.4;
-          color: #656d76;
-          text-align: right;
-          white-space: nowrap;
-          height: 19.6px;
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
+        code {
+          counter-reset: line-counter;
+          
+          .code-line {
+            position: relative;
+            counter-increment: line-counter;
+            
+            &:before {
+              content: attr(data-line);
+              position: absolute;
+              left: -50px;
+              width: 40px;
+              text-align: right;
+              color: #656d76;
+              font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+              font-size: 14px;
+              line-height: 1.4;
+              user-select: none;
+              padding-right: 10px;
+              background: transparent;
+              top: 0;
+              display: flex;
+              align-items: flex-start;
+              justify-content: flex-end;
+              line-height: 1.4;
+            }
+            
+            &:after {
+              content: '';
+              position: absolute;
+              left: -10px;
+              width: 1px;
+              background: #e1e4e8;
+              top: 0;
+              bottom: 0;
+            }
+          }
         }
       }
     }
@@ -184,11 +232,13 @@ div.codeBlockCaption {
       background: transparent;
       margin: 0;
       flex: 1;
+      overflow-x: auto;
       
       code {
         background: transparent !important;
         border: none !important;
         box-shadow: none !important;
+        white-space: pre;
       }
     }
   }
@@ -199,13 +249,13 @@ div.codeBlockCaption {
       background: #1e1e1e;
       
       &.with-line-numbers {
-        .line-numbers {
-          background: #252526;
-          border-right-color: #3c3c3c;
-          
-          .line-number {
-            color: #858585;
-          }
+        .code-editor-with-highlighting code .code-line:before {
+          background: transparent;
+          color: #858585;
+        }
+        
+        .code-editor-with-highlighting code .code-line:after {
+          background: #3c3c3c;
         }
       }
     }

@@ -96,26 +96,38 @@ const SyntaxHighlighter = (props) => {
     }
   };
 
-  const renderLineNumbers = () => {
-    if (!showLineNumbers) return null;
+  const processCodeWithLineNumbers = () => {
+    if (!showLineNumbers) {
+      return highlightCode();
+    }
     
     const lines = code.split('\n');
+    // Remove only the last empty line if it exists
+    if (lines.length > 1 && lines[lines.length - 1] === '') {
+      lines.pop();
+    }
     const startNum = parseInt(lineNbr, 10) || 1;
     
-    return (
-      <div className="line-numbers">
-        {lines.map((_, index) => (
-          <span key={index} className="line-number">
-            {startNum + index}
-          </span>
-        ))}
-      </div>
-    );
+    // Process each line individually and add line numbers
+    const processedLines = lines.map((line, index) => {
+      try {
+        const result = hljs.highlight(line, { language: language || 'javascript' });
+        return `<span class="code-line" data-line="${startNum + index}">${result.value}</span>`;
+      } catch (err) {
+        try {
+          const result = hljs.highlightAuto(line);
+          return `<span class="code-line" data-line="${startNum + index}">${result.value}</span>`;
+        } catch (err2) {
+          return `<span class="code-line" data-line="${startNum + index}">${line}</span>`;
+        }
+      }
+    });
+    
+    return processedLines.join('\n');
   };
 
   return (
     <div className={`code-editor-container ${showLineNumbers ? 'with-line-numbers' : ''}`}>
-      {renderLineNumbers()}
       <pre className={`code-editor-with-highlighting language-${language || 'text'}`}>
         <code
           className={`language-${language || 'text'}`}
@@ -124,11 +136,11 @@ const SyntaxHighlighter = (props) => {
             fontSize: '14px',
             lineHeight: '1.4',
             display: 'block',
-            padding: '15px',
+            padding: showLineNumbers ? '15px 15px 15px 60px' : '15px',
             margin: 0,
             border: 0,
           }}
-          dangerouslySetInnerHTML={{ __html: highlightCode() }}
+          dangerouslySetInnerHTML={{ __html: showLineNumbers ? processCodeWithLineNumbers() : highlightCode() }}
         />
       </pre>
     </div>

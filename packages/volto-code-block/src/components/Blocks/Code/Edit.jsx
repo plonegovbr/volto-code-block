@@ -122,6 +122,36 @@ const CodeBlockEdit = (props) => {
     }
   };
 
+  const processCodeWithLineNumbers = (code) => {
+    if (!data.showLineNumbers) {
+      return highlightCode(code);
+    }
+    
+    const lines = code.split('\n');
+    // Remove only the last empty line if it exists
+    if (lines.length > 1 && lines[lines.length - 1] === '') {
+      lines.pop();
+    }
+    const startNum = parseInt(data.lineNbr, 10) || 1;
+    
+    // Process each line individually and add line numbers
+    const processedLines = lines.map((line, index) => {
+      try {
+        const result = hljs.highlight(line, { language: language });
+        return `<span class="code-line" data-line="${startNum + index}">${result.value}</span>`;
+      } catch (err) {
+        try {
+          const result = hljs.highlightAuto(line);
+          return `<span class="code-line" data-line="${startNum + index}">${result.value}</span>`;
+        } catch (err2) {
+          return `<span class="code-line" data-line="${startNum + index}">${line}</span>`;
+        }
+      }
+    });
+    
+    return processedLines.join('\n');
+  };
+
   const { caption_title, caption_description } = data;
 
   // Save and restore cursor position
@@ -182,28 +212,11 @@ const CodeBlockEdit = (props) => {
     }
   }, [code]);
 
-  const renderLineNumbers = () => {
-    if (!data.showLineNumbers) return null;
-    
-    const lines = code.split('\n');
-    const startNum = parseInt(data.lineNbr, 10) || 1;
-    
-    return (
-      <div className="line-numbers">
-        {lines.map((_, index) => (
-          <span key={index} className="line-number">
-            {startNum + index}
-          </span>
-        ))}
-      </div>
-    );
-  };
 
   return (
     <div className="block code">
       <div className={className}>
         <div className={`code-editor-container ${data.showLineNumbers ? 'with-line-numbers' : ''}`}>
-          {renderLineNumbers()}
           <pre className={`code-editor-with-highlighting language-${language}`}>
             <code
               ref={codeRef}
@@ -211,20 +224,36 @@ const CodeBlockEdit = (props) => {
               contentEditable
               suppressContentEditableWarning={true}
               onInput={(e) => handleChange(e.target.textContent)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  const selection = window.getSelection();
+                  if (selection.rangeCount > 0) {
+                    const range = selection.getRangeAt(0);
+                    const textNode = document.createTextNode('\n');
+                    range.insertNode(textNode);
+                    range.setStartAfter(textNode);
+                    range.setEndAfter(textNode);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                    handleChange(e.target.textContent);
+                  }
+                }
+              }}
               style={{
                 fontFamily:
                   'Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace',
                 fontSize: '14px',
                 lineHeight: '1.4',
                 outline: 'none',
-                whiteSpace: 'pre-wrap',
+                whiteSpace: data.wrapLongLines ? 'pre-wrap' : 'pre',
                 minHeight: '200px',
                 display: 'block',
-                padding: '15px',
+                padding: data.showLineNumbers ? '15px 15px 15px 60px' : '15px',
                 margin: 0,
                 border: 0,
               }}
-              dangerouslySetInnerHTML={{ __html: highlightCode(code) }}
+              dangerouslySetInnerHTML={{ __html: data.showLineNumbers ? processCodeWithLineNumbers(code) : highlightCode(code) }}
             />
           </pre>
         </div>
