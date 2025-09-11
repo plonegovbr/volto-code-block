@@ -18,27 +18,6 @@ import './theme/main.less';
 import './theme/theme-dark.less';
 import './theme/theme-light.less';
 
-import 'prismjs/components/prism-bash';
-import 'prismjs/components/prism-clike';
-import 'prismjs/components/prism-css';
-import 'prismjs/components/prism-docker';
-import 'prismjs/components/prism-javascript';
-import 'prismjs/components/prism-typescript';
-import 'prismjs/components/prism-json';
-import 'prismjs/components/prism-less';
-import 'prismjs/components/prism-markup';
-import 'prismjs/components/prism-mermaid';
-import 'prismjs/components/prism-nginx';
-import 'prismjs/components/prism-python';
-import 'prismjs/components/prism-scss';
-import 'prismjs/components/prism-yaml';
-// They have to be the last ones (at least after markup)
-import 'prismjs/components/prism-markdown';
-import 'prismjs/components/prism-jsx';
-import 'prismjs/components/prism-tsx';
-
-import { languages } from 'prismjs/components/prism-core';
-
 const applyConfig = (config) => {
   config.blocks.blocksConfig.codeBlock = {
     id: 'codeBlock',
@@ -81,27 +60,119 @@ const applyConfig = (config) => {
     blockHasOwnFocusManagement: false,
   };
 
-  config.settings['codeBlock'] = {
-    languages: {
-      plain: { label: 'Plaintext', language: languages.plain },
-      bash: { label: 'Bash', language: languages.bash },
-      css: { label: 'CSS', language: languages.css },
-      dockerfile: { label: 'Dockerfile', language: languages.dockerfile },
-      javascript: { label: 'JavaScript', language: languages.js },
-      typescript: { label: 'TypeScript', language: languages.ts },
-      jsx: { label: 'JSX', language: languages.jsx },
-      tsx: { label: 'TSX', language: languages.tsx },
-      json: { label: 'JSON', language: languages.json },
-      less: { label: 'LESS', language: languages.less },
-      markdown: { label: 'Markdown', language: languages.markdown },
-      mermaid: { label: 'Mermaid', language: languages.mermaid },
-      nginx: { label: 'nginx', language: languages.nginx },
-      python: { label: 'Python', language: languages.python },
-      scss: { label: 'SCSS', language: languages.scss },
-      yaml: { label: 'Yaml', language: languages.yaml },
-      xml: { label: 'XML', language: languages.xml },
-    },
-  };
+  // Default configuration - backwards compatible
+  if (!config.settings['codeBlock']) {
+    config.settings['codeBlock'] = {
+      languages: {
+        // Core languages - backwards compatible format
+        text: { label: 'Plain Text' },
+        bash: { label: 'Bash / Shell' },
+        c: { label: 'C' },
+        cpp: { label: 'C++' },
+        csharp: { label: 'C#' },
+        css: { label: 'CSS' },
+        diff: { label: 'Diff' },
+        dockerfile: { label: 'Dockerfile' },
+        go: { label: 'Go' },
+        html: { label: 'HTML' },
+        java: { label: 'Java' },
+        javascript: { label: 'JavaScript' },
+        jsx: { label: 'JSX' },
+        json: { label: 'JSON' },
+        kotlin: { label: 'Kotlin' },
+        less: { label: 'LESS' },
+        lua: { label: 'Lua' },
+        makefile: { label: 'Makefile' },
+        markdown: { label: 'Markdown' },
+        mermaid: { label: 'Mermaid' },
+        objectivec: { label: 'Objective-C' },
+        perl: { label: 'Perl' },
+        php: { label: 'PHP' },
+        python: { label: 'Python' },
+        ruby: { label: 'Ruby' },
+        rust: { label: 'Rust' },
+        scss: { label: 'SCSS/Sass' },
+        sql: { label: 'SQL' },
+        swift: { label: 'Swift' },
+        typescript: { label: 'TypeScript' },
+        xml: { label: 'XML' },
+        yaml: { label: 'YAML' },
+
+        // Modern frameworks and libraries
+        tsx: { label: 'TSX (React TypeScript)' },
+        vue: { label: 'Vue.js' },
+        svelte: { label: 'Svelte' },
+        graphql: { label: 'GraphQL' },
+
+        // DevOps and Configuration
+        docker: { label: 'Docker Compose' },
+        nginx: { label: 'Nginx' },
+        apache: { label: 'Apache Config' },
+        terraform: { label: 'Terraform' },
+        ansible: { label: 'Ansible' },
+        kubernetes: { label: 'Kubernetes' },
+
+        // Data formats
+        toml: { label: 'TOML' },
+        ini: { label: 'INI' },
+        properties: { label: 'Properties' },
+        csv: { label: 'CSV' },
+
+        // Shell scripts
+        powershell: { label: 'PowerShell' },
+        batch: { label: 'Batch' },
+        fish: { label: 'Fish Shell' },
+        zsh: { label: 'Zsh' },
+
+        // Functional languages
+        haskell: { label: 'Haskell' },
+        clojure: { label: 'Clojure' },
+        erlang: { label: 'Erlang' },
+        elixir: { label: 'Elixir' },
+        fsharp: { label: 'F#' },
+        ocaml: { label: 'OCaml' },
+        elm: { label: 'Elm' },
+        scala: { label: 'Scala' },
+
+        // Systems programming
+        assembly: { label: 'Assembly' },
+        nasm: { label: 'NASM Assembly' },
+        llvm: { label: 'LLVM IR' },
+
+        // Web technologies
+        handlebars: { label: 'Handlebars' },
+        pug: { label: 'Pug' },
+        ejs: { label: 'EJS' },
+        twig: { label: 'Twig' },
+        django: { label: 'Django Template' },
+        jinja2: { label: 'Jinja2' },
+
+        // Mobile development
+        dart: { label: 'Dart' },
+        flutter: { label: 'Flutter' },
+        solidity: { label: 'Solidity' },
+
+        // Scientific computing
+        r: { label: 'R' },
+        matlab: { label: 'MATLAB' },
+        julia: { label: 'Julia' },
+        latex: { label: 'LaTeX' },
+
+        // Esoteric and legacy
+        cobol: { label: 'COBOL' },
+        fortran: { label: 'Fortran' },
+        pascal: { label: 'Pascal' },
+        ada: { label: 'Ada' },
+        scheme: { label: 'Scheme' },
+        prolog: { label: 'Prolog' },
+
+        // Markup and documentation
+        asciidoc: { label: 'AsciiDoc' },
+        restructuredtext: { label: 'reStructuredText' },
+        wiki: { label: 'Wiki markup' },
+      },
+    };
+  }
 
   // Add Blocks to gridBlock and accordionBlock
   // It's important to maintain the chain, and do not introduce pass by reference in
@@ -136,5 +207,4 @@ const applyConfig = (config) => {
   return config;
 };
 
-export { languages };
 export default applyConfig;

@@ -30,7 +30,6 @@ https://prismjs.com/download.html#themes=prism-twilight&languages=markup+css+cli
 
   pre[class*='language-'] {
     overflow: auto;
-    padding: 1em;
     border: 0.3em solid #545454;
     border-radius: 0.5em;
     margin: 0.5em 0;
@@ -73,11 +72,13 @@ https://prismjs.com/download.html#themes=prism-twilight&languages=markup+css+cli
   .token.comment,
   .token.doctype,
   .token.prolog {
-    color: #777;
+    color: #6c7086;
+    font-style: italic;
   }
 
   .token.punctuation {
-    opacity: 0.7;
+    color: #bac2de;
+    opacity: 0.9;
   }
 
   .token.namespace {
@@ -88,7 +89,7 @@ https://prismjs.com/download.html#themes=prism-twilight&languages=markup+css+cli
   .token.deleted,
   .token.number,
   .token.tag {
-    color: #ce6849;
+    color: #f38ba8;
   }
 
   .token.builtin,
@@ -97,7 +98,7 @@ https://prismjs.com/download.html#themes=prism-twilight&languages=markup+css+cli
   .token.property,
   .token.selector,
   .token.symbol {
-    color: #f9ed99;
+    color: #cba6f7;
   }
 
   .language-css .token.string,
@@ -107,20 +108,23 @@ https://prismjs.com/download.html#themes=prism-twilight&languages=markup+css+cli
   .token.char,
   .token.entity,
   .token.inserted,
-  .token.operator,
   .token.string,
   .token.url,
   .token.variable {
-    color: #909e6a;
+    color: #98d982;
+  }
+
+  .token.operator {
+    color: #ff6b6b;
   }
 
   .token.atrule {
-    color: #7385a5;
+    color: #74c7ec;
   }
 
   .token.important,
   .token.regex {
-    color: #e8c062;
+    color: #fab387;
   }
 
   .token.bold,
@@ -140,6 +144,109 @@ https://prismjs.com/download.html#themes=prism-twilight&languages=markup+css+cli
   .language-markup .token.punctuation,
   .language-markup .token.tag {
     color: #ac885c;
+  }
+
+  // Override highlight.js GitHub theme with vibrant dark colors
+  .hljs {
+    color: #cdd6f4 !important;
+    background: transparent !important;
+  }
+
+  .hljs-doctag,
+  .hljs-keyword,
+  .hljs-meta .hljs-keyword,
+  .hljs-template-tag,
+  .hljs-template-variable,
+  .hljs-type,
+  .hljs-variable.language_ {
+    color: #cba6f7 !important;
+  }
+
+  .hljs-title,
+  .hljs-title.class_,
+  .hljs-title.class_.inherited__,
+  .hljs-title.function_ {
+    color: #89b4fa !important;
+  }
+
+  .hljs-attr,
+  .hljs-attribute,
+  .hljs-literal,
+  .hljs-meta,
+  .hljs-number,
+  .hljs-operator,
+  .hljs-variable,
+  .hljs-selector-attr,
+  .hljs-selector-class,
+  .hljs-selector-id {
+    color: #f9e2af !important;
+  }
+
+  .hljs-regexp,
+  .hljs-string,
+  .hljs-meta .hljs-string {
+    color: #a6e3a1 !important;
+  }
+
+  .hljs-built_in,
+  .hljs-symbol {
+    color: #fab387 !important;
+  }
+
+  .hljs-comment,
+  .hljs-code,
+  .hljs-formula {
+    color: #6c7086 !important;
+    font-style: italic;
+  }
+
+  .hljs-name,
+  .hljs-quote,
+  .hljs-selector-tag,
+  .hljs-selector-pseudo {
+    color: #f38ba8 !important;
+  }
+
+  .hljs-subst {
+    color: #cdd6f4 !important;
+  }
+
+  .hljs-section {
+    color: #89b4fa !important;
+    font-weight: bold;
+  }
+
+  .hljs-bullet {
+    color: #f9e2af !important;
+  }
+
+  .hljs-emphasis {
+    color: #cdd6f4 !important;
+    font-style: italic;
+  }
+
+  .hljs-strong {
+    color: #cdd6f4 !important;
+    font-weight: bold;
+  }
+
+  .hljs-addition {
+    color: #a6e3a1 !important;
+    background-color: rgba(166, 227, 161, 0.1) !important;
+  }
+
+  .hljs-deletion {
+    color: #f38ba8 !important;
+    background-color: rgba(243, 139, 168, 0.1) !important;
+  }
+
+  .hljs-char.escape_,
+  .hljs-link,
+  .hljs-params,
+  .hljs-property,
+  .hljs-punctuation,
+  .hljs-tag {
+    color: #bac2de !important;
   }
 
   .token {

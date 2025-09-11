@@ -4,33 +4,112 @@
 .block.code {
   > .code-block-wrapper {
     &.edit {
+      .code-editor-container {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: #fff;
+        display: flex;
+        
+        &.with-line-numbers {
+          .code-editor-with-highlighting {
+            position: relative;
+            
+            code {
+              counter-reset: line-counter;
+              
+              .code-line {
+                position: relative;
+                counter-increment: line-counter;
+                
+                &:before {
+                  content: attr(data-line);
+                  position: absolute;
+                  left: -50px;
+                  width: 40px;
+                  text-align: right;
+                  color: #656d76;
+                  font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+                  font-size: 14px;
+                  line-height: 1.4;
+                  user-select: none;
+                  padding-right: 10px;
+                  background: transparent;
+                  top: 0;
+                  display: flex;
+                  align-items: flex-start;
+                  justify-content: flex-end;
+                  line-height: 1.4;
+                }
+                
+                &:after {
+                  content: '';
+                  position: absolute;
+                  left: -10px;
+                  width: 1px;
+                  background: #e1e4e8;
+                  top: 0;
+                  bottom: 0;
+                }
+              }
+            }
+          }
+        }
+        
+        .code-editor-with-highlighting {
+          border: none;
+          border-radius: 0;
+          background: transparent;
+          margin: 0;
+          flex: 1;
+          overflow-x: auto;
+          
+          code {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            white-space: pre;
+          }
+        }
+      }
+
       &.dark {
-        > textarea {
-          caret-color: #fff;
+        .code-editor-container {
+          border-color: #444;
+          background: #1e1e1e;
+          
+          &.with-line-numbers {
+            .code-editor-with-highlighting code .code-line:before {
+              background: transparent;
+              color: #858585;
+            }
+            
+            .code-editor-with-highlighting code .code-line:after {
+              background: #3c3c3c;
+            }
+          }
         }
       }
 
       &.light {
-        > textarea {
-          caret-color: #657b83;
+        .code-editor-container {
+          border-color: #e2e8f0;
+          background: #fff;
         }
-      }
-
-      > textarea {
-        overflow: hidden;
-        width: 100%;
-        padding: 10px;
-        border: 0px;
-        background-color: whitesmoke;
-        outline: none;
-        resize: none;
       }
     }
 
     &.wrapLongLines {
       code[class*='language-'],
-      pre[class*='language-'] {
+      pre[class*='language-'],
+      .code-editor-with-highlighting code,
+      .code-editor-with-highlighting {
         white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+      
+      .code-editor-with-highlighting {
+        overflow-x: visible;
       }
     }
 
@@ -90,6 +169,102 @@ div.codeBlockCaption {
       font-size: 14px;
       font-weight: 300;
       line-height: 16px;
+    }
+  }
+}
+
+// Apply the same styles to view mode
+.block.code > .code-block-wrapper {
+  .code-editor-container {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    display: flex;
+    
+    &.with-line-numbers {
+      .code-editor-with-highlighting {
+        position: relative;
+        
+        code {
+          counter-reset: line-counter;
+          
+          .code-line {
+            position: relative;
+            counter-increment: line-counter;
+            
+            &:before {
+              content: attr(data-line);
+              position: absolute;
+              left: -50px;
+              width: 40px;
+              text-align: right;
+              color: #656d76;
+              font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+              font-size: 14px;
+              line-height: 1.4;
+              user-select: none;
+              padding-right: 10px;
+              background: transparent;
+              top: 0;
+              display: flex;
+              align-items: flex-start;
+              justify-content: flex-end;
+              line-height: 1.4;
+            }
+            
+            &:after {
+              content: '';
+              position: absolute;
+              left: -10px;
+              width: 1px;
+              background: #e1e4e8;
+              top: 0;
+              bottom: 0;
+            }
+          }
+        }
+      }
+    }
+    
+    .code-editor-with-highlighting {
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      margin: 0;
+      flex: 1;
+      overflow-x: auto;
+      
+      code {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        white-space: pre;
+      }
+    }
+  }
+
+  &.dark {
+    .code-editor-container {
+      border-color: #444;
+      background: #1e1e1e;
+      
+      &.with-line-numbers {
+        .code-editor-with-highlighting code .code-line:before {
+          background: transparent;
+          color: #858585;
+        }
+        
+        .code-editor-with-highlighting code .code-line:after {
+          background: #3c3c3c;
+        }
+      }
+    }
+  }
+
+  &.light {
+    .code-editor-container {
+      border-color: #e2e8f0;
+      background: #fff;
     }
   }
 }
