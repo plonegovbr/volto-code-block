@@ -11,6 +11,11 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+#. Default: "Caption"
+#: components/Blocks/Code/schema
+msgid "Caption"
+msgstr ""
+
 #. Default: "Code Block"
 #: components/Blocks/Code/schema
 msgid "Code Block"
