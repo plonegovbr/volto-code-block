@@ -81,6 +81,16 @@ const cssText = /* CSS */ `
   -webkit-text-fill-color: inherit !important;
 }
 /**
+ * Normalize font styles in highlighted code to prevent selection misalignment
+ */
+pre:has(+ .${className}) .token.bold,
+pre:has(+ .${className}) .token.important {
+  font-weight: normal !important;
+}
+pre:has(+ .${className}) .token.italic {
+  font-style: normal !important;
+}
+/**
  * Hack to apply on some CSS on IE10 and IE11
  */
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
@@ -627,17 +637,18 @@ const styles = {
     display: 'inherit',
     fontFamily: 'inherit',
     fontSize: 'inherit',
-    fontStyle: 'inherit',
+    fontStyle: 'normal',
     fontVariantLigatures: 'inherit',
-    fontWeight: 'inherit',
+    fontWeight: 'normal',
     letterSpacing: 'inherit',
     lineHeight: 'inherit',
     tabSize: 'inherit',
     textIndent: 'inherit',
-    textRendering: 'inherit',
+    textRendering: 'optimizeSpeed',
     textTransform: 'inherit',
     whiteSpace: 'pre-wrap',
     wordBreak: 'keep-all',
     overflowWrap: 'break-word',
+    fontFeatureSettings: 'normal',
   },
 } as const;
