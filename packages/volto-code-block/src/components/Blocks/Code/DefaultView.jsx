@@ -30,10 +30,10 @@ const CodeView = (props) => {
               lineNbr={lineNbr}
             />
           </div>
+          {caption_title && (
+            <Caption title={caption_title} description={caption_description} />
+          )}
         </div>
-      )}
-      {caption_title && (
-        <Caption title={caption_title} description={caption_description} />
       )}
     </>
   );

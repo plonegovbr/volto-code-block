@@ -1,6 +1,6 @@
 import React from 'react';
 import MermaidView from './DefaultView';
-import { withBlockExtensions } from '@plone/volto/helpers';
+import { withBlockExtensions } from '@plone/volto/helpers/Extensions/withBlockExtensions';
 
 const MermaidBlockView = (props) => {
   const { block, data } = props;

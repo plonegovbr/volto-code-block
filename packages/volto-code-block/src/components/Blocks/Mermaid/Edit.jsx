@@ -1,5 +1,5 @@
 import React from 'react';
-import { withBlockExtensions } from '@plone/volto/helpers';
+import { withBlockExtensions } from '@plone/volto/helpers/Extensions/withBlockExtensions';
 import config from '@plone/volto/registry';
 import Editor from '../../Editor/Editor.tsx';
 import { highlight } from 'prismjs/components/prism-core';
