@@ -1,5 +1,6 @@
 {
   "name": "@plonegovbr/volto-code-block-dev",
+  "version": "1.0.0-alpha.0",
   "description": "Volto add-on providing a code block with syntax highlighting.",
   "author": "PloneGov-BR",
   "homepage": "https://github.com/plonegovbr/volto-code-block",
@@ -12,14 +13,14 @@
   ],
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "start": "pnpm build:deps && VOLTOCONFIG=$(pwd)/volto.config.js pnpm --filter @plone/volto start",
+    "start": "VOLTOCONFIG=$(pwd)/volto.config.js pnpm --filter @plone/volto start",
     "start:prod": "pnpm --filter @plone/volto start:prod",
-    "build": "pnpm build:deps && VOLTOCONFIG=$(pwd)/volto.config.js pnpm --filter @plone/volto build",
+    "build": "VOLTOCONFIG=$(pwd)/volto.config.js pnpm --filter @plone/volto build",
     "build:deps": "pnpm --filter @plone/registry --filter @plone/components build",
-    "i18n": "pnpm --filter @plonegovbr/volto-code-block i18n",
-    "test": "RAZZLE_JEST_CONFIG=$(pwd)/jest-addon.config.js pnpm --filter @plone/volto test",
-    "lint": "eslint --max-warnings=0 'packages/**/src/**/*.{js,jsx,ts,tsx}'",
-    "lint:fix": "eslint --fix 'packages/**/src/**/*.{js,jsx,ts,tsx}'",
+    "i18n": "pnpm --filter @plonegovbr/volto-code-block i18n && VOLTOCONFIG=$(pwd)/volto.config.js pnpm --filter @plone/volto i18n",
+    "test": "pnpm --filter @plonegovbr/volto-code-block exec vitest",
+    "lint": "VOLTOCONFIG=$(pwd)/volto.config.js eslint --max-warnings=0 'packages/**/src/**/*.{js,jsx,ts,tsx}'",
+    "lint:fix": "VOLTOCONFIG=$(pwd)/volto.config.js eslint --fix 'packages/**/src/**/*.{js,jsx,ts,tsx}'",
     "prettier": "prettier --check 'packages/**/src/**/*.{js,jsx,ts,tsx}'",
     "prettier:fix": "prettier --write 'packages/**/src/**/*.{js,jsx,ts,tsx}' ",
     "stylelint": "stylelint 'packages/**/src/**/*.{css,scss,less}' --allow-empty-input",
@@ -28,8 +29,8 @@
     "release": "pnpm --filter @plonegovbr/volto-code-block release",
     "release-major-alpha": "pnpm --filter @plonegovbr/volto-code-block release-major-alpha",
     "release-alpha": "pnpm --filter @plonegovbr/volto-code-block release-alpha",
-    "storybook": "pnpm build:deps && VOLTOCONFIG=$(pwd)/volto.config.js pnpm --filter @plone/volto storybook dev -p 6006 -c $(pwd)/.storybook",
-    "build-storybook": "pnpm build:deps && VOLTOCONFIG=$(pwd)/volto.config.js pnpm --filter @plone/volto build-storybook -c $(pwd)/.storybook"
+    "storybook": "VOLTOCONFIG=$(pwd)/volto.config.js pnpm --filter @plone/volto storybook dev -p 6006 -c $(pwd)/.storybook",
+    "storybook-build": "VOLTOCONFIG=$(pwd)/volto.config.js pnpm --filter @plone/volto build-storybook -c $(pwd)/.storybook"
   },
   "dependencies": {
     "@plone/volto": "workspace:*",
@@ -39,5 +40,24 @@
   "devDependencies": {
     "mrs-developer": "^2.2.0"
   },
-  "packageManager": "pnpm@8.15.4"
+  "pnpm": {
+    "overrides": {
+      "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
+      "react-refresh": "^0.14.2"
+    },
+    "ignoredBuiltDependencies": [
+      "@parcel/watcher"
+    ],
+    "onlyBuiltDependencies": [
+      "core-js",
+      "core-js-pure",
+      "cypress",
+      "es5-ext",
+      "esbuild",
+      "full-icu",
+      "lightningcss-cli",
+      "unrs-resolver"
+    ]
+  },
+  "packageManager": "pnpm@10.20.0"
 }

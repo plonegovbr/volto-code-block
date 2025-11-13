@@ -1,22 +1,20 @@
 {
   "name": "@plonegovbr/volto-code-block",
-  "version": "2.3.0",
+  "version": "1.0.0-alpha.0",
   "description": "Volto add-on providing a code block with syntax highlighting.",
   "main": "src/index.js",
   "license": "MIT",
   "keywords": [
     "volto-addon",
-    "volto-block",
     "volto",
     "plone",
-    "highlighting",
     "react"
   ],
   "author": "PloneGov-BR",
-  "homepage": "https://github.com/plonegovbr/volto-code-block#readme",
+  "homepage": "https://github.com/collective/volto-code-block#readme",
   "repository": {
     "type": "git",
-    "url": "git@github.com:plonegovbr/volto-code-block.git"
+    "url": "git@github.com:collective/volto-code-block"
   },
   "publishConfig": {
     "access": "public"
@@ -34,12 +32,20 @@
     "react-gist": "1.2.4"
   },
   "peerDependencies": {
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-intl": "3.8.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-intl": "^3.12.1",
+    "react-redux": "^8.1.2"
   },
   "devDependencies": {
-    "@plone/scripts": "^3.6.1",
-    "release-it": "^17.1.1"
+    "@plone/registry": "workspace:*",
+    "@plone/scripts": "workspace:*",
+    "@plone/types": "workspace:*",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "typescript": "^5.7.3",
+    "@testing-library/react": "^16.2.0",
+    "release-it": "^19.0.5",
+    "vitest": "^3.1.2"
   }
 }
