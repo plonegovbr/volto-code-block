@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.0",
   "description": "Volto add-on providing a code block with syntax highlighting.",
   "author": "PloneGov-BR",
-  "homepage": "https://github.com/collective/volto-code-block",
+  "homepage": "https://github.com/plonegovbr/volto-code-block",
   "license": "MIT",
   "keywords": [
     "volto-addon",
