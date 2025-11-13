@@ -6,9 +6,10 @@ on:
       - "*.json"
       - "*.yaml"
       - "packages/**"
+      - ".github/workflows/unit.yml"
 
 env:
-  NODE_VERSION: 20.x
+  NODE_VERSION: 24
 
 jobs:
   unit:
@@ -23,13 +24,8 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - uses: pnpm/action-setup@v3
-        name: Install pnpm
-        with:
-          version: 8
-          # We don't want to install until later,
-          # when the cache and Cypress are in place
-          run_install: false
+      - name: Enable corepack
+        run: npm i -g corepack@latest && corepack enable
 
       - name: Get pnpm store directory
         shell: bash
@@ -48,4 +44,4 @@ jobs:
         run: make install
 
       - name: Unit tests
-        run: make test-ci
+        run: make ci-test
