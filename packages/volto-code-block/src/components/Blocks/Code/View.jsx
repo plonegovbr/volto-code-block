@@ -1,5 +1,5 @@
 import React from 'react';
-import { withBlockExtensions } from '@plone/volto/helpers/Extensions/withBlockExtensions';
+import { withBlockExtensions } from '@plone/volto/helpers/Extensions';
 import CodeView from './DefaultView';
 
 const CodeBlockView = (props) => {

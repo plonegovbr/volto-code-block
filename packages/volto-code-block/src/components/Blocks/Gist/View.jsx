@@ -1,5 +1,5 @@
 import React from 'react';
-import { withBlockExtensions } from '@plone/volto/helpers/Extensions/withBlockExtensions';
+import { withBlockExtensions } from '@plone/volto/helpers/Extensions';
 import GistView from './DefaultView';
 
 const GistBlockView = (props) => {
