@@ -11,6 +11,11 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+#. Default: "Caption"
+#: components/Blocks/Code/schema
+msgid "Caption"
+msgstr "Legenda"
+
 #. Default: "Code Block"
 #: components/Blocks/Code/schema
 msgid "Code Block"
@@ -25,22 +30,22 @@ msgstr "Escuro"
 #: components/Blocks/Code/schema
 #: components/Blocks/Gist/schema
 msgid "Description"
-msgstr ""
+msgstr "Descrição"
 
 #. Default: "File"
 #: components/Blocks/Gist/schema
 msgid "File"
-msgstr ""
+msgstr "Arquivo"
 
 #. Default: "Gist Block"
 #: components/Blocks/Gist/schema
 msgid "Gist Block"
-msgstr ""
+msgstr "Bloco Gist"
 
 #. Default: "Gist Id"
 #: components/Blocks/Gist/schema
 msgid "Gist Id"
-msgstr ""
+msgstr "Id do Gist"
 
 #. Default: "Language"
 #: components/Blocks/Code/schema
@@ -60,7 +65,7 @@ msgstr "Exibir número de linha"
 #. Default: "Starting Line Number"
 #: components/Blocks/Code/schema
 msgid "Starting Line Number"
-msgstr ""
+msgstr "Número da Linha Inicial"
 
 #. Default: "Style"
 #: components/Blocks/Code/schema
@@ -71,7 +76,7 @@ msgstr "Estilo"
 #: components/Blocks/Code/schema
 #: components/Blocks/Gist/schema
 msgid "Title"
-msgstr ""
+msgstr "Título"
 
 #. Default: "Wrap Long Lines"
 #: components/Blocks/Code/schema
