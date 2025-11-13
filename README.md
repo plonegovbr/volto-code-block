@@ -11,11 +11,11 @@ Addon implementing a code block with syntax highlight for [Plone](https://plone.
 
 ### Code Block with Dark style
 
-<img alt="Screenshot" src="./docs/block-dark.png" width="500" />
+<img alt="Screenshot" src="https://github.com/plonegovbr/volto-code-block/raw/main/docs/block-dark.png" width="500" />
 
 ### Code Block with Light style
 
-<img alt="Screenshot" src="./docs/block-light.png" width="500" />
+<img alt="Screenshot" src="https://github.com/plonegovbr/volto-code-block/raw/main/docs/block-light.png" width="500" />
 
 ## Examples
 
