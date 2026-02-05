@@ -4,10 +4,10 @@ import Caption from '../../Caption/Caption';
 import cx from 'classnames';
 
 const GistView = (props) => {
-  const { 
-    file, 
-    gistId, 
-    caption_title, 
+  const {
+    file,
+    gistId,
+    caption_title,
     caption_description,
     className,
     styles = {},

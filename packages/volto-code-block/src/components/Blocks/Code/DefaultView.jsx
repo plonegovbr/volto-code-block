@@ -35,7 +35,10 @@ const CodeView = (props) => {
               />
             </div>
             {caption_title && (
-              <Caption title={caption_title} description={caption_description} />
+              <Caption
+                title={caption_title}
+                description={caption_description}
+              />
             )}
           </div>
         </div>
