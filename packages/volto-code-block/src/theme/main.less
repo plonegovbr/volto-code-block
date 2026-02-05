@@ -2,7 +2,62 @@
   Code Block styles
 */
 .block.code {
-  > .code-block-wrapper {
+  clear: both;
+
+  &.align-left {
+    .code-content-wrapper {
+      margin: 0 1rem 1rem 0 !important;
+      float: left;
+    }
+  }
+
+  &.align-right {
+    .code-content-wrapper {
+      margin: 0 0 1rem 1rem !important;
+      float: right;
+    }
+  }
+
+  &.align-center,
+  &.align-full {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .code-content-wrapper {
+    &.block-l {
+      width: 100%;
+      max-width: 900px;
+    }
+    &.block-m {
+      width: 100%;
+      max-width: 600px;
+    }
+    &.block-s {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .code-block-wrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .codeBlockCaption {
+      clear: both;
+    }
+  }
+
+  // When centered and large, use full width
+  &.align-center,
+  &.align-full {
+    .code-content-wrapper.block-l {
+      max-width: 100%;
+    }
+  }
+
+  > .code-content-wrapper {
     &.edit {
       &.dark {
         > textarea {
@@ -48,26 +103,6 @@
   }
 }
 
-.block.gist {
-  &.edit {
-    position: relative;
-
-    iframe {
-      width: 100%;
-      height: 100%;
-    }
-
-    .gist.editLayer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.1);
-    }
-  }
-}
-
 div.codeBlockCaption {
   margin: 0 5px;
   color: #000;
@@ -90,6 +125,131 @@ div.codeBlockCaption {
       font-size: 14px;
       font-weight: 300;
       line-height: 16px;
+    }
+  }
+}
+
+/*
+  Mermaid Block styles
+*/
+.block.mermaid {
+  clear: both;
+
+  &.align-left {
+    .mermaidWrapper {
+      margin: 0 1rem 1rem 0 !important;
+      float: left;
+    }
+  }
+
+  &.align-right {
+    .mermaidWrapper {
+      margin: 0 0 1rem 1rem !important;
+      float: right;
+    }
+  }
+
+  &.align-center,
+  &.align-full {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mermaidWrapper {
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  // When centered and large, use full width
+  &.align-center,
+  &.align-full {
+    .mermaidWrapper {
+      max-width: 100%;
+    }
+  }
+
+  .codeBlockCaption {
+    clear: both;
+    margin-top: 0.5rem;
+  }
+}
+
+/*
+  Gist Block styles
+*/
+.block.gist {
+  clear: both;
+
+  &.align-left {
+    .gist-content-wrapper {
+      margin: 0 1rem 1rem 0 !important;
+      float: left;
+    }
+  }
+
+  &.align-right {
+    .gist-content-wrapper {
+      margin: 0 0 1rem 1rem !important;
+      float: right;
+    }
+  }
+
+  &.align-center,
+  &.align-full {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .gist-content-wrapper {
+    &.block-l {
+      width: 100%;
+      max-width: 900px;
+    }
+    &.block-m {
+      width: 100%;
+      max-width: 600px;
+    }
+    &.block-s {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .gistWrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .codeBlockCaption {
+      clear: both;
+      margin-top: 0.5rem;
+    }
+  }
+
+  // When centered and large, use full width
+  &.align-center,
+  &.align-full {
+    .gist-content-wrapper.block-l {
+      max-width: 100%;
+    }
+  }
+
+  &.edit {
+    .gist.editLayer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.1);
+      z-index: 1;
+    }
+
+    .gist-content-wrapper {
+      position: relative;
     }
   }
 }
