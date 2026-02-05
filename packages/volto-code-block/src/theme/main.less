@@ -172,8 +172,8 @@ div.codeBlockCaption {
   }
 
   .codeBlockCaption {
-    clear: both;
     margin-top: 0.5rem;
+    clear: both;
   }
 }
 
@@ -224,8 +224,8 @@ div.codeBlockCaption {
     }
 
     .codeBlockCaption {
-      clear: both;
       margin-top: 0.5rem;
+      clear: both;
     }
   }
 
@@ -240,16 +240,26 @@ div.codeBlockCaption {
   &.edit {
     .gist.editLayer {
       position: absolute;
+      z-index: 1;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.1);
-      z-index: 1;
     }
 
     .gist-content-wrapper {
       position: relative;
     }
   }
+}
+
+/*
+  Accordion compatibility: prevent floats from leaking outside accordion panels
+*/
+.accordion-block .ui.accordion .content.active::after,
+.accordion-block .ui.accordion .content::after {
+  display: table;
+  clear: both;
+  content: '';
 }
