@@ -4,8 +4,7 @@ import { withBlockExtensions } from '@plone/volto/helpers/Extensions';
 
 const MermaidBlockView = (props) => {
   const { block, data } = props;
-  const code = data.code || '';
-  return <>{code && <MermaidView code={code} block={block} />}</>;
+  return <>{data && <MermaidView {...data} block={block} />}</>;
 };
 
 export default withBlockExtensions(MermaidBlockView);

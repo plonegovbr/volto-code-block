@@ -1,4 +1,5 @@
 import { defineMessages } from 'react-intl';
+import { addStyling } from '@plone/volto/helpers/Extensions/withBlockSchemaEnhancer';
 import STYLES from '../../SyntaxHighlighter/Styles';
 import config from '@plone/volto/registry';
 
@@ -39,6 +40,10 @@ const messages = defineMessages({
     id: 'Caption',
     defaultMessage: 'Caption',
   },
+  size: {
+    id: 'Size',
+    defaultMessage: 'Size',
+  },
 });
 
 export const codeSchema = (props) => {
@@ -61,7 +66,7 @@ export const codeSchema = (props) => {
     return STYLES.map((item) => [item[0], props.intl.formatMessage(item[1])]);
   };
 
-  return {
+  const schema = {
     title: props.intl.formatMessage(messages.codeBlock),
     fieldsets: [
       {
@@ -120,4 +125,20 @@ export const codeSchema = (props) => {
     },
     required: ['language'],
   };
+  // Add styling with alignment
+  addStyling({ schema, intl: props.intl });
+  schema.properties.styles.schema.properties.align = {
+    widget: 'align',
+    title: 'Alignment',
+    actions: ['left', 'center', 'right'],
+    default: 'center',
+  };
+  schema.properties.styles.schema.properties.size = {
+    title: props.intl.formatMessage(messages.size),
+    widget: 'image_size',
+    default: 'l',
+  };
+  schema.properties.styles.schema.fieldsets[0].fields.push('align');
+  schema.properties.styles.schema.fieldsets[0].fields.push('size');
+  return schema;
 };

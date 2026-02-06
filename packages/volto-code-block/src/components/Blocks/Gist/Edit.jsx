@@ -5,9 +5,9 @@ import GistBlockData from './Data';
 import View from './DefaultView';
 
 const GistBlockEdit = (props) => {
-  const { data, selected, block } = props;
-  const { gistId, file } = data;
-  const { caption_title, caption_description } = data;
+  const { data, selected, block, className } = props;
+  const { gistId, file, styles, caption_title, caption_description } = data;
+
   return (
     <div className="block gist edit" id={`gistBlock-${block}`}>
       {data && (
@@ -18,6 +18,8 @@ const GistBlockEdit = (props) => {
             file={file}
             caption_title={caption_title}
             caption_description={caption_description}
+            className={className}
+            styles={styles}
           />
         </>
       )}

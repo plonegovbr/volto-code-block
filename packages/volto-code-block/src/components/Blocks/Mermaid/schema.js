@@ -2,17 +2,25 @@ import { defineMessages } from 'react-intl';
 import { addStyling } from '@plone/volto/helpers/Extensions/withBlockSchemaEnhancer';
 
 const messages = defineMessages({
-  gistBlock: {
-    id: 'Gist Block',
-    defaultMessage: 'Gist Block',
+  mermaidBlock: {
+    id: 'Mermaid Diagram',
+    defaultMessage: 'Mermaid Diagram',
   },
-  gistId: {
-    id: 'Gist Id',
-    defaultMessage: 'Gist Id',
+  align: {
+    id: 'Alignment',
+    defaultMessage: 'Alignment',
   },
-  file: {
-    id: 'File',
-    defaultMessage: 'File',
+  alignLeft: {
+    id: 'Left',
+    defaultMessage: 'Left',
+  },
+  alignCenter: {
+    id: 'Center',
+    defaultMessage: 'Center',
+  },
+  alignRight: {
+    id: 'Right',
+    defaultMessage: 'Right',
   },
   caption_title: {
     id: 'Title',
@@ -22,9 +30,9 @@ const messages = defineMessages({
     id: 'Description',
     defaultMessage: 'Description',
   },
-  align: {
-    id: 'Alignment',
-    defaultMessage: 'Alignment',
+  caption: {
+    id: 'Caption',
+    defaultMessage: 'Caption',
   },
   size: {
     id: 'Size',
@@ -32,29 +40,22 @@ const messages = defineMessages({
   },
 });
 
-export const gistSchema = (props) => {
+export const mermaidSchema = (props) => {
   const schema = {
-    title: props.intl.formatMessage(messages.gistBlock),
+    title: props.intl.formatMessage(messages.mermaidBlock),
     fieldsets: [
       {
         id: 'default',
         title: 'Default',
-        fields: ['gistId', 'file'],
+        fields: [],
       },
       {
         id: 'caption',
-        title: 'Caption',
+        title: props.intl.formatMessage(messages.caption),
         fields: ['caption_title', 'caption_description'],
       },
     ],
-
     properties: {
-      gistId: {
-        title: props.intl.formatMessage(messages.gistId),
-      },
-      file: {
-        title: props.intl.formatMessage(messages.file),
-      },
       caption_title: {
         title: props.intl.formatMessage(messages.caption_title),
       },
@@ -63,9 +64,9 @@ export const gistSchema = (props) => {
         widget: 'textarea',
       },
     },
-    required: ['gistId'],
+    required: [],
   };
-  // Add styling with alignment and size
+  // Add styling with alignment
   addStyling({ schema, intl: props.intl });
   schema.properties.styles.schema.properties.align = {
     widget: 'align',
@@ -73,12 +74,6 @@ export const gistSchema = (props) => {
     actions: ['left', 'center', 'right'],
     default: 'center',
   };
-  schema.properties.styles.schema.properties.size = {
-    title: props.intl.formatMessage(messages.size),
-    widget: 'image_size',
-    default: 'l',
-  };
   schema.properties.styles.schema.fieldsets[0].fields.push('align');
-  schema.properties.styles.schema.fieldsets[0].fields.push('size');
   return schema;
 };

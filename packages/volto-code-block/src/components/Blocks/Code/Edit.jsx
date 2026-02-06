@@ -10,6 +10,9 @@ import { highlight } from 'prismjs/components/prism-core';
 const CodeBlockEdit = (props) => {
   const { data, selected, block, onChangeBlock } = props;
   const [code, setCode] = React.useState(data.code || '');
+  const styles = data.styles || {};
+  const align = styles?.align || 'center';
+  const size = styles?.size || 'l';
   const className = `code-block-wrapper edit ${data.style}`;
   const codeBlockConfig = config.blocks?.blocksConfig?.codeBlock;
   const defaultLanguage = codeBlockConfig?.defaultLanguage;
@@ -27,22 +30,24 @@ const CodeBlockEdit = (props) => {
   };
 
   return (
-    <div className="block code">
-      <div className={className}>
-        <Editor
-          value={code}
-          onValueChange={(code) => handleChange(code)}
-          highlight={(code) => highlight(code, language)}
-          padding={10}
-          preClassName={`code-block-wrapper ${data.style} language-${data.language}`}
-        />
+    <div className={`block code align-${align}`}>
+      <div className={`code-content-wrapper block-${size}`}>
+        <div className={className}>
+          <Editor
+            value={code}
+            onValueChange={(code) => handleChange(code)}
+            highlight={(code) => highlight(code, language)}
+            padding={10}
+            preClassName={`code-block-wrapper ${data.style} language-${data.language}`}
+          />
+        </div>
         {caption_title && (
           <Caption title={caption_title} description={caption_description} />
         )}
-        <SidebarPortal selected={selected}>
-          <CodeBlockData {...props} />
-        </SidebarPortal>
       </div>
+      <SidebarPortal selected={selected}>
+        <CodeBlockData {...props} />
+      </SidebarPortal>
     </div>
   );
 };

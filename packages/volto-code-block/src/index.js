@@ -5,14 +5,17 @@ import showcaseSVG from '@plone/volto/icons/showcase.svg';
 // Blocks - CodeBlock
 import CodeBlockView from './components/Blocks/Code/View';
 import CodeBlockEdit from './components/Blocks/Code/Edit';
+import { codeSchema } from './components/Blocks/Code/schema';
 
 // Blocks - MermaidBlock
 import MermaidBlockEdit from './components/Blocks/Mermaid/Edit';
 import MermaidBlockView from './components/Blocks/Mermaid/View';
+import { mermaidSchema } from './components/Blocks/Mermaid/schema';
 
 // Blocks - GistBlock
 import GistBlockEdit from './components/Blocks/Gist/Edit';
 import GistBlockView from './components/Blocks/Gist/View';
+import { gistSchema } from './components/Blocks/Gist/schema';
 
 import './theme/main.less';
 import './theme/theme-dark.less';
@@ -53,6 +56,7 @@ const applyConfig = (config) => {
     blockHasOwnFocusManagement: true,
     defaultLanguage: 'python',
     defaultStyle: 'dark',
+    blockSchema: codeSchema,
   };
 
   config.blocks.blocksConfig.mermaidBlock = {
@@ -64,8 +68,9 @@ const applyConfig = (config) => {
     edit: MermaidBlockEdit,
     restricted: false,
     mostUsed: false,
-    sidebarTab: 0,
+    sidebarTab: 1,
     blockHasOwnFocusManagement: true,
+    blockSchema: mermaidSchema,
   };
 
   config.blocks.blocksConfig.gistBlock = {
@@ -79,6 +84,7 @@ const applyConfig = (config) => {
     mostUsed: false,
     sidebarTab: 1,
     blockHasOwnFocusManagement: false,
+    blockSchema: gistSchema,
   };
 
   config.settings['codeBlock'] = {
