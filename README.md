@@ -77,25 +77,29 @@ export default applyConfig;
 
 This add-on is developed and tested with Volto 19.6. The `@blocks-schema` endpoint, which serves the documentation of its blocks, requires Volto 19.6.0 or later.
 
-Add `@plonegovbr/volto-code-block` to your `package.json`:
+Add `@plonegovbr/volto-code-block` to the `dependencies` and `addons` keys of your `package.json`:
 
 ```json
+"addons": [
+    "@plonegovbr/volto-code-block"
+],
 "dependencies": {
     "@plonegovbr/volto-code-block": "*"
 }
 ```
 
-Add `@plonegovbr/volto-code-block` to your `volto.config.js`:
-
-```javascript
-const addons = ['@plonegovbr/volto-code-block'];
-```
-
-Install the dependencies and start Volto:
+Install the dependencies and start Volto. From the `frontend` folder of your project, run:
 
 ```shell
-pnpm install
-pnpm start
+make install
+make start
+```
+
+Or, from the root of your project, run:
+
+```shell
+make frontend-install
+make frontend-start
 ```
 
 ## Test installation
