@@ -1,1 +1,0 @@
-Code block: Showed code with an unset or unknown language instead of failing, as plain text when there is no grammar for it, and applied the defaults of the block settings to data that did not come from the sidebar. @ericof

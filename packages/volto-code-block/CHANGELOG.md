@@ -8,6 +8,42 @@
 
 <!-- towncrier release notes start -->
 
+## 4.0.0 (2026-11-01)
+
+
+### Feature
+
+- Code block: Added the TOML language. @ericof [#36](https://github.com/plonegovbr/volto-code-block/issues/36)
+- Documented the Code, Mermaid and Gist blocks for the `@blocks-schema` endpoint of Volto 19.6. The sidebar forms now read the schema from the block configuration, so a customized `blockSchema` applies to both, and they show validation errors. @ericof [#36](https://github.com/plonegovbr/volto-code-block/issues/36)
+
+
+### Bugfix
+
+- Code block: Restored the position of the copy button, always show it, and made the wrap long lines setting work again. @ericof [#36](https://github.com/plonegovbr/volto-code-block/issues/36)
+- Code block: Showed code with an unset or unknown language instead of failing, as plain text when there is no grammar for it, and applied the defaults of the block settings to data that did not come from the sidebar. @ericof [#36](https://github.com/plonegovbr/volto-code-block/issues/36)
+- Caption: Used valid markup for the description, which had paragraphs inside a paragraph. @ericof [#36](https://github.com/plonegovbr/volto-code-block/issues/36)
+
+
+### Internal
+
+- Updated blocks: Implement style wrappers + captions for the Mermaid block, size and alignment for code and gist blocks. @humanaice [#32](https://github.com/plonegovbr/volto-code-block/issues/32)
+- Update Storybook with alignment examples for all blocks. @humanaice [#33](https://github.com/plonegovbr/volto-code-block/issues/33)
+- Upgraded to Volto 19.6.1, aligned the repository with `cookieplone-templates`, and moved CI to the shared workflows with Dependabot enabled. @ericof [#36](https://github.com/plonegovbr/volto-code-block/issues/36)
+- Upgraded prismjs to 1.30.0, the version Volto uses. @ericof [#36](https://github.com/plonegovbr/volto-code-block/issues/36)
+- Converted the add-on to TypeScript, split its configuration into `config/blocks.ts` and `config/settings.ts`, and loaded the edit components lazily. @ericof [#36](https://github.com/plonegovbr/volto-code-block/issues/36)
+- Replaced Cypress with Playwright for the acceptance tests. @ericof [#38](https://github.com/plonegovbr/volto-code-block/issues/38)
+
+
+### Documentation
+
+- Updated the installation and development documentation. @ericof [#36](https://github.com/plonegovbr/volto-code-block/issues/36)
+- Fix README file loading of images (when viewed on [npmjs.com](https://www.npmjs.com/package/@plonegovbr/volto-code-block)). @ericof 
+
+
+### Tests
+
+- Added tests and stories for the Editor and Caption components. @ericof [#36](https://github.com/plonegovbr/volto-code-block/issues/36)
+
 ## 3.0.0 (2025-11-13)
 
 ### Feature
