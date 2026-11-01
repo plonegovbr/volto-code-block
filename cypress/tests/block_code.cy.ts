@@ -28,6 +28,18 @@ context('Code Block Acceptance Tests', () => {
         .type('from plone import api\n\nuser=api.user.get(username="admin")');
 
       cy.get('#toolbar-save').click();
+
+      // Volto styles any `.block .toolbar`, so Prism's needs its own rules.
+      cy.get('.code-toolbar > .toolbar')
+        .should('have.css', 'opacity', '1')
+        .and('have.css', 'background-color', 'rgba(0, 0, 0, 0)')
+        .then(($toolbar) => {
+          const toolbar = $toolbar[0].getBoundingClientRect();
+          const pre = Cypress.$('.code-toolbar pre')[0].getBoundingClientRect();
+          expect(pre.right - toolbar.right).to.be.lessThan(20);
+          expect(toolbar.width).to.be.lessThan(120);
+        });
+      cy.get('.code-toolbar pre').should('have.css', 'white-space', 'pre-wrap');
     });
   });
 });

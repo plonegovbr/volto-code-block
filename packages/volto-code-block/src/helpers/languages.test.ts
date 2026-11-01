@@ -3,7 +3,6 @@ import config from '@plone/volto/registry';
 import { getGrammar, getLanguages } from './languages';
 
 const python = { comment: /#.*/ };
-const plain = {};
 
 describe('languages', () => {
   afterEach(() => {
@@ -12,14 +11,13 @@ describe('languages', () => {
 
   it('has no languages before the settings are installed', () => {
     expect(getLanguages()).toEqual({});
-    expect(getGrammar('python')).toBeUndefined();
+    expect(getGrammar('python')).toEqual({});
   });
 
   describe('with languages', () => {
     const install = () => {
       config.settings.codeBlock = {
         languages: {
-          plain: { label: 'Plaintext', language: plain },
           python: { label: 'Python', language: python },
           markdown: { label: 'Markdown', language: undefined },
         },
@@ -35,7 +33,7 @@ describe('languages', () => {
       'falls back to plain text for %s',
       (language) => {
         install();
-        expect(getGrammar(language)).toBe(plain);
+        expect(getGrammar(language)).toEqual({});
       },
     );
   });

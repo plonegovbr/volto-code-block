@@ -18,6 +18,7 @@ import 'prismjs/components/prism-mermaid';
 import 'prismjs/components/prism-nginx';
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-scss';
+import 'prismjs/components/prism-toml';
 import 'prismjs/components/prism-yaml';
 // They have to be the last ones (at least after markup)
 import 'prismjs/components/prism-jsx';
@@ -43,6 +44,7 @@ export default function install(config: ConfigType) {
       nginx: { label: 'nginx', language: languages.nginx },
       python: { label: 'Python', language: languages.python },
       scss: { label: 'SCSS', language: languages.scss },
+      toml: { label: 'TOML', language: languages.toml },
       yaml: { label: 'Yaml', language: languages.yaml },
       xml: { label: 'XML', language: languages.xml },
     },

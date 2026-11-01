@@ -16,10 +16,10 @@ export const getLanguages = (): CodeBlockSettings['languages'] =>
   (config.settings.codeBlock as CodeBlockSettings | undefined)?.languages ?? {};
 
 /**
- * Grammar of a language, or the plain text one when there is none: a language
- * can be unset or unknown in data that did not come from the sidebar form.
+ * Grammar of a language, or an empty one, which is plain text, when there is
+ * none: a language can be unset or unknown in data that did not come from the
+ * sidebar form, a project can remove languages, and Prism throws without a
+ * grammar.
  */
-export const getGrammar = (language?: string): unknown => {
-  const languages = getLanguages();
-  return languages[language as string]?.language ?? languages.plain?.language;
-};
+export const getGrammar = (language?: string): unknown =>
+  getLanguages()[language as string]?.language ?? {};

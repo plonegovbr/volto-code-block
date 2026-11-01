@@ -1,6 +1,6 @@
 # Code Block for Volto (@plonegovbr/volto-code-block)
 
-Addon implementing a code block with syntax highlight for [Plone](https://plone.org) projects with [Volto](https://github.com/plone/volto).
+Add-on with code, Mermaid diagram and GitHub Gist blocks for [Plone](https://plone.org) projects with [Volto](https://github.com/plone/volto).
 
 [![npm](https://img.shields.io/npm/v/@plonegovbr/volto-code-block)](https://www.npmjs.com/package/@plonegovbr/volto-code-block)
 [![](https://img.shields.io/badge/-Storybook-ff4785?logo=Storybook&logoColor=white&style=flat-square)](https://plonegovbr.github.io/volto-code-block/)
@@ -32,57 +32,46 @@ All blocks are also available inside the grid and accordion blocks, and they are
 
 You can also check its [Storybook](https://plonegovbr.github.io/volto-code-block/).
 
-### Configure language available in the block setting
+## Configuration
 
-You can specify the languages available in the block settings by modifying the object in `config.settings.codeBlock.languages`, in the configuration of your project or add-on. Each item is composed of an object containing:
+### Languages
 
-* label: Friendly name for the language. i.e.: Python
-* language: Reference to `prismjs` language component.
+The languages offered in the block settings are in `config.settings.codeBlock.languages`. Each item is an object containing:
 
+- `label`: Friendly name for the language, for example `Python`.
+- `language`: Reference to the `prismjs` language component.
 
-Example:
+To change them, start from the existing languages in the configuration of your project or add-on. The Mermaid block needs the `mermaid` language for its syntax highlighting, and languages with no grammar are shown as plain text. For example, this adds Markdown highlighting, which is not loaded by default:
 
 ```typescript
 import type { ConfigType } from '@plone/registry';
 import { languages } from '@plonegovbr/volto-code-block';
+import type { CodeBlockSettings } from '@plonegovbr/volto-code-block/helpers/languages';
 
-import 'prismjs/components/prism-bash';
-import 'prismjs/components/prism-clike';
-import 'prismjs/components/prism-css';
-import 'prismjs/components/prism-docker';
-import 'prismjs/components/prism-javascript';
-import 'prismjs/components/prism-json';
-import 'prismjs/components/prism-less';
 import 'prismjs/components/prism-markdown';
-import 'prismjs/components/prism-markup';
-import 'prismjs/components/prism-nginx';
-import 'prismjs/components/prism-python';
-import 'prismjs/components/prism-scss';
-import 'prismjs/components/prism-yaml';
 
 const applyConfig = (config: ConfigType) => {
-    config.settings['codeBlock'] = {
-        languages: {
-        bash: { label: 'Bash', language: languages.bash },
-        css: { label: 'CSS', language: languages.css },
-        dockerfile: { label: 'Dockerfile', language: languages.dockerfile },
-        javascript: { label: 'Javascript', language: languages.js },
-        json: { label: 'JSON', language: languages.json },
-        less: { label: 'LESS', language: languages.less },
-        markdown: { label: 'Markdown', language: languages.markdown },
-        nginx: { label: 'nginx', language: languages.nginx },
-        python: { label: 'Python', language: languages.python },
-        scss: { label: 'SCSS', language: languages.scss },
-        yaml: { label: 'Yaml', language: languages.yaml },
-        xml: { label: 'XML', language: languages.xml },
-        },
-    };
+  const settings = config.settings.codeBlock as CodeBlockSettings;
 
-    return config;
+  config.settings.codeBlock = {
+    languages: {
+      ...settings.languages,
+      markdown: { label: 'Markdown', language: languages.markdown },
+    },
+  };
+
+  return config;
 };
 
 export default applyConfig;
 ```
+
+### Defaults
+
+`config.blocks.blocksConfig.codeBlock` sets the language and the style used when a block has none:
+
+- `defaultLanguage`: `python`
+- `defaultStyle`: `dark`
 
 ## Installation
 
@@ -151,9 +140,11 @@ Run `make help` to list the available commands.
 
 ```text
 help                             Show this help
+clean                            Clean environment
 install                          Installs the add-on in a development environment
 start                            Starts Volto, allowing reloading of the add-on during development
 build                            Build a production bundle for distribution of the project with the add-on
+build-deps                       Build dependencies
 i18n                             Sync i18n
 ci-i18n                          Check if i18n is not synced
 format                           Format codebase
