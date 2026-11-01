@@ -11,9 +11,21 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+#. Default: "Alignment"
+#: components/Blocks/Gist/schema
+#: components/Blocks/Mermaid/schema
+msgid "Alignment"
+msgstr ""
+
 #. Default: "Caption"
 #: components/Blocks/Code/schema
+#: components/Blocks/Mermaid/schema
 msgid "Caption"
+msgstr ""
+
+#. Default: "Center"
+#: components/Blocks/Mermaid/schema
+msgid "Center"
 msgstr ""
 
 #. Default: "Code Block"
@@ -29,6 +41,7 @@ msgstr ""
 #. Default: "Description"
 #: components/Blocks/Code/schema
 #: components/Blocks/Gist/schema
+#: components/Blocks/Mermaid/schema
 msgid "Description"
 msgstr ""
 
@@ -52,14 +65,36 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
+#. Default: "Left"
+#: components/Blocks/Mermaid/schema
+msgid "Left"
+msgstr ""
+
 #. Default: "Light"
 #: components/SyntaxHighlighter/Styles
 msgid "Light"
 msgstr ""
 
+#. Default: "Mermaid Diagram"
+#: components/Blocks/Mermaid/schema
+msgid "Mermaid Diagram"
+msgstr ""
+
+#. Default: "Right"
+#: components/Blocks/Mermaid/schema
+msgid "Right"
+msgstr ""
+
 #. Default: "Show Line Numbers"
 #: components/Blocks/Code/schema
 msgid "Show Line Numbers"
+msgstr ""
+
+#. Default: "Size"
+#: components/Blocks/Code/schema
+#: components/Blocks/Gist/schema
+#: components/Blocks/Mermaid/schema
+msgid "Size"
 msgstr ""
 
 #. Default: "Starting Line Number"
@@ -75,6 +110,7 @@ msgstr ""
 #. Default: "Title"
 #: components/Blocks/Code/schema
 #: components/Blocks/Gist/schema
+#: components/Blocks/Mermaid/schema
 msgid "Title"
 msgstr ""
 

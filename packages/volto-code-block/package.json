@@ -2,7 +2,7 @@
   "name": "@plonegovbr/volto-code-block",
   "version": "3.0.0",
   "description": "Volto add-on providing a code block with syntax highlighting.",
-  "main": "src/index.js",
+  "main": "src/index.ts",
   "license": "MIT",
   "keywords": [
     "volto-addon",
@@ -11,10 +11,10 @@
     "react"
   ],
   "author": "PloneGov-BR",
-  "homepage": "https://github.com/collective/volto-code-block#readme",
+  "homepage": "https://github.com/plonegovbr/volto-code-block#readme",
   "repository": {
     "type": "git",
-    "url": "git@github.com:collective/volto-code-block"
+    "url": "git@github.com:plonegovbr/volto-code-block"
   },
   "publishConfig": {
     "access": "public"
@@ -24,11 +24,14 @@
     "dry-release": "release-it --dry-run",
     "release": "release-it",
     "release-major-alpha": "release-it major --preRelease=alpha",
-    "release-alpha": "release-it --preRelease=alpha"
+    "release-alpha": "release-it --preRelease=alpha",
+    "typecheck": "tsc --noEmit -p tsconfig.dev.json"
   },
+  "addons": [],
+  "theme": "",
   "dependencies": {
     "mermaid": "10.8.0",
-    "prismjs": "1.29.0",
+    "prismjs": "1.30.0",
     "react-gist": "1.2.4"
   },
   "peerDependencies": {
@@ -47,5 +50,12 @@
     "@testing-library/react": "^16.2.0",
     "release-it": "^19.0.5",
     "vitest": "^3.1.2"
-  }
+  },
+  "files": [
+    "CHANGELOG.md",
+    "babel.config.js",
+    "locales",
+    "src",
+    "tsconfig.json"
+  ]
 }

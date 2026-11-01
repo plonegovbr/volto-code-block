@@ -11,10 +11,22 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+#. Default: "Alignment"
+#: components/Blocks/Gist/schema
+#: components/Blocks/Mermaid/schema
+msgid "Alignment"
+msgstr "Alinhamento"
+
 #. Default: "Caption"
 #: components/Blocks/Code/schema
+#: components/Blocks/Mermaid/schema
 msgid "Caption"
 msgstr "Legenda"
+
+#. Default: "Center"
+#: components/Blocks/Mermaid/schema
+msgid "Center"
+msgstr "Centro"
 
 #. Default: "Code Block"
 #: components/Blocks/Code/schema
@@ -29,6 +41,7 @@ msgstr "Escuro"
 #. Default: "Description"
 #: components/Blocks/Code/schema
 #: components/Blocks/Gist/schema
+#: components/Blocks/Mermaid/schema
 msgid "Description"
 msgstr "Descrição"
 
@@ -52,15 +65,37 @@ msgstr "Id do Gist"
 msgid "Language"
 msgstr "Linguagem"
 
+#. Default: "Left"
+#: components/Blocks/Mermaid/schema
+msgid "Left"
+msgstr "Esquerda"
+
 #. Default: "Light"
 #: components/SyntaxHighlighter/Styles
 msgid "Light"
 msgstr "Claro"
 
+#. Default: "Mermaid Diagram"
+#: components/Blocks/Mermaid/schema
+msgid "Mermaid Diagram"
+msgstr "Diagrama Mermaid"
+
+#. Default: "Right"
+#: components/Blocks/Mermaid/schema
+msgid "Right"
+msgstr "Direita"
+
 #. Default: "Show Line Numbers"
 #: components/Blocks/Code/schema
 msgid "Show Line Numbers"
 msgstr "Exibir número de linha"
+
+#. Default: "Size"
+#: components/Blocks/Code/schema
+#: components/Blocks/Gist/schema
+#: components/Blocks/Mermaid/schema
+msgid "Size"
+msgstr "Tamanho"
 
 #. Default: "Starting Line Number"
 #: components/Blocks/Code/schema
@@ -75,6 +110,7 @@ msgstr "Estilo"
 #. Default: "Title"
 #: components/Blocks/Code/schema
 #: components/Blocks/Gist/schema
+#: components/Blocks/Mermaid/schema
 msgid "Title"
 msgstr "Título"
 

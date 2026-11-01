@@ -1,0 +1,1 @@
+Converted the add-on to TypeScript, split its configuration into `config/blocks.ts` and `config/settings.ts`, and loaded the edit components lazily. @ericof

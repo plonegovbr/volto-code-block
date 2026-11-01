@@ -10,21 +10,28 @@
     "verbatimModuleSyntax": true,
     "module": "preserve",
     "noEmit": true,
-    "lib": ["es2022", "dom", "dom.iterable"],
+    "lib": [
+      "es2022",
+      "dom",
+      "dom.iterable"
+    ],
     "jsx": "react-jsx",
     "paths": {
-      "@plone/volto/*": ["../../core/packages/volto/src/*"],
-      "@plonegovbr/volto-code-block/*": ["./src/*"]
+      "@plonegovbr/volto-code-block/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx"
+  ],
   "exclude": [
     "node_modules",
     "build",
     "public",
-    "coverage",
-    "**/*.test.{js,jsx,ts,tsx}",
-    "**/*.spec.{js,jsx,ts,tsx}",
-    "**/*.stories.{js,jsx,ts,tsx}"
+    "coverage"
   ]
 }

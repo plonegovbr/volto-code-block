@@ -82,6 +82,11 @@ lint: ## Lint, or catch and remove problems, in code base
 	pnpm lint
 	pnpm prettier
 	pnpm stylelint --allow-empty-input
+	pnpm typecheck
+
+.PHONY: typecheck
+typecheck: ## Type check the add-on with tsc
+	pnpm typecheck
 
 .PHONY: release
 release: ## Release the add-on on npmjs.org
@@ -99,7 +104,7 @@ test: ## Run unit tests
 ci-test: ## Run unit tests in CI
 	# Unit Tests need the i18n to be built
 	VOLTOCONFIG=$(CURRENT_DIR)/volto.config.js pnpm --filter @plone/volto i18n
-	CI=1 pnpm run test --passWithNoTests
+	CI=1 pnpm run test
 
 .PHONY: backend-docker-start
 backend-docker-start:	## Starts a Docker-based backend for development

@@ -1,11 +1,18 @@
 # Code Block for Volto (@plonegovbr/volto-code-block)
 
-Addon implementing a code block with syntax highlight for [Plone](https://plone.org) projects with [Volto](https://github.com/plone/volto).
+Add-on with code, Mermaid diagram and GitHub Gist blocks for [Plone](https://plone.org) projects with [Volto](https://github.com/plone/volto).
 
 [![npm](https://img.shields.io/npm/v/@plonegovbr/volto-code-block)](https://www.npmjs.com/package/@plonegovbr/volto-code-block)
 [![](https://img.shields.io/badge/-Storybook-ff4785?logo=Storybook&logoColor=white&style=flat-square)](https://plonegovbr.github.io/volto-code-block/)
-[![Code analysis checks](https://github.com/plonegovbr/volto-code-block/actions/workflows/code.yml/badge.svg)](https://github.com/plonegovbr/volto-code-block/actions/workflows/code.yml)
-[![Unit tests](https://github.com/plonegovbr/volto-code-block/actions/workflows/unit.yml/badge.svg)](https://github.com/plonegovbr/volto-code-block/actions/workflows/unit.yml)
+[![CI](https://github.com/plonegovbr/volto-code-block/actions/workflows/main.yml/badge.svg)](https://github.com/plonegovbr/volto-code-block/actions/workflows/main.yml)
+
+## Features
+
+- **Code Block** (`codeBlock`): source code with syntax highlighting, line numbers and a caption.
+- **Mermaid Diagram** (`mermaidBlock`): diagrams rendered from their text definition.
+- **Gist Block** (`gistBlock`): embedded GitHub Gists.
+
+All blocks are also available inside the grid and accordion blocks, and they are documented for the [`@blocks-schema` endpoint](https://6.docs.plone.org/volto/reference/blocks-schema-endpoint.html) of Volto 19.6 and later.
 
 ## Screenshots
 
@@ -25,129 +32,85 @@ Addon implementing a code block with syntax highlight for [Plone](https://plone.
 
 You can also check its [Storybook](https://plonegovbr.github.io/volto-code-block/).
 
-### Configure language available in the block setting
+## Configuration
 
-You can specify the language available in the setting by changing in `config.js` (or index.js) by modifying the object in `config.settings.codeBlock.languages`. Each item is composed of an object containing:
+### Languages
 
-* label: Friendly name for the language. i.e.: Python
-* language: Reference to `prismjs` language component.
+The languages offered in the block settings are in `config.settings.codeBlock.languages`. Each item is an object containing:
 
+- `label`: Friendly name for the language, for example `Python`.
+- `language`: Reference to the `prismjs` language component.
 
-Example:
+To change them, start from the existing languages in the configuration of your project or add-on. The Mermaid block needs the `mermaid` language for its syntax highlighting, and languages with no grammar are shown as plain text. For example, this adds Markdown highlighting, which is not loaded by default:
 
-```javascript
-
-import 'prismjs/components/prism-bash';
-import 'prismjs/components/prism-clike';
-import 'prismjs/components/prism-css';
-import 'prismjs/components/prism-docker';
-import 'prismjs/components/prism-javascript';
-import 'prismjs/components/prism-json';
-import 'prismjs/components/prism-less';
-import 'prismjs/components/prism-markdown';
-import 'prismjs/components/prism-markup';
-import 'prismjs/components/prism-nginx';
-import 'prismjs/components/prism-python';
-import 'prismjs/components/prism-scss';
-import 'prismjs/components/prism-yaml';
-
-
+```typescript
+import type { ConfigType } from '@plone/registry';
 import { languages } from '@plonegovbr/volto-code-block';
+import type { CodeBlockSettings } from '@plonegovbr/volto-code-block/helpers/languages';
 
-const applyConfig = (config) => {
-    config.settings['codeBlock'] = {
-        languages: {
-        bash: { label: 'Bash', language: languages.bash },
-        css: { label: 'CSS', language: languages.css },
-        dockerfile: { label: 'Dockerfile', language: languages.dockerfile },
-        javascript: { label: 'Javascript', language: languages.js },
-        json: { label: 'JSON', language: languages.json },
-        less: { label: 'LESS', language: languages.less },
-        markdown: { label: 'Markdown', language: languages.markdown },
-        nginx: { label: 'nginx', language: languages.nginx },
-        python: { label: 'Python', language: languages.python },
-        scss: { label: 'SCSS', language: languages.scss },
-        yaml: { label: 'Yaml', language: languages.yaml },
-        xml: { label: 'XML', language: languages.xml },
-        },
-    };
+import 'prismjs/components/prism-markdown';
 
-    return config;
+const applyConfig = (config: ConfigType) => {
+  const settings = config.settings.codeBlock as CodeBlockSettings;
+
+  config.settings.codeBlock = {
+    languages: {
+      ...settings.languages,
+      markdown: { label: 'Markdown', language: languages.markdown },
+    },
+  };
+
+  return config;
 };
 
 export default applyConfig;
 ```
 
+### Defaults
+
+`config.blocks.blocksConfig.codeBlock` sets the language and the style used when a block has none:
+
+- `defaultLanguage`: `python`
+- `defaultStyle`: `dark`
+
 ## Installation
 
-To install your project, you must choose the method appropriate to your version of Volto.
+This add-on is developed and tested with Volto 19.6. The `@blocks-schema` endpoint, which serves the documentation of its blocks, requires Volto 19.6.0 or later.
 
-
-### Volto 18 and later
-
-Add `@plonegovbr/volto-code-block` to your `package.json`:
+Add `@plonegovbr/volto-code-block` to the `dependencies` and `addons` keys of your `package.json`:
 
 ```json
-"dependencies": {
-    "@plonegovbr/volto-code-block": "*"
-}
-```
-
-Add `@plonegovbr/volto-code-block` to your `volto.config.js`:
-
-```javascript
-const addons = ['@plonegovbr/volto-code-block'];
-```
-
-If this package provides a Volto theme, and you want to activate it, then add the following to your `volto.config.js`:
-
-```javascript
-const theme = '@plonegovbr/volto-code-block';
-```
-
-### Volto 17 and earlier
-
-Create a new Volto project (you can skip this step if you already have one):
-
-```
-npm install -g yo @plone/generator-volto
-yo @plone/volto my-volto-project --addon @plonegovbr/volto-code-block
-cd my-volto-project
-```
-
-Add `@plonegovbr/volto-code-block` to your package.json:
-
-```JSON
 "addons": [
     "@plonegovbr/volto-code-block"
 ],
-
 "dependencies": {
     "@plonegovbr/volto-code-block": "*"
 }
 ```
 
-Download and install the new add-on by running:
+Install the dependencies and start Volto. From the `frontend` folder of your project, run:
 
-```
-yarn install
+```shell
+make install
+make start
 ```
 
-Start volto with:
+Or, from the root of your project, run:
 
-```
-yarn start
+```shell
+make frontend-install
+make frontend-start
 ```
 
 ## Test installation
 
-Visit http://localhost:3000/ in a browser, login, and check the awesome new features.
+Visit http://localhost:3000/ in a browser, log in, edit a page, and add a **Code Block**, **Mermaid Diagram** or **Gist Block** from the text group of the block chooser.
 
 
 ## Development
 
-The development of this add-on is done in isolation using a new approach using pnpm workspaces and latest `mrs-developer` and other Volto core improvements.
-For this reason, it only works with pnpm and Volto 18 (currently in alpha).
+The development of this add-on is done in isolation using pnpm workspaces, `mrs-developer` and a checkout of Volto core.
+For this reason, it only works with pnpm.
 
 
 ### Prerequisites ✅
@@ -164,7 +127,7 @@ For this reason, it only works with pnpm and Volto 18 (currently in alpha).
 1.  Clone this repository, then change your working directory.
 
     ```shell
-    git clone git@github.com:collective/volto-code-block.git
+    git clone git@github.com:plonegovbr/volto-code-block.git
     cd volto-code-block
     ```
 
@@ -181,13 +144,16 @@ Run `make help` to list the available commands.
 
 ```text
 help                             Show this help
+clean                            Clean environment
 install                          Installs the add-on in a development environment
 start                            Starts Volto, allowing reloading of the add-on during development
 build                            Build a production bundle for distribution of the project with the add-on
+build-deps                       Build dependencies
 i18n                             Sync i18n
 ci-i18n                          Check if i18n is not synced
 format                           Format codebase
 lint                             Lint, or catch and remove problems, in code base
+typecheck                        Type check the add-on with tsc
 release                          Release the add-on on npmjs.org
 release-dry-run                  Dry-run the release of the add-on on npmjs.org
 test                             Run unit tests
@@ -227,7 +193,7 @@ make start
 
 ### Lint code
 
-Run ESlint, Prettier, and Stylelint in analyze mode.
+Run ESlint, Prettier, Stylelint and the type check in analyze mode.
 
 ```shell
 make lint
@@ -239,6 +205,14 @@ Run ESlint, Prettier, and Stylelint in fix mode.
 
 ```shell
 make format
+```
+
+### Type check
+
+Run `tsc` on the add-on.
+
+```shell
+make typecheck
 ```
 
 ### i18n
@@ -279,10 +253,15 @@ In the third session, start the Cypress interactive test runner.
 make acceptance-test
 ```
 
+## Documenting blocks
+
+Each block has a `docs.block.md` next to its schema, which Volto serves through the `@blocks-schema` endpoint.
+When you change the fields of a block, update this file too: `src/components/Blocks/docs.test.ts` fails when the documentation and the schema disagree.
+
 ## License
 
 The project is licensed under the MIT license.
 
 ## Credits and acknowledgements 🙏
 
-Generated using [Cookieplone (0.9.10)](https://github.com/plone/cookieplone) and [cookieplone-templates (c0b5a93)](https://github.com/plone/cookieplone-templates/commit/c0b5a93e16bc7da0fb36f37242a5dcf7f792323f) on 2025-11-13 18:28:49.205057. A special thanks to all contributors and supporters!
+Generated using [Cookieplone](https://github.com/plone/cookieplone), and aligned with [cookieplone-templates (feb3bcf)](https://github.com/plone/cookieplone-templates/commit/feb3bcf). A special thanks to all contributors and supporters!
