@@ -31,7 +31,9 @@
     "release-major-alpha": "pnpm --filter @plonegovbr/volto-code-block release-major-alpha",
     "release-alpha": "pnpm --filter @plonegovbr/volto-code-block release-alpha",
     "storybook": "VOLTOCONFIG=$(pwd)/volto.config.js pnpm --filter @plone/volto storybook dev -p 6006 -c $(pwd)/.storybook",
-    "storybook-build": "VOLTOCONFIG=$(pwd)/volto.config.js pnpm --filter @plone/volto build-storybook -c $(pwd)/.storybook"
+    "storybook-build": "VOLTOCONFIG=$(pwd)/volto.config.js pnpm --filter @plone/volto build-storybook -c $(pwd)/.storybook",
+    "test:acceptance": "playwright test",
+    "test:acceptance:ui": "playwright test --ui"
   },
   "dependencies": {
     "@plone/volto": "workspace:*",
@@ -48,12 +50,12 @@
       "webpack": "catalog:"
     },
     "ignoredBuiltDependencies": [
-      "@parcel/watcher"
+      "@parcel/watcher",
+      "cypress"
     ],
     "onlyBuiltDependencies": [
       "core-js",
       "core-js-pure",
-      "cypress",
       "es5-ext",
       "esbuild",
       "lightningcss-cli",
