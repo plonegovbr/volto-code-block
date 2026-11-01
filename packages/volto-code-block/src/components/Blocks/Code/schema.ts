@@ -1,0 +1,142 @@
+import type { BlockSchemaProps, JSONSchema } from '@plone/types';
+import { defineMessages } from 'react-intl';
+import type { IntlShape } from 'react-intl';
+import { addStyling } from '@plone/volto/helpers/Extensions/withBlockSchemaEnhancer';
+import STYLES from '../../SyntaxHighlighter/Styles';
+import config from '@plone/volto/registry';
+import { getLanguages } from '../../../helpers/languages';
+import type { CodeBlockConfig } from './index';
+
+const messages = defineMessages({
+  codeBlock: {
+    id: 'Code Block',
+    defaultMessage: 'Code Block',
+  },
+  language: {
+    id: 'Language',
+    defaultMessage: 'Language',
+  },
+  style: {
+    id: 'Style',
+    defaultMessage: 'Style',
+  },
+  showLineNumbers: {
+    id: 'Show Line Numbers',
+    defaultMessage: 'Show Line Numbers',
+  },
+  wrapLongLines: {
+    id: 'Wrap Long Lines',
+    defaultMessage: 'Wrap Long Lines',
+  },
+  lineNbr: {
+    id: 'Starting Line Number',
+    defaultMessage: 'Starting Line Number',
+  },
+  caption_title: {
+    id: 'Title',
+    defaultMessage: 'Title',
+  },
+  caption_description: {
+    id: 'Description',
+    defaultMessage: 'Description',
+  },
+  caption: {
+    id: 'Caption',
+    defaultMessage: 'Caption',
+  },
+  size: {
+    id: 'Size',
+    defaultMessage: 'Size',
+  },
+});
+
+export const codeSchema = (
+  props: Pick<BlockSchemaProps, 'intl'>,
+): JSONSchema => {
+  const { defaultLanguage, defaultStyle } = config.blocks.blocksConfig
+    .codeBlock as CodeBlockConfig;
+
+  const availableLanguages = () =>
+    Object.entries(getLanguages()).map(([key, value]) => [key, value.label]);
+
+  const availableStyles = () => {
+    return STYLES.map((item) => [item[0], props.intl.formatMessage(item[1])]);
+  };
+
+  const schema: JSONSchema = {
+    title: props.intl.formatMessage(messages.codeBlock),
+    fieldsets: [
+      {
+        id: 'default',
+        title: 'Default',
+        fields: [
+          'language',
+          'style',
+          'showLineNumbers',
+          'wrapLongLines',
+          'lineNbr',
+        ],
+      },
+      {
+        id: 'caption',
+        title: props.intl.formatMessage(messages.caption),
+        fields: ['caption_title', 'caption_description'],
+      },
+    ],
+
+    properties: {
+      language: {
+        title: props.intl.formatMessage(messages.language),
+        choices: availableLanguages(),
+        default: defaultLanguage,
+        noValueOption: false,
+      },
+      style: {
+        title: props.intl.formatMessage(messages.style),
+        choices: availableStyles(),
+        default: defaultStyle,
+        noValueOption: false,
+      },
+      showLineNumbers: {
+        title: props.intl.formatMessage(messages.showLineNumbers),
+        default: true,
+        type: 'boolean',
+      },
+      wrapLongLines: {
+        title: props.intl.formatMessage(messages.wrapLongLines),
+        default: true,
+        type: 'boolean',
+      },
+      lineNbr: {
+        title: props.intl.formatMessage(messages.lineNbr),
+        type: 'integer',
+        default: 1,
+      },
+      caption_title: {
+        title: props.intl.formatMessage(messages.caption_title),
+      },
+      caption_description: {
+        title: props.intl.formatMessage(messages.caption_description),
+        widget: 'textarea',
+      },
+    },
+    required: ['language'],
+  };
+  // Add styling with alignment
+  // `@plone/types` declares its own, narrower `IntlShape`.
+  addStyling({ schema, intl: props.intl as unknown as IntlShape });
+  schema.properties.styles.schema.properties.align = {
+    widget: 'align',
+    title: 'Alignment',
+    actions: ['left', 'center', 'right'],
+    default: 'center',
+  };
+  schema.properties.styles.schema.properties.size = {
+    title: props.intl.formatMessage(messages.size),
+    widget: 'image_size',
+    default: 'l',
+  };
+  schema.properties.styles.schema.fieldsets[0].fields.push('align');
+  schema.properties.styles.schema.fieldsets[0].fields.push('size');
+  return schema;
+};

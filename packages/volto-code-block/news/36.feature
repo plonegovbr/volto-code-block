@@ -1,0 +1,1 @@
+Documented the Code, Mermaid and Gist blocks for the `@blocks-schema` endpoint of Volto 19.6. The sidebar forms now read the schema from the block configuration, so a customized `blockSchema` applies to both, and they show validation errors. @ericof
