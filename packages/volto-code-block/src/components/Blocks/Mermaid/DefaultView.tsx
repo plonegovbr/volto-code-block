@@ -29,8 +29,10 @@ const MermaidView: React.FC<MermaidViewProps> = (props) => {
 
   useEffect(() => {
     const loadMermaid = async () => {
+      // This block calls `mermaid.render` itself. With `startOnLoad`, Mermaid
+      // also treats the wrapper, which has the `mermaid` class, as a diagram.
       const config = {
-        startOnLoad: true,
+        startOnLoad: false,
         flowchart: { useMaxWidth: false, htmlLabels: true },
       };
       const { default: mermaid } = await import('mermaid/dist/mermaid.esm.mjs');

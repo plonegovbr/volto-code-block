@@ -80,6 +80,30 @@
         outline: none;
         resize: none;
       }
+
+      // The dark theme positions tokens, which would take the markers inside
+      // a multi-line token away from the gutter.
+      .token {
+        position: static;
+      }
+
+      // One marker per line, numbered like `.line-numbers-rows` in the view.
+      .line-number {
+        position: absolute;
+        left: 0;
+        width: 3em;
+        color: #999;
+        counter-increment: linenumber;
+        font-style: normal;
+        font-weight: normal;
+        letter-spacing: -1px;
+        text-align: right;
+        user-select: none;
+
+        &::before {
+          content: counter(linenumber);
+        }
+      }
     }
 
     &.wrapLongLines {

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Prism from 'prismjs';
+import Prism from '../../helpers/prism';
 import { getGrammar } from '../../helpers/languages';
 
 import cx from 'classnames';
