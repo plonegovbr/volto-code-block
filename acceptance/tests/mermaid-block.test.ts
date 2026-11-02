@@ -25,5 +25,25 @@ test.describe('Mermaid Block', () => {
     await save(page);
 
     await expect(page.locator('.mermaidWrapper > div > svg')).toBeVisible();
+
+    // Mermaid's `startOnLoad` runs on the `load` event, which it only sees when
+    // its chunk arrives first. A pending image holds the event back, as the
+    // images of a real page do.
+    await page.route('**/hold-load-event.png', async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await route.abort();
+    });
+    await page.addInitScript(() => {
+      document.addEventListener('DOMContentLoaded', () => {
+        const image = document.createElement('img');
+        image.src = '/hold-load-event.png';
+        document.body.appendChild(image);
+      });
+    });
+    await page.reload({ waitUntil: 'load' });
+    await expect(page.locator('.mermaidWrapper > div > svg')).toBeVisible();
+    await expect(page.locator('.block.mermaid')).not.toHaveAttribute(
+      'data-processed',
+    );
   });
 });

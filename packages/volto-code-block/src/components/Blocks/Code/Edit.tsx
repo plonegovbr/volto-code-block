@@ -6,6 +6,7 @@ import CodeBlockData from './Data';
 import Caption from '../../Caption/Caption';
 import Editor from '../../Editor/Editor';
 import { getGrammar } from '../../../helpers/languages';
+import { addLineMarkers } from '../../../helpers/lineNumbers';
 import { highlight } from 'prismjs/components/prism-core';
 import type { BlockDataProps } from '../../BlockData/BlockData';
 import type { CodeBlockConfig, CodeBlockData as Data } from './index';
@@ -14,6 +15,8 @@ interface CodeBlockEditProps extends BlockDataProps {
   data: Data;
   selected: boolean;
 }
+
+const PADDING = { top: 10, right: 10, bottom: 10, left: 10 };
 
 const CodeBlockEdit: React.FC<CodeBlockEditProps> = (props) => {
   const { data, selected, block, onChangeBlock } = props;
@@ -29,7 +32,12 @@ const CodeBlockEdit: React.FC<CodeBlockEditProps> = (props) => {
     data.style = defaultStyle;
   }
   const language = getGrammar(data.language);
-  const { caption_title, caption_description } = data;
+  const {
+    caption_title,
+    caption_description,
+    lineNbr = 1,
+    showLineNumbers = true,
+  } = data;
   const handleChange = (code: string) => {
     setCode(code);
     onChangeBlock(block, { ...data, code: code });
@@ -42,9 +50,17 @@ const CodeBlockEdit: React.FC<CodeBlockEditProps> = (props) => {
           <Editor
             value={code}
             onValueChange={(code) => handleChange(code)}
-            highlight={(code) => highlight(code, language)}
-            padding={10}
+            highlight={(code) => {
+              const html = highlight(code, language);
+              return showLineNumbers ? addLineMarkers(html) : html;
+            }}
+            padding={showLineNumbers ? { ...PADDING, left: '3.8em' } : PADDING}
             preClassName={`code-block-wrapper ${data.style} language-${data.language}`}
+            style={
+              showLineNumbers
+                ? { counterReset: `linenumber ${lineNbr - 1}` }
+                : undefined
+            }
           />
         </div>
         {caption_title && (

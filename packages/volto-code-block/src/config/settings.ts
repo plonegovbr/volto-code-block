@@ -1,8 +1,8 @@
 import type { ConfigType } from '@plone/registry';
 
 // It has to be the first one: the components below register their grammars in
-// the global `Prism`, and loading `prism-core` is what sets it to this instance.
-import { languages } from 'prismjs/components/prism-core';
+// the global `Prism`, and loading this module is what sets it to this instance.
+import Prism from '../helpers/prism';
 
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-clike';
@@ -24,7 +24,7 @@ import 'prismjs/components/prism-yaml';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-tsx';
 
-export { languages };
+export const { languages } = Prism;
 
 export default function install(config: ConfigType) {
   config.settings.codeBlock = {
