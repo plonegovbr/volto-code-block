@@ -12,7 +12,9 @@ declare module 'prismjs/components/prism-core' {
   const Prism: {
     languages: Record<string, unknown>;
     manual?: boolean;
-    plugins: Record<string, unknown>;
+    plugins: Record<string, unknown> & {
+      lineNumbers: { resize: (element: HTMLElement) => void };
+    };
     highlightAll: () => void;
   };
   export default Prism;

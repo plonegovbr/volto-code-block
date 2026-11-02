@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Prism from '../../helpers/prism';
 import { getGrammar } from '../../helpers/languages';
 
@@ -20,12 +20,28 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterProps> = (props) => {
   const className = cx(`language-${language}`, {
     'line-numbers': showLineNumbers,
   });
+  const preRef = useRef<HTMLPreElement>(null);
   useEffect(() => {
     Prism.languages[language] = getGrammar(language);
     Prism.highlightAll();
   }, [language]);
+  // Prism measures the lines when it highlights, and a `pre` that is not
+  // displayed yet, as in a closed accordion panel, measures 0.
+  useEffect(() => {
+    const pre = preRef.current;
+    if (!pre || !showLineNumbers || typeof ResizeObserver === 'undefined') {
+      return;
+    }
+    const observer = new ResizeObserver(() => {
+      if (pre.offsetHeight > 0) {
+        Prism.plugins.lineNumbers.resize(pre);
+      }
+    });
+    observer.observe(pre);
+    return () => observer.disconnect();
+  }, [showLineNumbers]);
   return (
-    <pre className={className} data-start={lineNbr}>
+    <pre ref={preRef} className={className} data-start={lineNbr}>
       <code data-prismjs-copy-timeout="300">{code}</code>
     </pre>
   );

@@ -59,16 +59,13 @@
 
   > .code-content-wrapper > .code-block-wrapper {
     &.edit {
-      &.dark {
-        > textarea {
-          caret-color: #fff;
-        }
+      // The editor wraps the textarea, which is transparent over the code.
+      &.dark textarea {
+        caret-color: #fff;
       }
 
-      &.light {
-        > textarea {
-          caret-color: #657b83;
-        }
+      &.light textarea {
+        caret-color: #657b83;
       }
 
       > textarea {
@@ -94,6 +91,7 @@
         width: 3em;
         color: #999;
         counter-increment: linenumber;
+        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
         font-style: normal;
         font-weight: normal;
         letter-spacing: -1px;

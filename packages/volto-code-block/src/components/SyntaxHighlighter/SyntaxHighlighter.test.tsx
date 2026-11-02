@@ -1,5 +1,13 @@
 import React from 'react';
-import { beforeAll, describe, expect, it } from 'vitest';
+import {
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from 'vitest';
 import { render } from '@testing-library/react';
 import config from '@plone/volto/registry';
 import installSettings from '../../config/settings';
@@ -57,5 +65,56 @@ describe('SyntaxHighlighter', () => {
   it('adds no line numbers unless asked to', () => {
     const { container } = setup();
     expect(container.querySelector('.line-numbers-rows')).toBeNull();
+  });
+
+  describe('when the size of the code changes', () => {
+    let notify: () => void;
+    const disconnect = vi.fn();
+
+    beforeEach(() => {
+      disconnect.mockClear();
+      vi.stubGlobal(
+        'ResizeObserver',
+        class {
+          constructor(callback: () => void) {
+            notify = callback;
+          }
+          observe() {}
+          disconnect = disconnect;
+        },
+      );
+    });
+
+    afterEach(() => {
+      vi.unstubAllGlobals();
+      vi.restoreAllMocks();
+    });
+
+    const displayed = (height: number) =>
+      vi
+        .spyOn(HTMLElement.prototype, 'offsetHeight', 'get')
+        .mockReturnValue(height);
+
+    it('sizes the line numbers once the code is displayed', () => {
+      const { container } = setup(true);
+      const resize = vi.spyOn(Prism.plugins.lineNumbers, 'resize');
+      displayed(100);
+      notify();
+      expect(resize).toHaveBeenCalledWith(container.querySelector('pre'));
+    });
+
+    it('does not measure code that is hidden', () => {
+      setup(true);
+      const resize = vi.spyOn(Prism.plugins.lineNumbers, 'resize');
+      displayed(0);
+      notify();
+      expect(resize).not.toHaveBeenCalled();
+    });
+
+    it('stops observing when the block is removed', () => {
+      const { unmount } = setup(true);
+      unmount();
+      expect(disconnect).toHaveBeenCalled();
+    });
   });
 });
