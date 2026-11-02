@@ -8,6 +8,21 @@
 
 <!-- towncrier release notes start -->
 
+## 4.1.0 (2026-11-02)
+
+
+### Feature
+
+- Code block: Showed the line numbers in the edit view too, following the Show Line Numbers and Starting Line Number settings. @ericof [#41](https://github.com/plonegovbr/volto-code-block/issues/41)
+
+
+### Bugfix
+
+- Code block: Fixed the line numbers piling up inside a closed accordion panel. @ericof [#34](https://github.com/plonegovbr/volto-code-block/issues/34)
+- Mermaid block: Fixed the `Syntax error in text` message and the missing caption when a page was loaded directly or reloaded. @ericof [#40](https://github.com/plonegovbr/volto-code-block/issues/40)
+- Code block: Fixed the line numbers disappearing and the hydration errors on a full page load. @ericof [#41](https://github.com/plonegovbr/volto-code-block/issues/41)
+- Code block: Fixed the caret color in the editor, which was invisible in the dark theme, and used a monospaced font for the line numbers. @ericof 
+
 ## 4.0.0 (2026-11-01)
 
 
