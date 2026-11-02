@@ -38,6 +38,7 @@
   "dependencies": {
     "@plone/volto": "workspace:*",
     "@plone/registry": "workspace:*",
+    "@eeacms/volto-accordion-block": "^13.1.1",
     "@plonegovbr/volto-code-block": "workspace:*"
   },
   "devDependencies": {

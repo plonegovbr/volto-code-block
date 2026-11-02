@@ -79,6 +79,38 @@ test.describe('Code Block', () => {
     await expect(textarea).toHaveCSS('padding-left', '10px');
   });
 
+  for (const [style, caret] of [
+    ['dark', 'rgb(255, 255, 255)'],
+    ['light', 'rgb(101, 123, 131)'],
+  ]) {
+    test(`The editor is readable in the ${style} theme`, async ({
+      page,
+      request,
+    }) => {
+      await createContent(request, {
+        contentType: 'Document',
+        contentId: style,
+        contentTitle: style,
+        bodyModifier: (body) => ({
+          ...body,
+          blocks: {
+            title: { '@type': 'title' },
+            code: { '@type': 'codeBlock', code: 'a = 1', style },
+          },
+          blocks_layout: { items: ['title', 'code'] },
+        }),
+      });
+
+      await editDocument(page, `/${style}`);
+      const editor = page.locator(`.code-block-wrapper.edit.${style}`);
+      await expect(editor.locator('textarea')).toHaveCSS('caret-color', caret);
+      await expect(editor.locator('.line-number')).toHaveCSS(
+        'font-family',
+        /monospace/,
+      );
+    });
+  }
+
   test('The line numbers survive a full load', async ({ page }) => {
     await editDocument(page, '/document');
     await addTextBlock(page, 'codeBlock');
@@ -103,5 +135,96 @@ test.describe('Code Block', () => {
     await expect(rows).toHaveCount(3);
     await expect(page.locator('pre.line-numbers .token').first()).toBeVisible();
     expect(errors).toEqual([]);
+  });
+
+  test('The line numbers are sized when the code is shown', async ({
+    page,
+  }) => {
+    await editDocument(page, '/document');
+    await addTextBlock(page, 'codeBlock');
+    await page
+      .locator('.code-block-wrapper.edit textarea')
+      .fill('from plone import api\n\nuser=api.user.get(username="admin")');
+    await save(page);
+
+    // Hides the code while it is highlighted, as a closed accordion panel does.
+    await page.addInitScript(() => {
+      document.addEventListener(
+        'readystatechange',
+        () => {
+          const style = document.createElement('style');
+          style.id = 'hidden-code';
+          style.textContent =
+            '.code-toolbar, pre { display: none !important; }';
+          document.head.append(style);
+        },
+        { once: true },
+      );
+    });
+    await page.reload({ waitUntil: 'load' });
+    const rows = page.locator('pre.line-numbers .line-numbers-rows > span');
+    await expect(rows).toHaveCount(3);
+    await expect(rows.first()).toHaveCSS('height', '0px');
+
+    await page.locator('#hidden-code').evaluate((style) => style.remove());
+
+    await expect(rows.first()).not.toHaveCSS('height', '0px');
+    const offsets = await rows.evaluateAll((elements) =>
+      elements.map((element) => element.getBoundingClientRect().y),
+    );
+    expect(new Set(offsets).size).toBe(3);
+  });
+
+  test('The line numbers are sized when an accordion panel opens', async ({
+    page,
+    request,
+  }) => {
+    await createContent(request, {
+      contentType: 'Document',
+      contentId: 'accordion',
+      contentTitle: 'Accordion',
+      bodyModifier: (body) => ({
+        ...body,
+        blocks: {
+          title: { '@type': 'title' },
+          accordion: {
+            '@type': 'accordion',
+            collapsed: true,
+            data: {
+              blocks: {
+                panel: {
+                  '@type': 'accordionPanel',
+                  title: 'Panel',
+                  blocks: {
+                    code: {
+                      '@type': 'codeBlock',
+                      code: 'from plone import api\n\ncontent = api.content.get("/foo")',
+                      language: 'python',
+                      showLineNumbers: true,
+                    },
+                  },
+                  blocks_layout: { items: ['code'] },
+                },
+              },
+              blocks_layout: { items: ['panel'] },
+            },
+          },
+        },
+        blocks_layout: { items: ['title', 'accordion'] },
+      }),
+    });
+
+    await page.goto('/accordion');
+    const rows = page.locator('pre.line-numbers .line-numbers-rows > span');
+    await expect(rows).toHaveCount(3);
+    await expect(rows.first()).toHaveCSS('height', '0px');
+
+    await page.locator('.accordion-title').click();
+
+    await expect(rows.first()).not.toHaveCSS('height', '0px');
+    const offsets = await rows.evaluateAll((elements) =>
+      elements.map((element) => element.getBoundingClientRect().y),
+    );
+    expect(new Set(offsets).size).toBe(3);
   });
 });
